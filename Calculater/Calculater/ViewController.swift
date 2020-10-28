@@ -9,101 +9,117 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var cancelBtn: UIButton!
-    @IBOutlet weak var totalBtn: UIButton!
-    @IBOutlet weak var backspaceBtn: UIButton!
-    @IBOutlet weak var textLabel: UILabel!
-    @IBOutlet var numberBtn: [UIButton]!
-    
-    //< --- 텍스트 라벨 "" 문자열 넣기, 변화할때 메인큐가 업데이트
-    var number = "" {
-        didSet {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.textLabel.text = self.number
-            }
-        }
-    }
-    var captureone: Int?
-    var doit = ""
+    @IBOutlet var Btns: [UIButton]!
+    @IBOutlet weak var displayText: UILabel!
+    @IBOutlet weak var historyText: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //<-- 버튼 둥글게
-        cancelBtn.layer.cornerRadius = 25
-        backspaceBtn.layer.cornerRadius = 25
-        totalBtn.layer.cornerRadius = 25
-        for btn in numberBtn {
+        displayText.text = "0"
+        historyText.text = ""
+        for btn in Btns {
             btn.layer.cornerRadius = 25
-            
-        //<-- 버튼 눌렸을때 이벤트 처리
-            for textbtn in numberBtn {
-                textbtn.addTarget(self, action: #selector(onBtnClicked(sender:)), for: .touchUpInside)
-            }
-            cancelBtn.addTarget(self, action: #selector(cancelBtnClicked(sender:)), for: .touchUpInside)
-            backspaceBtn.addTarget(self, action: #selector(backspaceBtnClicked(sender:)), for: .touchUpInside)
-            totalBtn.addTarget(self, action: #selector(totalBtnClicked(sender:)), for: .touchUpInside)
         }
-    }
-    
-    @objc fileprivate func onBtnClicked(sender: UIButton) {
-        guard let inputNumber = sender.titleLabel?.text else { return }
-        switch inputNumber {
-        case "+", "-", "X", "/":
-            print("입력된 값은 \(inputNumber)")
-            doit.append(inputNumber)
-            if captureone == nil {
-                guard captureone == nil else { return }
-                captureone = Int(number)
-                number.removeAll()
-            } else {
-                print("captureone이 있네요 ㅎㅎ")
-//                var capturetwo = 0
-//                capturetwo = Int(number)!
-//                number.removeAll()
-//                number.append(String(captureone ?? 0 + capturetwo))
-            }
-        case "%":
-            captureone = Int(number)
-            doit.append("%")
-            totalBtnClicked(sender: totalBtn)
-        default:
-            print("현재버튼은 \(inputNumber)입니다")
-            number.append(inputNumber)
-        }
-    }
-    @objc fileprivate func cancelBtnClicked(sender: UIButton) {
-        number.removeAll()
-        captureone = nil
-        doit.removeAll()
-    }
-    
-    @objc fileprivate func backspaceBtnClicked(sender: UIButton) {
-        number.popLast()
-    }
-    
-    @objc fileprivate func totalBtnClicked(sender: UIButton) {
-        switch doit {
-        case "+":
-            let capturetwo = Int(number)!
-            number = String((captureone ?? 0) + capturetwo )
-        case "-":
-            let capturetwo = Int(number)!
-            number = String((captureone ?? 0) - capturetwo )
-        case "X":
-            let capturetwo = Int(number)!
-            number = String((captureone ?? 0) * capturetwo )
-        case "/":
-            let capturetwo = Int(number)!
-            number = String((captureone ?? 0) / capturetwo )
-        case "%":
-            number = String((captureone ?? 0) / 100 )
-        default:
-            return
-        }
-    }
-    
-    
 }
-
+   
+    var displayLabel: String = ""
+    var opersign: String? = nil
+    var firstNum: Int? = nil
+    var numberbox: String = ""
+    var secondNum: Int = 0
+    
+    
+    
+    @IBAction func cancelBtn(_ sender: UIButton) {
+        displayText.text = "0"
+        historyText.text = ""
+        displayLabel = ""
+        firstNum = nil
+        secondNum = 0
+        opersign = nil
+        numberbox = ""
+    }
+    
+    @IBAction func backspaceBtn(_ sender: UIButton) {
+        if numberbox.count >= 0 {
+            numberbox.popLast()
+            displayText.text = numberbox
+            historyText.text?.popLast()
+        } else {
+            
+        }
+    }
+    
+    @IBAction func operatorBtn(_ sender: UIButton) {
+        if numberbox.isEmpty {
+            
+        } else {
+        if opersign == nil {
+            operSign(sign: sender.currentTitle!)
+        }else {
+            if sender.currentTitle! == "=" {
+                secondNum = Int(numberbox)!
+                operSign(sign: sender.currentTitle!)
+            } else {
+                numberbox = displayText.text!
+                operSign(sign: sender.currentTitle!)
+                }
+            }
+        }
+    }
+    
+    
+    @IBAction func numBtn(_ sender: UIButton) {
+        historyText.text! += (sender.currentTitle)!
+        displayLabel += (sender.currentTitle)!
+        numberbox += (sender.currentTitle)!
+        displayText.text = numberbox
+    }
+    
+    private func operSign(sign: String) -> () {
+        switch sign {
+        case "+":
+            historyText.text! += "+"
+            opersign = "+"
+            firstNum = Int(numberbox)!
+            numberbox = ""
+        case "-":
+            historyText.text! += "-"
+            opersign = "-"
+            firstNum = Int(numberbox)!
+            numberbox = ""
+        case "x":
+            historyText.text! += "x"
+            opersign = "x"
+            firstNum = Int(numberbox)!
+            numberbox = ""
+        case "/":
+            historyText.text! += "/"
+            opersign = "/"
+            firstNum = Int(numberbox)!
+            numberbox = ""
+        case "%":
+            historyText.text! += "%"
+            opersign = "%"
+            firstNum = Int(numberbox)!
+            displayText.text = String(firstNum! / 100)
+            numberbox = ""
+        case "=":
+            if opersign == nil {
+            
+            } else {
+                if opersign == "+" {
+                    displayText.text = String(firstNum! + secondNum)
+                } else if opersign == "-" {
+                    displayText.text = String(firstNum! - secondNum)
+                } else if opersign == "x" {
+                    displayText.text = String(firstNum! * secondNum)
+                } else if opersign == "/" {
+                    displayText.text = String(firstNum! / secondNum)
+                }
+            }
+        default:
+            displayText.text = String(firstNum!)
+        }
+    }
+}

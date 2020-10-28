@@ -30,16 +30,19 @@
                                                     <constraint firstAttribute="width" constant="60" id="3sS-AH-ArC"/>
                                                     <constraint firstAttribute="height" constant="60" id="L7d-CQ-NRH"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                                <color key="tintColor" red="0.32720769649999998" green="0.362613401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <state key="normal" title="C">
+                                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                                                <color key="tintColor" systemColor="systemPinkColor"/>
+                                                <state key="normal" title="x" image="c.square" catalog="system">
                                                     <color key="titleColor" systemColor="systemRedColor"/>
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
                                                 </state>
                                                 <state key="selected">
                                                     <color key="titleColor" systemColor="linkColor"/>
                                                     <color key="titleShadowColor" systemColor="linkColor"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="cancelBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dWb-wS-ygH"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mPq-rb-6uI">
                                                 <rect key="frame" x="75" y="0.0" width="60" height="60"/>
@@ -48,12 +51,15 @@
                                                     <constraint firstAttribute="height" constant="60" id="9YR-U1-M0y"/>
                                                     <constraint firstAttribute="width" constant="60" id="fpv-td-H5Y"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                                <color key="tintColor" red="0.32720769649999998" green="0.362613401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <state key="normal" title="%">
+                                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                                                <color key="tintColor" systemColor="systemPinkColor"/>
+                                                <state key="normal" title="%" image="percent.ar" catalog="system">
                                                     <color key="titleColor" systemColor="systemGreenColor"/>
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="operatorBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bnr-o5-Q4B"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4l0-OM-8vM">
                                                 <rect key="frame" x="150" y="0.0" width="60" height="60"/>
@@ -62,13 +68,16 @@
                                                     <constraint firstAttribute="width" constant="60" id="1Er-4P-dLI"/>
                                                     <constraint firstAttribute="height" constant="60" id="qif-B3-bGn"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                                <color key="tintColor" red="0.32720769649999998" green="0.362613401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                                                <color key="tintColor" systemColor="systemPinkColor"/>
                                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
-                                                <state key="normal" title="/">
+                                                <state key="normal" title="/" image="divide" catalog="system">
                                                     <color key="titleColor" systemColor="systemGreenColor"/>
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="operatorBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5HF-7l-Htr"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="96Y-9M-rg6">
                                                 <rect key="frame" x="225" y="0.0" width="60" height="60"/>
@@ -81,8 +90,11 @@
                                                 <color key="tintColor" systemColor="systemPinkColor"/>
                                                 <state key="normal">
                                                     <imageReference key="image" image="arrow.backward" catalog="system" symbolScale="small"/>
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="60"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="backspaceBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HoQ-h8-3BD"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -101,6 +113,9 @@
                                                 <state key="normal" title="7">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rd3-cS-GSq"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sng-2T-LFd">
                                                 <rect key="frame" x="75" y="0.0" width="60" height="60"/>
@@ -114,6 +129,9 @@
                                                 <state key="normal" title="8">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yro-xA-yc9"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJk-B3-8LY">
                                                 <rect key="frame" x="150" y="0.0" width="60" height="60"/>
@@ -127,6 +145,9 @@
                                                 <state key="normal" title="9">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gqU-Bt-DYB"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IYV-sU-brV">
                                                 <rect key="frame" x="225" y="0.0" width="60" height="60"/>
@@ -135,12 +156,15 @@
                                                     <constraint firstAttribute="height" constant="60" id="4Ua-3T-2hl"/>
                                                     <constraint firstAttribute="width" constant="60" id="UmH-EI-Sw2"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="60"/>
-                                                <color key="tintColor" red="0.32720769649999998" green="0.362613401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <state key="normal" title="X">
+                                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                                                <color key="tintColor" systemColor="systemPinkColor"/>
+                                                <state key="normal" title="x" image="xmark" catalog="system">
                                                     <color key="titleColor" systemColor="systemGreenColor"/>
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="operatorBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4ay-KF-7lY"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -159,6 +183,9 @@
                                                 <state key="normal" title="4">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Dg-o0-gsl"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oAj-mI-UeN">
                                                 <rect key="frame" x="75" y="0.0" width="60" height="60"/>
@@ -172,6 +199,9 @@
                                                 <state key="normal" title="5">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hu5-Og-SDI"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SFa-vj-Dqc">
                                                 <rect key="frame" x="150" y="0.0" width="60" height="60"/>
@@ -185,6 +215,9 @@
                                                 <state key="normal" title="6">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kee-mt-RPu"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h16-yZ-Ajq">
                                                 <rect key="frame" x="225" y="0.0" width="60" height="60"/>
@@ -193,13 +226,15 @@
                                                     <constraint firstAttribute="height" constant="60" id="J92-gy-7wQ"/>
                                                     <constraint firstAttribute="width" constant="60" id="Rxf-1U-D3z"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="100"/>
-                                                <color key="tintColor" red="0.32720769649999998" green="0.362613401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="11"/>
-                                                <state key="normal" title="-">
+                                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                                                <color key="tintColor" systemColor="systemPinkColor"/>
+                                                <state key="normal" title="-" image="minus" catalog="system">
                                                     <color key="titleColor" systemColor="systemGreenColor"/>
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="operatorBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="t9T-7T-Zqb"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -218,6 +253,9 @@
                                                 <state key="normal" title="1">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="w3j-KY-ltr"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ls-iT-NwD">
                                                 <rect key="frame" x="75" y="0.0" width="60" height="60"/>
@@ -231,6 +269,9 @@
                                                 <state key="normal" title="2">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6pr-kr-faq"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6xa-5y-piu">
                                                 <rect key="frame" x="150" y="0.0" width="60" height="60"/>
@@ -244,6 +285,9 @@
                                                 <state key="normal" title="3">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oia-Wc-Xpz"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXH-yM-28P">
                                                 <rect key="frame" x="225" y="0.0" width="60" height="60"/>
@@ -252,13 +296,15 @@
                                                     <constraint firstAttribute="width" constant="60" id="8oC-bj-rJg"/>
                                                     <constraint firstAttribute="height" constant="60" id="amK-40-dz0"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="80"/>
-                                                <color key="tintColor" red="0.32720769649999998" green="0.362613401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
-                                                <state key="normal" title="+">
+                                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                                                <color key="tintColor" systemColor="systemPinkColor"/>
+                                                <state key="normal" title="+" image="plus" catalog="system">
                                                     <color key="titleColor" systemColor="systemGreenColor"/>
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="operatorBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="idp-Aq-qQn"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -279,6 +325,9 @@
                                                 <state key="normal" title="0">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LZR-J1-mXa"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M85-4M-bHF">
                                                 <rect key="frame" x="149" y="0.0" width="60" height="60"/>
@@ -293,32 +342,42 @@
                                                 <state key="normal" title=".">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eBR-fn-kny"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BS3-dP-7Vv">
                                                 <rect key="frame" x="225" y="0.0" width="60" height="60"/>
-                                                <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                                <color key="backgroundColor" red="0.38674091420912882" green="0.36176664459815505" blue="0.58557318652849744" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="PGt-un-LDG"/>
                                                     <constraint firstAttribute="width" constant="60" id="plI-25-FYt"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="80"/>
-                                                <color key="tintColor" red="0.32720769649999998" green="0.362613401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="6"/>
-                                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="5"/>
-                                                <state key="normal" title="=">
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="1"/>
+                                                <color key="tintColor" systemColor="systemPinkColor"/>
+                                                <state key="normal" title="=" image="equal.square" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="operatorBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lD6-Hp-JhY"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qkp-oj-GMF">
-                                <rect key="frame" x="64.5" y="369" width="0.0" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="asdf" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KjU-IW-4qg">
+                                <rect key="frame" x="300.5" y="372" width="49" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="asdfasdf" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qkp-oj-GMF">
+                                <rect key="frame" x="233.5" y="202" width="116" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="hix-ag-Pa6"/>
+                                    <constraint firstAttribute="height" constant="100" id="EpL-3O-jqI"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="40"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -327,43 +386,54 @@
                         <color key="backgroundColor" systemColor="systemGrayColor"/>
                         <color key="tintColor" systemColor="opaqueSeparatorColor"/>
                         <constraints>
+                            <constraint firstItem="qkp-oj-GMF" firstAttribute="trailing" secondItem="pkB-dr-dPi" secondAttribute="trailing" id="43E-Cv-NYT"/>
                             <constraint firstItem="pkB-dr-dPi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7y0-op-Hpy"/>
-                            <constraint firstItem="pkB-dr-dPi" firstAttribute="top" secondItem="qkp-oj-GMF" secondAttribute="bottom" constant="43" id="Eae-tx-cGB"/>
-                            <constraint firstItem="qkp-oj-GMF" firstAttribute="leading" secondItem="pkB-dr-dPi" secondAttribute="leading" id="N8A-un-2xQ"/>
-                            <constraint firstItem="qkp-oj-GMF" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="pkB-dr-dPi" secondAttribute="trailing" id="r1W-D9-VZY"/>
+                            <constraint firstItem="qkp-oj-GMF" firstAttribute="top" secondItem="KjU-IW-4qg" secondAttribute="bottom" constant="-200" id="9dW-y8-uDc"/>
+                            <constraint firstItem="qkp-oj-GMF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pkB-dr-dPi" secondAttribute="leading" constant="10" id="CbD-MD-Hrv"/>
+                            <constraint firstItem="pkB-dr-dPi" firstAttribute="top" secondItem="qkp-oj-GMF" secondAttribute="bottom" constant="150" id="LE2-UG-v2e"/>
+                            <constraint firstItem="KjU-IW-4qg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qkp-oj-GMF" secondAttribute="leading" constant="10" id="QT5-UZ-3Si"/>
+                            <constraint firstItem="KjU-IW-4qg" firstAttribute="trailing" secondItem="qkp-oj-GMF" secondAttribute="trailing" id="mkr-gQ-Cih"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="pkB-dr-dPi" secondAttribute="bottom" constant="50" id="ys8-b5-md7"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="backspaceBtn" destination="96Y-9M-rg6" id="sNM-tW-dNd"/>
-                        <outlet property="cancelBtn" destination="NJ3-5L-9eS" id="ao0-zB-bdJ"/>
-                        <outlet property="textLabel" destination="qkp-oj-GMF" id="G6l-X3-MOK"/>
-                        <outlet property="totalBtn" destination="BS3-dP-7Vv" id="5oC-xb-f0F"/>
-                        <outletCollection property="numberBtn" destination="woV-mo-ZYv" collectionClass="NSMutableArray" id="Mhv-Pg-yEG"/>
-                        <outletCollection property="numberBtn" destination="6xa-5y-piu" collectionClass="NSMutableArray" id="cmo-dx-d0v"/>
-                        <outletCollection property="numberBtn" destination="1Ls-iT-NwD" collectionClass="NSMutableArray" id="za9-rJ-YBQ"/>
-                        <outletCollection property="numberBtn" destination="zfn-Yy-nSS" collectionClass="NSMutableArray" id="Iob-Mx-E0n"/>
-                        <outletCollection property="numberBtn" destination="GeH-2f-EE4" collectionClass="NSMutableArray" id="yKJ-uX-WWS"/>
-                        <outletCollection property="numberBtn" destination="oAj-mI-UeN" collectionClass="NSMutableArray" id="Izl-dd-FHy"/>
-                        <outletCollection property="numberBtn" destination="SFa-vj-Dqc" collectionClass="NSMutableArray" id="ZpK-HS-Mci"/>
-                        <outletCollection property="numberBtn" destination="TaI-K7-rMk" collectionClass="NSMutableArray" id="ggh-Yb-JlV"/>
-                        <outletCollection property="numberBtn" destination="sng-2T-LFd" collectionClass="NSMutableArray" id="Hny-lH-nP4"/>
-                        <outletCollection property="numberBtn" destination="fJk-B3-8LY" collectionClass="NSMutableArray" id="QJX-rO-hjb"/>
-                        <outletCollection property="numberBtn" destination="uXH-yM-28P" collectionClass="NSMutableArray" id="PNf-98-jcd"/>
-                        <outletCollection property="numberBtn" destination="h16-yZ-Ajq" collectionClass="NSMutableArray" id="4Ko-ko-RrV"/>
-                        <outletCollection property="numberBtn" destination="IYV-sU-brV" collectionClass="NSMutableArray" id="ZZ0-Do-gwA"/>
-                        <outletCollection property="numberBtn" destination="4l0-OM-8vM" collectionClass="NSMutableArray" id="kqM-J9-zaU"/>
-                        <outletCollection property="numberBtn" destination="mPq-rb-6uI" collectionClass="NSMutableArray" id="B1A-tR-aW3"/>
-                        <outletCollection property="numberBtn" destination="M85-4M-bHF" collectionClass="NSMutableArray" id="tPv-SH-kZB"/>
+                        <outlet property="displayText" destination="qkp-oj-GMF" id="8nc-fX-QVZ"/>
+                        <outlet property="historyText" destination="KjU-IW-4qg" id="Tun-8P-L9G"/>
+                        <outletCollection property="Btns" destination="NJ3-5L-9eS" collectionClass="NSMutableArray" id="DXw-JC-BZ1"/>
+                        <outletCollection property="Btns" destination="mPq-rb-6uI" collectionClass="NSMutableArray" id="UCt-gm-9s1"/>
+                        <outletCollection property="Btns" destination="4l0-OM-8vM" collectionClass="NSMutableArray" id="fYR-6g-cmd"/>
+                        <outletCollection property="Btns" destination="96Y-9M-rg6" collectionClass="NSMutableArray" id="47d-Ty-EaV"/>
+                        <outletCollection property="Btns" destination="TaI-K7-rMk" collectionClass="NSMutableArray" id="Cet-7l-fAP"/>
+                        <outletCollection property="Btns" destination="sng-2T-LFd" collectionClass="NSMutableArray" id="iP3-2G-uqc"/>
+                        <outletCollection property="Btns" destination="fJk-B3-8LY" collectionClass="NSMutableArray" id="gVt-bG-zQa"/>
+                        <outletCollection property="Btns" destination="IYV-sU-brV" collectionClass="NSMutableArray" id="Qr5-4q-uKx"/>
+                        <outletCollection property="Btns" destination="h16-yZ-Ajq" collectionClass="NSMutableArray" id="uvX-NL-jxd"/>
+                        <outletCollection property="Btns" destination="SFa-vj-Dqc" collectionClass="NSMutableArray" id="NCi-8l-zIS"/>
+                        <outletCollection property="Btns" destination="oAj-mI-UeN" collectionClass="NSMutableArray" id="DQc-7Y-LyS"/>
+                        <outletCollection property="Btns" destination="GeH-2f-EE4" collectionClass="NSMutableArray" id="Dwa-Dk-8UR"/>
+                        <outletCollection property="Btns" destination="uXH-yM-28P" collectionClass="NSMutableArray" id="pyl-02-NNs"/>
+                        <outletCollection property="Btns" destination="6xa-5y-piu" collectionClass="NSMutableArray" id="ogp-FU-HwL"/>
+                        <outletCollection property="Btns" destination="1Ls-iT-NwD" collectionClass="NSMutableArray" id="QXF-xx-YhR"/>
+                        <outletCollection property="Btns" destination="zfn-Yy-nSS" collectionClass="NSMutableArray" id="Kpt-uY-Aug"/>
+                        <outletCollection property="Btns" destination="woV-mo-ZYv" collectionClass="NSMutableArray" id="2hi-m4-Jsj"/>
+                        <outletCollection property="Btns" destination="M85-4M-bHF" collectionClass="NSMutableArray" id="LoQ-wb-UhA"/>
+                        <outletCollection property="Btns" destination="BS3-dP-7Vv" collectionClass="NSMutableArray" id="qfQ-nS-Bxz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-226.08695652173915" y="-1.3392857142857142"/>
+            <point key="canvasLocation" x="-820.28985507246387" y="-13.392857142857142"/>
         </scene>
     </scenes>
     <resources>
         <image name="arrow.backward" catalog="system" width="128" height="98"/>
+        <image name="c.square" catalog="system" width="128" height="114"/>
+        <image name="divide" catalog="system" width="128" height="103"/>
+        <image name="equal.square" catalog="system" width="128" height="114"/>
+        <image name="minus" catalog="system" width="128" height="24"/>
+        <image name="percent.ar" catalog="system" width="117" height="128"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
@@ -375,9 +445,6 @@
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
