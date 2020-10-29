@@ -2,7 +2,7 @@
 
 ###2020.10.29 계산기 업데이트 입니다 (Version 1.0.2) //버튼애니메이션 추가, MVC 모델 적용
 
-
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FVC9hF%2FbtqL9tnR1af%2FUpwu0CCopmYwRzgtNVc6H1%2Fimg.gif" width="20%" height="20%">
 
 ###2020.10.28 첫번째 계산기 앱입니다.(Version 1.0.1) (feat. 생에첫 앱)
 
