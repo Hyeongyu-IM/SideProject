@@ -363,14 +363,14 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="asdf" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KjU-IW-4qg">
-                                <rect key="frame" x="300.5" y="372" width="49" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KjU-IW-4qg">
+                                <rect key="frame" x="349.5" y="402" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="asdfasdf" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qkp-oj-GMF">
-                                <rect key="frame" x="233.5" y="202" width="116" height="100"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qkp-oj-GMF">
+                                <rect key="frame" x="339.5" y="202" width="10" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="EpL-3O-jqI"/>
                                 </constraints>
@@ -395,6 +395,26 @@
                     </view>
                     <connections>
                         <outlet property="displayLB" destination="KjU-IW-4qg" id="08c-oM-LUH"/>
+                        <outlet property="historyLB" destination="qkp-oj-GMF" id="D8Q-aK-GBI"/>
+                        <outletCollection property="Btns" destination="NJ3-5L-9eS" collectionClass="NSMutableArray" id="S7L-3r-fF6"/>
+                        <outletCollection property="Btns" destination="mPq-rb-6uI" collectionClass="NSMutableArray" id="XWl-Dn-wZD"/>
+                        <outletCollection property="Btns" destination="4l0-OM-8vM" collectionClass="NSMutableArray" id="GrP-NM-xYA"/>
+                        <outletCollection property="Btns" destination="96Y-9M-rg6" collectionClass="NSMutableArray" id="Yco-Na-enw"/>
+                        <outletCollection property="Btns" destination="IYV-sU-brV" collectionClass="NSMutableArray" id="hVR-TP-O4r"/>
+                        <outletCollection property="Btns" destination="fJk-B3-8LY" collectionClass="NSMutableArray" id="Smy-tC-zsK"/>
+                        <outletCollection property="Btns" destination="uXH-yM-28P" collectionClass="NSMutableArray" id="N7y-sr-cTb"/>
+                        <outletCollection property="Btns" destination="h16-yZ-Ajq" collectionClass="NSMutableArray" id="tRu-Q0-WYQ"/>
+                        <outletCollection property="Btns" destination="BS3-dP-7Vv" collectionClass="NSMutableArray" id="6t9-tB-qkk"/>
+                        <outletCollection property="Btns" destination="M85-4M-bHF" collectionClass="NSMutableArray" id="PU2-xm-awV"/>
+                        <outletCollection property="Btns" destination="6xa-5y-piu" collectionClass="NSMutableArray" id="Zbc-ot-QRI"/>
+                        <outletCollection property="Btns" destination="SFa-vj-Dqc" collectionClass="NSMutableArray" id="yDQ-4u-wnB"/>
+                        <outletCollection property="Btns" destination="sng-2T-LFd" collectionClass="NSMutableArray" id="ifL-ET-5b8"/>
+                        <outletCollection property="Btns" destination="oAj-mI-UeN" collectionClass="NSMutableArray" id="H6v-dh-adH"/>
+                        <outletCollection property="Btns" destination="1Ls-iT-NwD" collectionClass="NSMutableArray" id="WQe-r0-lAa"/>
+                        <outletCollection property="Btns" destination="woV-mo-ZYv" collectionClass="NSMutableArray" id="0qE-8k-zdP"/>
+                        <outletCollection property="Btns" destination="zfn-Yy-nSS" collectionClass="NSMutableArray" id="Z8F-M5-rIx"/>
+                        <outletCollection property="Btns" destination="GeH-2f-EE4" collectionClass="NSMutableArray" id="qkD-o5-6su"/>
+                        <outletCollection property="Btns" destination="TaI-K7-rMk" collectionClass="NSMutableArray" id="VgV-Nu-Sr3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

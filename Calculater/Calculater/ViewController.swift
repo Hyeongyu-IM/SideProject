@@ -128,12 +128,32 @@ class UpgradeCalculatorViewControler: UIViewController {
 
     //MARK: - UI Property
     @IBOutlet weak var displayLB: UILabel!
+    @IBOutlet weak var historyLB: UILabel!
+    
+    
+    //UI 둥글게하기위해 버튼 컬렉션
+    @IBOutlet var Btns: [UIButton]!
+    
+    override func viewDidLoad() {
+            super.viewDidLoad()
+            for btn in Btns {
+                btn.layer.cornerRadius = 25
+            }
+    }
+   
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        for i in Btns {
+            i.startAnimatingPressActions()
+        }
+    }
 
     //MARK: - IBAction
     //숫자 입력
     var isTyping: Bool = false
     @IBAction func digit(_ sender: UIButton) {
         let currentDigit = sender.currentTitle!
+        historyLB!.text! += sender.currentTitle!
         if isTyping {
             let textCurrentlyInDisplay = displayLB!.text!
             displayLB!.text = textCurrentlyInDisplay + currentDigit
@@ -146,6 +166,7 @@ class UpgradeCalculatorViewControler: UIViewController {
     // 리셋
     @IBAction func resetHandler(_ sender: UIButton) {
         displayValue = 0.0
+        historyLB.text = ""
         isTyping = false
         calModel.setNumber(displayNum: displayValue)
     }
@@ -157,12 +178,15 @@ class UpgradeCalculatorViewControler: UIViewController {
         }
         set {
             displayLB.text! = String(newValue)
+            historyLB!.text! += displayLB.text!
         }
     }
     
     // operation
     var calModel = CalculatorModel()
+    
     @IBAction func operation(_ sender: UIButton) {
+        historyLB!.text! += sender.currentTitle!
         if isTyping { // check
             calModel.setNumber(displayNum: displayValue)
             isTyping = false
@@ -175,6 +199,8 @@ class UpgradeCalculatorViewControler: UIViewController {
             displayValue = calModel.returnValue!
         }
     }
+    
+    
 
 }
 
@@ -193,9 +219,7 @@ class CalculatorModel {
             "-": .binary({(num1, num2) -> Double in return num1 - num2}),
             "*": .binary({(num1, num2) -> Double in return num1 * num2}),
             "/": .binary({(num1, num2) -> Double in return num1 / num2}),
-            "cos": .unary(cos),
-            "√": .unary(sqrt),
-            "±": .unary({(num1: Double) -> Double in return -num1}),
+            "%": .unary ({(num1: Double) -> Double in return num1 / 100}),
             "=": .equal
         ]
 
@@ -259,4 +283,30 @@ var operand: Double?
  }
 }
  
-
+extension UIButton {
+    
+    func startAnimatingPressActions() {
+        addTarget(self, action: #selector(animateDown), for: [.touchDown, .touchDragEnter])
+        addTarget(self, action: #selector(animateUp), for: [.touchDragExit, .touchCancel, .touchUpInside, .touchUpOutside])
+    }
+    
+    @objc private func animateDown(sender: UIButton) {
+        animate(sender, transform: CGAffineTransform.identity.scaledBy(x: 0.95, y: 0.95))
+    }
+    
+    @objc private func animateUp(sender: UIButton) {
+        animate(sender, transform: .identity)
+    }
+    
+    private func animate(_ button: UIButton, transform: CGAffineTransform) {
+        UIView.animate(withDuration: 0.4,
+                       delay: 0,
+                       usingSpringWithDamping: 0.5,
+                       initialSpringVelocity: 3,
+                       options: [.curveEaseInOut],
+                       animations: {
+                        button.transform = transform
+            }, completion: nil)
+    }
+    
+}
