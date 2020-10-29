@@ -276,13 +276,11 @@ var operand: Double?
          firstNum = waitingBinary!.doBinaryOp(with: firstNum!)
      }
  }
- 
  // 뷰콘트롤러에 넘겨줄 연산 완료된 값
  var returnValue: Double? {
      return firstNum
  }
 }
- 
 extension UIButton {
     
     func startAnimatingPressActions() {
@@ -308,5 +306,4 @@ extension UIButton {
                         button.transform = transform
             }, completion: nil)
     }
-    
 }
