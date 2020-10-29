@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Upgrade Calculator View Controler-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Calculater" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="UpgradeCalculatorViewControler" customModule="Calculater" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -41,7 +41,7 @@
                                                     <color key="titleShadowColor" systemColor="linkColor"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="cancelBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dWb-wS-ygH"/>
+                                                    <action selector="resetHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xci-bq-PaD"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mPq-rb-6uI">
@@ -58,7 +58,7 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="operatorBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bnr-o5-Q4B"/>
+                                                    <action selector="operation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="odJ-r3-gab"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4l0-OM-8vM">
@@ -76,7 +76,7 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="operatorBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5HF-7l-Htr"/>
+                                                    <action selector="operation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ymD-U1-xQG"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="96Y-9M-rg6">
@@ -92,9 +92,6 @@
                                                     <imageReference key="image" image="arrow.backward" catalog="system" symbolScale="small"/>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="60"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="backspaceBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HoQ-h8-3BD"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -114,7 +111,7 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rd3-cS-GSq"/>
+                                                    <action selector="digit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qnm-Wv-T0c"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sng-2T-LFd">
@@ -130,7 +127,7 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yro-xA-yc9"/>
+                                                    <action selector="digit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v7I-4d-Xvg"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJk-B3-8LY">
@@ -146,7 +143,7 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gqU-Bt-DYB"/>
+                                                    <action selector="digit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TsT-ln-hCK"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IYV-sU-brV">
@@ -163,7 +160,7 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="operatorBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4ay-KF-7lY"/>
+                                                    <action selector="operation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WeC-NZ-VtR"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -184,7 +181,7 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Dg-o0-gsl"/>
+                                                    <action selector="digit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HKg-1j-woZ"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oAj-mI-UeN">
@@ -200,7 +197,7 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hu5-Og-SDI"/>
+                                                    <action selector="digit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bip-Ft-xxC"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SFa-vj-Dqc">
@@ -216,7 +213,7 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kee-mt-RPu"/>
+                                                    <action selector="digit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="I1R-Ox-GDs"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h16-yZ-Ajq">
@@ -233,7 +230,7 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="operatorBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="t9T-7T-Zqb"/>
+                                                    <action selector="operation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="l0l-8D-rH4"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -254,7 +251,7 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="w3j-KY-ltr"/>
+                                                    <action selector="digit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rUq-lt-etB"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ls-iT-NwD">
@@ -270,7 +267,7 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6pr-kr-faq"/>
+                                                    <action selector="digit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bJb-t3-iyD"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6xa-5y-piu">
@@ -286,7 +283,7 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oia-Wc-Xpz"/>
+                                                    <action selector="digit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NA6-87-su8"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXH-yM-28P">
@@ -303,7 +300,7 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="operatorBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="idp-Aq-qQn"/>
+                                                    <action selector="operation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="51y-BD-nW3"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -326,7 +323,7 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LZR-J1-mXa"/>
+                                                    <action selector="digit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5RG-ar-3Wj"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M85-4M-bHF">
@@ -343,7 +340,7 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="80"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eBR-fn-kny"/>
+                                                    <action selector="digit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="n0Z-hw-WWb"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BS3-dP-7Vv">
@@ -359,7 +356,7 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="operatorBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lD6-Hp-JhY"/>
+                                                    <action selector="operation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uJr-AZ-jJV"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -397,27 +394,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="displayText" destination="qkp-oj-GMF" id="8nc-fX-QVZ"/>
-                        <outlet property="historyText" destination="KjU-IW-4qg" id="Tun-8P-L9G"/>
-                        <outletCollection property="Btns" destination="NJ3-5L-9eS" collectionClass="NSMutableArray" id="DXw-JC-BZ1"/>
-                        <outletCollection property="Btns" destination="mPq-rb-6uI" collectionClass="NSMutableArray" id="UCt-gm-9s1"/>
-                        <outletCollection property="Btns" destination="4l0-OM-8vM" collectionClass="NSMutableArray" id="fYR-6g-cmd"/>
-                        <outletCollection property="Btns" destination="96Y-9M-rg6" collectionClass="NSMutableArray" id="47d-Ty-EaV"/>
-                        <outletCollection property="Btns" destination="TaI-K7-rMk" collectionClass="NSMutableArray" id="Cet-7l-fAP"/>
-                        <outletCollection property="Btns" destination="sng-2T-LFd" collectionClass="NSMutableArray" id="iP3-2G-uqc"/>
-                        <outletCollection property="Btns" destination="fJk-B3-8LY" collectionClass="NSMutableArray" id="gVt-bG-zQa"/>
-                        <outletCollection property="Btns" destination="IYV-sU-brV" collectionClass="NSMutableArray" id="Qr5-4q-uKx"/>
-                        <outletCollection property="Btns" destination="h16-yZ-Ajq" collectionClass="NSMutableArray" id="uvX-NL-jxd"/>
-                        <outletCollection property="Btns" destination="SFa-vj-Dqc" collectionClass="NSMutableArray" id="NCi-8l-zIS"/>
-                        <outletCollection property="Btns" destination="oAj-mI-UeN" collectionClass="NSMutableArray" id="DQc-7Y-LyS"/>
-                        <outletCollection property="Btns" destination="GeH-2f-EE4" collectionClass="NSMutableArray" id="Dwa-Dk-8UR"/>
-                        <outletCollection property="Btns" destination="uXH-yM-28P" collectionClass="NSMutableArray" id="pyl-02-NNs"/>
-                        <outletCollection property="Btns" destination="6xa-5y-piu" collectionClass="NSMutableArray" id="ogp-FU-HwL"/>
-                        <outletCollection property="Btns" destination="1Ls-iT-NwD" collectionClass="NSMutableArray" id="QXF-xx-YhR"/>
-                        <outletCollection property="Btns" destination="zfn-Yy-nSS" collectionClass="NSMutableArray" id="Kpt-uY-Aug"/>
-                        <outletCollection property="Btns" destination="woV-mo-ZYv" collectionClass="NSMutableArray" id="2hi-m4-Jsj"/>
-                        <outletCollection property="Btns" destination="M85-4M-bHF" collectionClass="NSMutableArray" id="LoQ-wb-UhA"/>
-                        <outletCollection property="Btns" destination="BS3-dP-7Vv" collectionClass="NSMutableArray" id="qfQ-nS-Bxz"/>
+                        <outlet property="displayLB" destination="KjU-IW-4qg" id="08c-oM-LUH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
