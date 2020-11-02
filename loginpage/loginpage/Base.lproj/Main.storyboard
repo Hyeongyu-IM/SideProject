@@ -135,10 +135,10 @@
             </objects>
             <point key="canvasLocation" x="140.57971014492756" y="128.57142857142856"/>
         </scene>
-        <!--View Controller-->
+        <!--Signin View Controller-->
         <scene sceneID="vdL-Lh-rcg">
             <objects>
-                <viewController id="3Tm-Ob-wLj" sceneMemberID="viewController">
+                <viewController id="3Tm-Ob-wLj" customClass="signinViewController" customModule="loginpage" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KaX-1I-nxT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -155,6 +155,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal" title="Create your Apple Account"/>
+                                <connections>
+                                    <action selector="createBtn:" destination="3Tm-Ob-wLj" eventType="touchUpInside" id="GvJ-ai-r9R"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qNL-TM-Cf2">
                                 <rect key="frame" x="40" y="200" width="334" height="34"/>
@@ -254,6 +257,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rrz-cC-UbF"/>
+                    <connections>
+                        <outlet property="Btn" destination="vwJ-Fc-sCV" id="qAR-LQ-NE1"/>
+                        <outlet property="idTextField" destination="W0P-6b-ajZ" id="Qqp-Bz-t7Y"/>
+                        <outlet property="nameText" destination="qNL-TM-Cf2" id="aGl-q8-rqe"/>
+                        <outlet property="pwTextField" destination="odc-xk-SgQ" id="1NN-TW-rmT"/>
+                        <outlet property="pwcheckTextField" destination="2a7-wC-TlY" id="JHG-ox-Xlz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R98-kd-4Su" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

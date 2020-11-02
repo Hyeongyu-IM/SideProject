@@ -15,20 +15,32 @@ class ViewController: UIViewController {
     @IBOutlet weak var signinLB: UIButton!
     @IBOutlet weak var loginLB: UIButton!
     
+    // ---> 파이어베이스 데이터베이스 연결
     let db = Database.database().reference()
     
-    // 모델을 가져옵니다
+    // ---> 저장할 데이터의 모델을 가져옵니다
     var users: [User] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewDidLoad호출")
         saveBasicUsers()
         fetchCustomers()
-        signinLB.layer.cornerRadius = 10
-        loginLB.layer.cornerRadius = 10
+//        loginLB.layer.cornerRadius = 10
     }
     
-    // 로그인 버튼을 누를시 유저가 있는지 확인합니다.
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("sender입니다 --> \(sender)")
+        if segue.identifier == "signin" {
+            let ve = segue.destination as? signinViewController
+            if let info = sender as? [User] {
+                ve?.usermodel.update(model: info)
+            }
+        }
+    }
+    
+    // --- 로그인 버튼을 누를시 유저 데이터가 맞는지 확인합니다.
     func hasUser() -> Bool {
         print("입력된 id\(idLB.text) , password \(psLB.text)입니다")
         print("\(users)")
@@ -46,11 +58,12 @@ class ViewController: UIViewController {
     }
     
     
-    
-    @IBAction func signinBtn(_ sender: UIButton) {
-        
+    // ---> 회원가입 버튼 클릭시 화면전환을 위해 segue를 사용합니다
+    @IBAction func signinBtn(_ sender: Any) {
+        performSegue(withIdentifier: "signin", sender: users)
     }
     
+    // --> 버튼누르고 판별에 따른 로그인 알림 출력
     @IBAction func loginBtn(_ sender: Any) {
         if hasUser() {
             let succed = UIAlertController(title: "로그인 하셨습니다", message: nil, preferredStyle: .alert)
@@ -62,28 +75,30 @@ class ViewController: UIViewController {
             self.present(fail, animated: false)
         }
     }
+    
     @IBAction func exitBtn(_ sender: Any) {
     }
     
 }
 
-// --- 기본적인 유저정보를 파이어베이스에 저장합니다.
+// ---> 기본적인 유저정보를 파이어베이스에 저장합니다.
 extension ViewController {
     func saveBasicUsers() {
-        let user1 = User(id: "limku220", name: "Hyeongyu_IM", password: "1234")
-        let user2 = User(id: "kei960311", name: "Soomin_KIM", password: "1234")
+        let user1 = User(num: "\(User.num)", id: "limku220", name: "Hyeongyu_IM", password: "1234")
+        User.num += 1
+        let user2 = User(num: "\(User.num)", id: "kei960311", name: "Soomin_KIM", password: "1234")
+        User.num += 1
         
-        db.child("users").child(user1.id).setValue(user1.toDictionary)
-        db.child("users").child(user2.id).setValue(user2.toDictionary)
+        db.child("users").child(user1.num).setValue(user1.toDictionary)
+        db.child("users").child(user2.num).setValue(user2.toDictionary)
     }
 }
 
-// --- 로그인확인을 위한 유저정보를 가져옵니다.
+// ---> 로그인확인을 위한 유저정보를 가져옵니다.
 extension ViewController {
     func fetchCustomers() {
         db.child("users").observeSingleEvent(of:.value) { snapshot in
             print("--> \(snapshot.value)")
-            
             // 받아온 데이터 디코딩
             do {
                 let data = try JSONSerialization.data(withJSONObject: snapshot.value, options: [])
@@ -92,10 +107,7 @@ extension ViewController {
                 //디코딩 시작
                 let users: [User] = try decoder.decode([User].self, from: data)
                 //모델 데이터 설정
-                print("usersdata입니다 \(users)")
                 self.users = users
-                print("usersdata입니다 \(users)")
-                
             } catch let error {
                 print("error ---->\(error.localizedDescription)")
             }
