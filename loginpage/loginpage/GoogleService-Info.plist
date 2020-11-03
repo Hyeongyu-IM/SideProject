@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>428168767724-gfdelb28u16d3nj2l4jn1nhc2br3mtpj.apps.googleusercontent.com</string>
+	<string>466341533832-3bhiq6lc0lm78g6v58pf0tjqtk1narvp.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.428168767724-gfdelb28u16d3nj2l4jn1nhc2br3mtpj</string>
+	<string>com.googleusercontent.apps.466341533832-3bhiq6lc0lm78g6v58pf0tjqtk1narvp</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBG7ORQi6mBPpkIiAf-A2YFh-u138SOFWI</string>
+	<string>AIzaSyBDY1b-hTmvwkthM0ihqIv97HyVREjd1Oc</string>
 	<key>GCM_SENDER_ID</key>
-	<string>428168767724</string>
+	<string>466341533832</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>Hyeongyu.loginpage</string>
 	<key>PROJECT_ID</key>
-	<string>loginpage-892b6</string>
+	<string>loginpage-d5062</string>
 	<key>STORAGE_BUCKET</key>
-	<string>loginpage-892b6.appspot.com</string>
+	<string>loginpage-d5062.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:428168767724:ios:d665a566c9bdd5d9c5ddc9</string>
+	<string>1:466341533832:ios:e84813c5fa051bedcba73d</string>
 	<key>DATABASE_URL</key>
-	<string>https://loginpage-892b6.firebaseio.com</string>
+	<string>https://loginpage-d5062.firebaseio.com</string>
 </dict>
 </plist>

@@ -68,8 +68,7 @@
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Sign in"/>
                                 <connections>
-                                    <action selector="signinBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9Ue-kA-8mD"/>
-                                    <segue destination="3Tm-Ob-wLj" kind="presentation" identifier="signin" id="j4m-Dt-Aly"/>
+                                    <segue destination="3Tm-Ob-wLj" kind="presentation" identifier="signin" id="awA-Cj-SuB"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FJ1-Dv-POY">
@@ -90,6 +89,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="CwY-dn-cMi" firstAttribute="leading" secondItem="ISf-UB-U8C" secondAttribute="leading" id="1ML-Uy-gld"/>
                             <constraint firstItem="CwY-dn-cMi" firstAttribute="top" secondItem="ISf-UB-U8C" secondAttribute="bottom" constant="100" id="1wh-B0-amV"/>
@@ -145,6 +145,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="스크린샷 2020-10-31 오후 9.26.31" translatesAutoresizingMaskIntoConstraints="NO" id="hf6-00-1PA">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <gestureRecognizers/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vwJ-Fc-sCV">
                                 <rect key="frame" x="40" y="586" width="334" height="40"/>
@@ -263,6 +264,10 @@
                         <outlet property="nameText" destination="qNL-TM-Cf2" id="aGl-q8-rqe"/>
                         <outlet property="pwTextField" destination="odc-xk-SgQ" id="1NN-TW-rmT"/>
                         <outlet property="pwcheckTextField" destination="2a7-wC-TlY" id="JHG-ox-Xlz"/>
+                        <outletCollection property="colForTF" destination="qNL-TM-Cf2" collectionClass="NSMutableArray" id="C2W-z6-aD9"/>
+                        <outletCollection property="colForTF" destination="W0P-6b-ajZ" collectionClass="NSMutableArray" id="lNg-id-RFg"/>
+                        <outletCollection property="colForTF" destination="odc-xk-SgQ" collectionClass="NSMutableArray" id="Z2F-Xo-gWm"/>
+                        <outletCollection property="colForTF" destination="2a7-wC-TlY" collectionClass="NSMutableArray" id="8Xm-ed-fb1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R98-kd-4Su" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

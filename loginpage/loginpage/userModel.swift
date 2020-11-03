@@ -22,5 +22,6 @@ struct User: Codable {
         return user
     }
     
+    // 생성후
     static var num: Int = 0
 }
