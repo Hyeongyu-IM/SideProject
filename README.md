@@ -2,7 +2,7 @@
 
 ###2020.11.03 로그인 & 회원가입 뷰입니다 (Version 1.0.0)
 
-<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fl3Kkp%2FbtqMve5qKTy%2FrsAgGPmYrEEbLThM6Fm4bK%2Fimg.gif" width="20%" height="20%">
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fl3Kkp%2FbtqMve5qKTy%2FrsAgGPmYrEEbLThM6Fm4bK%2Fimg.gif" width="40%" height="40%">
 
 https://memohg.tistory.com/92
 
