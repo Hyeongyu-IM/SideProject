@@ -1,6 +1,7 @@
 # SideProject
 
 ##2020.11.18 로그인 & 회원가입 뷰 업데이트 (Version 1.0.1)
+
 ###업데이트 타겟입니다
 - 입력값 유효성검사
     = ValidationCheck라는 클래스를 생성하여 NSPredicate(format:) 를 이용해서 인스턴스를 생성하고 evealuate하는 방법으로 작성하였습니다
