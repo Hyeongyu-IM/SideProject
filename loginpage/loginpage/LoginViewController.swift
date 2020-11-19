@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import GoogleSignIn
 
 class LoginViewController: UIViewController {
     
@@ -17,6 +18,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginLB: UIButton!
     @IBOutlet var tapRecog: UITapGestureRecognizer!
     
+    @IBOutlet weak var signInButton: GIDSignInButton!
+    
     // ---> 파이어베이스 데이터베이스 연결
 //    let db = Database.database().reference()
     
@@ -26,6 +29,9 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         config()
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        GIDSignIn.sharedInstance().signIn()
+        signInButton.layer.cornerRadius = 10
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -81,6 +87,19 @@ class LoginViewController: UIViewController {
             }
         }
     }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+      // ...
+      if let error = error {
+        // ...
+        return
+      }
+
+      guard let authentication = user.authentication else { return }
+      let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                        accessToken: authentication.accessToken)
+      // ...
+    }
 }
 
 extension LoginViewController: UIGestureRecognizerDelegate {
@@ -93,8 +112,7 @@ extension LoginViewController: UIGestureRecognizerDelegate {
         }
     }
 }
-        
-        
+
         
         // 사용자의 입력이 없으면 테두리가 빨갛게 됩니다
         
