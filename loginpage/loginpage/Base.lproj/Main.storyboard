@@ -71,20 +71,37 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mIp-En-X73" customClass="GIDSignInButton">
-                                <rect key="frame" x="40" y="662" width="334" height="48"/>
+                                <rect key="frame" x="40" y="652" width="334" height="48"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0aA-9u-azv">
+                                <rect key="frame" x="40" y="740" width="334" height="40"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="EyI-RO-OZC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal" title="Log in"/>
+                                <connections>
+                                    <action selector="loginBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VYp-fQ-Iig"/>
+                                    <action selector="onKakaoLoginByAppTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nnn-Iy-tPa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="0aA-9u-azv" firstAttribute="leading" secondItem="mIp-En-X73" secondAttribute="leading" id="0Ny-kg-WQG"/>
                             <constraint firstItem="CwY-dn-cMi" firstAttribute="leading" secondItem="ISf-UB-U8C" secondAttribute="leading" id="1ML-Uy-gld"/>
                             <constraint firstItem="CwY-dn-cMi" firstAttribute="top" secondItem="ISf-UB-U8C" secondAttribute="bottom" constant="100" id="1wh-B0-amV"/>
                             <constraint firstItem="Ong-XD-0VD" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="4Yb-pa-QBr"/>
+                            <constraint firstItem="0aA-9u-azv" firstAttribute="trailing" secondItem="mIp-En-X73" secondAttribute="trailing" id="5g6-Yy-My8"/>
                             <constraint firstAttribute="bottom" secondItem="Ong-XD-0VD" secondAttribute="bottom" id="AZ1-An-oya"/>
+                            <constraint firstItem="0aA-9u-azv" firstAttribute="top" secondItem="mIp-En-X73" secondAttribute="bottom" constant="40" id="C2M-ck-80a"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="d7d-E0-sL4" secondAttribute="trailing" constant="87" id="DCY-zS-fN8"/>
-                            <constraint firstItem="mIp-En-X73" firstAttribute="top" secondItem="CwY-dn-cMi" secondAttribute="bottom" constant="50" id="GEI-NZ-ALz"/>
+                            <constraint firstItem="mIp-En-X73" firstAttribute="top" secondItem="CwY-dn-cMi" secondAttribute="bottom" constant="40" id="GEI-NZ-ALz"/>
                             <constraint firstItem="hDd-je-aSW" firstAttribute="leading" secondItem="ISf-UB-U8C" secondAttribute="leading" id="GPf-3e-4ix"/>
                             <constraint firstItem="iPw-uZ-VeG" firstAttribute="top" secondItem="ISf-UB-U8C" secondAttribute="bottom" constant="30" id="Hgf-su-adr"/>
                             <constraint firstItem="xYU-GY-Tdk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="IQQ-Fl-Ny4"/>

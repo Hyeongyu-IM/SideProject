@@ -8,6 +8,9 @@
 import UIKit
 import FirebaseAuth
 import GoogleSignIn
+import KakaoSDKAuth
+import KakaoSDKUser
+import Firebase
 
 class LoginViewController: UIViewController {
     
@@ -21,7 +24,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var signInButton: GIDSignInButton!
     
     // ---> 파이어베이스 데이터베이스 연결
-//    let db = Database.database().reference()
+    let db = Database.database().reference()
     
     // ---> 저장할 데이터의 모델을 가져옵니다
 //    var users: [User] = []
@@ -38,6 +41,63 @@ class LoginViewController: UIViewController {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @IBAction func onKakaoLoginByAppTouched(_ sender: Any) {
+     // 카카오톡 설치 여부 확인
+      if (AuthApi.isKakaoTalkLoginAvailable()) {
+        // 카카오톡 로그인. api 호출 결과를 클로저로 전달.
+        AuthApi.shared.loginWithKakaoTalk {(oauthToken, error) in
+            if let error = error {
+                // 예외 처리 (로그인 취소 등)
+                print(error)
+            }
+            else {
+                print("loginWithKakaoTalk() success.")
+               // do something
+                _ = oauthToken
+               // 어세스토큰
+               let accessToken = oauthToken?.accessToken
+            }
+        }
+      } else {
+        AuthApi.shared.loginWithKakaoAccount {(oauthToken, error) in
+           if let error = error {
+             print(error)
+           }
+           else {
+            print("loginWithKakaoAccount() success.")
+            
+            //do something
+            _ = oauthToken
+            self.saveUserToFirebase()
+           }
+      }
+    }
+    }
+    
+    func saveUserToFirebase() {
+        UserApi.shared.me() {(user, error) in
+            if let error = error {
+                print(error)
+            }
+            else {
+                print("me() success.")
+        //do something
+                _ = user
+                
+                self.db.child("users").setValue(["name": user?.kakaoAccount?.profile?.nickname, "email": user?.kakaoAccount?.email, "uid": user?.id ]) { (error, complete) in
+                    if error != nil {
+                        // Show error message
+                        print("Error saving user data")
+                    } else {
+                        let succed = UIAlertController(title: "Well Come 😍", message: nil, preferredStyle: .alert)
+                       succed.addAction(UIAlertAction(title: "OK", style: .cancel))
+                       self.present(succed, animated: false)
+                    }
+                }
+            }
+        }
     }
     
     func config() {

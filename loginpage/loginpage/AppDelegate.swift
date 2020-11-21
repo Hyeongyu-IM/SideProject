@@ -8,16 +8,21 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import KakaoSDKCommon
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
-
+    
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
+        
+        KakaoSDKCommon.initSDK(appKey: "149ce286ea72c842351a35df8beb663d")
         
         return true
     }
@@ -67,6 +72,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    
+    
 
 
 }

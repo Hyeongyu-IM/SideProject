@@ -11,6 +11,11 @@ pod 'Firebase/Database'
 pod 'Firebase/Auth'
 pod 'GoogleSignIn'
 # add pods for any other desired Firebase products
+
+  # kakao login Service
+  pod 'KakaoSDKCommon'
+  pod 'KakaoSDKAuth'
+  pod 'KakaoSDKUser'
 # https://firebase.google.com/docs/ios/setup#available-pods
   # Pods for loginpage
 
