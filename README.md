@@ -1,13 +1,13 @@
 # SideProject
 
-##2020.11.18 로그인 & 회원가입 뷰 업데이트 (Version 1.0.2)
+## 2020.11.18 로그인 & 회원가입 뷰 업데이트 (Version 1.0.2)
 
-###업데이트 타겟입니다
+### 업데이트 타겟입니다
  - 구글 & 카카오 로그인 기능 추가 및 로그인 성공시 해당 유저의 데이터를 파이어베이스 데이터베이스에 저장하도록 업데이트 했습니다
 
-##2020.11.18 로그인 & 회원가입 뷰 업데이트 (Version 1.0.1)
+## 2020.11.18 로그인 & 회원가입 뷰 업데이트 (Version 1.0.1)
 
-###업데이트 타겟입니다
+### 업데이트 타겟입니다
 - 입력값 유효성검사
     = ValidationCheck라는 클래스를 생성하여 NSPredicate(format:) 를 이용해서 인스턴스를 생성하고 evealuate하는 방법으로 작성하였습니다
     
@@ -24,22 +24,22 @@
     = 노티피케이션 센터를 활용하여 키보드가 올라가고 내려갈때 일정부분 화면을 가리는 부분을 frame.y를 값을 더하여 수정했습니다. 
 
 
-##2020.11.03 로그인 & 회원가입 뷰입니다 (Version 1.0.0)
+## 2020.11.03 로그인 & 회원가입 뷰입니다 (Version 1.0.0)
 
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fl3Kkp%2FbtqMve5qKTy%2FrsAgGPmYrEEbLThM6Fm4bK%2Fimg.gif" width="40%" height="40%">
 
 https://memohg.tistory.com/92
 
-##2020.10.29 계산기 업데이트 입니다 (Version 1.0.2) //버튼애니메이션 추가, MVC 모델 적용
+## 2020.10.29 계산기 업데이트 입니다 (Version 1.0.2) //버튼애니메이션 추가, MVC 모델 적용
 
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FVC9hF%2FbtqL9tnR1af%2FUpwu0CCopmYwRzgtNVc6H1%2Fimg.gif" width="20%" height="20%">
 
 https://memohg.tistory.com/84?category=865507
 
-##2020.10.28 첫번째 계산기 앱입니다.(Version 1.0.1) (feat. 생에첫 앱)
+## 2020.10.28 첫번째 계산기 앱입니다.(Version 1.0.1) (feat. 생에첫 앱)
 
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FRSgb8%2FbtqLZKxzK0E%2FbHOTu0Dxpvl4T0Luvu2Zyk%2Fimg.png" width="20%" height="20%">
 
 https://memohg.tistory.com/79
 
-##2020.10.27 사이드 프로젝트 연습을 위해 개설되었습니다.
+## 2020.10.27 사이드 프로젝트 연습을 위해 개설되었습니다.
