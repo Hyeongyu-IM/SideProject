@@ -1,0 +1,6 @@
+framework module Pods_loginpage {
+  umbrella header "Pods-loginpage-umbrella.h"
+
+  export *
+  module * { export * }
+}

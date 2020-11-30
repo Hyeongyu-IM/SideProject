@@ -8,14 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		2C035AA22551398A00CCD0D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C035AA12551398A00CCD0D0 /* GoogleService-Info.plist */; };
+		2C755A1C2564FEFE00C2915B /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C755A1B2564FEFE00C2915B /* Utilities.swift */; };
 		2CE1FECF254D8CCE00AA494D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE1FECE254D8CCE00AA494D /* AppDelegate.swift */; };
 		2CE1FED1254D8CCE00AA494D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE1FED0254D8CCE00AA494D /* SceneDelegate.swift */; };
-		2CE1FED3254D8CCE00AA494D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE1FED2254D8CCE00AA494D /* ViewController.swift */; };
+		2CE1FED3254D8CCE00AA494D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE1FED2254D8CCE00AA494D /* LoginViewController.swift */; };
 		2CE1FED6254D8CCE00AA494D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CE1FED4254D8CCE00AA494D /* Main.storyboard */; };
 		2CE1FED8254D8CCF00AA494D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CE1FED7254D8CCF00AA494D /* Assets.xcassets */; };
 		2CE1FEDB254D8CCF00AA494D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CE1FED9254D8CCF00AA494D /* LaunchScreen.storyboard */; };
 		2CEF5786254EFA6A00CFF5CB /* userModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF5785254EFA6A00CFF5CB /* userModel.swift */; };
-		2CEF5789254F097C00CFF5CB /* signinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF5788254F097C00CFF5CB /* signinViewController.swift */; };
+		2CEF5789254F097C00CFF5CB /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF5788254F097C00CFF5CB /* SigninViewController.swift */; };
 		A5338959B11362C3178C88E9 /* Pods_loginpage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EEBE05B2D36551C29A09060 /* Pods_loginpage.framework */; };
 /* End PBXBuildFile section */
 
@@ -23,16 +24,17 @@
 		1EEBE05B2D36551C29A09060 /* Pods_loginpage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_loginpage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2605DA4663AB717B3B25B215 /* Pods-loginpage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-loginpage.debug.xcconfig"; path = "Target Support Files/Pods-loginpage/Pods-loginpage.debug.xcconfig"; sourceTree = "<group>"; };
 		2C035AA12551398A00CCD0D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2C755A1B2564FEFE00C2915B /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		2CE1FECB254D8CCE00AA494D /* loginpage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = loginpage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE1FECE254D8CCE00AA494D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CE1FED0254D8CCE00AA494D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2CE1FED2254D8CCE00AA494D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2CE1FED2254D8CCE00AA494D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2CE1FED5254D8CCE00AA494D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2CE1FED7254D8CCF00AA494D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2CE1FEDA254D8CCF00AA494D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2CE1FEDC254D8CCF00AA494D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2CEF5785254EFA6A00CFF5CB /* userModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userModel.swift; sourceTree = "<group>"; };
-		2CEF5788254F097C00CFF5CB /* signinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signinViewController.swift; sourceTree = "<group>"; };
+		2CEF5788254F097C00CFF5CB /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		4CC6A4EB4590843E56059467 /* Pods-loginpage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-loginpage.release.xcconfig"; path = "Target Support Files/Pods-loginpage/Pods-loginpage.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,8 +73,9 @@
 			children = (
 				2CE1FECE254D8CCE00AA494D /* AppDelegate.swift */,
 				2CE1FED0254D8CCE00AA494D /* SceneDelegate.swift */,
-				2CE1FED2254D8CCE00AA494D /* ViewController.swift */,
-				2CEF5788254F097C00CFF5CB /* signinViewController.swift */,
+				2C755A1B2564FEFE00C2915B /* Utilities.swift */,
+				2CE1FED2254D8CCE00AA494D /* LoginViewController.swift */,
+				2CEF5788254F097C00CFF5CB /* SigninViewController.swift */,
 				2CEF5785254EFA6A00CFF5CB /* userModel.swift */,
 				2CE1FED4254D8CCE00AA494D /* Main.storyboard */,
 				2CE1FED7254D8CCF00AA494D /* Assets.xcassets */,
@@ -112,6 +115,7 @@
 				2CE1FEC8254D8CCE00AA494D /* Frameworks */,
 				2CE1FEC9254D8CCE00AA494D /* Resources */,
 				048A6C832F42CB8C20EA4776 /* [CP] Embed Pods Frameworks */,
+				2CE1063BE1BD7BC72C08B548 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -186,6 +190,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-loginpage/Pods-loginpage-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		2CE1063BE1BD7BC72C08B548 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-loginpage/Pods-loginpage-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-loginpage/Pods-loginpage-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-loginpage/Pods-loginpage-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5D754E063D02C3A2D73D20B2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -215,11 +236,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CE1FED3254D8CCE00AA494D /* ViewController.swift in Sources */,
-				2CEF5789254F097C00CFF5CB /* signinViewController.swift in Sources */,
+				2CE1FED3254D8CCE00AA494D /* LoginViewController.swift in Sources */,
+				2CEF5789254F097C00CFF5CB /* SigninViewController.swift in Sources */,
 				2CE1FECF254D8CCE00AA494D /* AppDelegate.swift in Sources */,
 				2CEF5786254EFA6A00CFF5CB /* userModel.swift in Sources */,
 				2CE1FED1254D8CCE00AA494D /* SceneDelegate.swift in Sources */,
+				2C755A1C2564FEFE00C2915B /* Utilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,7 +293,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -332,7 +354,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
