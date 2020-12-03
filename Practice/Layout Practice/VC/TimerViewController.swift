@@ -27,7 +27,7 @@ class TimerViewController: UIViewController, UITableViewDataSource {
     
     func updateTimer(_ timer: Timer) {
         print(#function, Date(), timer)
-        timeLabel.text = formatter.string(for: comps)
+        timeLabel.text = formatter.string(for: Date())
     }
     
     @IBAction func start(_ sender: Any) {

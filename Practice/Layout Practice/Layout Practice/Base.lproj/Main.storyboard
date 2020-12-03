@@ -74,13 +74,13 @@
                                 <items>
                                     <navigationItem title="Wanted" id="HGu-xF-huY">
                                         <barButtonItem key="rightBarButtonItem" style="plain" id="cfS-8x-CRN">
-                                            <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="i5o-pf-ykJ">
+                                            <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="i5o-pf-ykJ">
                                                 <rect key="frame" x="343" y="6.5" width="51" height="31"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <connections>
+                                                    <action selector="toggleBtn:" destination="BYZ-38-t0r" eventType="valueChanged" id="DbM-qw-ggd"/>
+                                                </connections>
                                             </switch>
-                                            <connections>
-                                                <action selector="toggleEdit:" destination="BYZ-38-t0r" id="tnQ-zk-18c"/>
-                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -98,7 +98,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="bountyList" destination="bHa-OE-yVp" id="BWs-qS-p1k"/>
-                        <outlet property="toggleBtn" destination="cfS-8x-CRN" id="kXW-K4-T7W"/>
+                        <outlet property="toggleBtnClicked" destination="i5o-pf-ykJ" id="QUP-D1-Wcq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

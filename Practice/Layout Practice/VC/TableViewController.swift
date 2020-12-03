@@ -11,16 +11,19 @@ class TableViewController: UIViewController {
     
     let bountyViewModel = TableViewModel()
     @IBOutlet weak var bountyList: UITableView!
-    @IBOutlet weak var toggleBtn: UIBarButtonItem!
+    
+    @IBOutlet weak var toggleBtnClicked: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func toggleEdit(_ sender: UISwitch) {
+    
+    @IBAction func toggleBtn(_ sender: UISwitch) {
         bountyList.setEditing(sender.isOn, animated: true)
     }
+    
 
 }
 
