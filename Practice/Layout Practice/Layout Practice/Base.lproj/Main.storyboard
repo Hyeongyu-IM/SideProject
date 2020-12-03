@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bHa-OE-yVp">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -39,7 +39,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZy-Gc-lCc">
-                                                    <rect key="frame" x="207.5" y="113" width="96.5" height="48"/>
+                                                    <rect key="frame" x="207.5" y="113" width="97" height="48"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="40"/>
                                                     <color key="textColor" systemColor="systemGray2Color"/>
                                                     <nil key="highlightedColor"/>
@@ -69,12 +69,37 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="72v-5I-Rp3"/>
                                 </connections>
                             </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d19-63-ltV">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Wanted" id="HGu-xF-huY">
+                                        <barButtonItem key="rightBarButtonItem" style="plain" id="cfS-8x-CRN">
+                                            <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="i5o-pf-ykJ">
+                                                <rect key="frame" x="343" y="6.5" width="51" height="31"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </switch>
+                                            <connections>
+                                                <action selector="toggleEdit:" destination="BYZ-38-t0r" id="tnQ-zk-18c"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="d19-63-ltV" secondAttribute="trailing" id="9wK-tL-Sy0"/>
+                            <constraint firstItem="d19-63-ltV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Pxk-08-1H5"/>
+                            <constraint firstItem="d19-63-ltV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="eP8-V1-Rog"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="TableView" image="table" catalog="system" id="eUn-a0-zDR"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="bountyList" destination="bHa-OE-yVp" id="BWs-qS-p1k"/>
+                        <outlet property="toggleBtn" destination="cfS-8x-CRN" id="kXW-K4-T7W"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

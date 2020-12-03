@@ -10,12 +10,17 @@ import UIKit
 class TableViewController: UIViewController {
     
     let bountyViewModel = TableViewModel()
-
+    @IBOutlet weak var bountyList: UITableView!
+    @IBOutlet weak var toggleBtn: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
+    
+    @IBAction func toggleEdit(_ sender: UISwitch) {
+        bountyList.setEditing(sender.isOn, animated: true)
+    }
 
 }
 
@@ -34,5 +39,13 @@ extension TableViewController: UITableViewDataSource {
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+}
+
+extension TableViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
 }
