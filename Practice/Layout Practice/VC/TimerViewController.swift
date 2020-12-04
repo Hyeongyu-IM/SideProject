@@ -40,8 +40,8 @@ class TimerViewController: UIViewController, UITableViewDataSource {
     @IBAction func stop(_ sender: Any) {
         time.insert(timeLabel.text!, at: 0)
         print(time)
-        timeList.reloadData()
         timeLabel.text = "00.00.00"
+        timeList.reloadData()
         timer?.invalidate()
     }
     
