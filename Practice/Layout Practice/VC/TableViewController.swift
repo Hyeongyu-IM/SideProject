@@ -56,4 +56,8 @@ extension TableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("클릭되었습니다 \(indexPath.row)")
+    }
 }
