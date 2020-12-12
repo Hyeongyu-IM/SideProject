@@ -6,19 +6,87 @@
 //
 
 import UIKit
+import GooglePlaces
 
 class SearchViewController: UIViewController {
-
     
+    @IBOutlet weak var customSearchBar: UISearchBar!
+    @IBOutlet weak var blurView: UIView!
     
-    override func viewDidLoad() {
+    let weatherViewModel = WeatherViewModel()
+    
+    private var tableView: UITableView!
+      private var tableDataSource: GMSAutocompleteTableDataSource!
+    
+      override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
+        configAutoComplete()
+      }
     
-   
+    func configAutoComplete() {
+        customSearchBar.delegate = self
+        tableDataSource = GMSAutocompleteTableDataSource()
+        tableDataSource.delegate = self
+        tableView = UITableView(frame: CGRect(x: 0, y: 105, width: self.view.frame.size.width, height: self.view.frame.size.height - 44))
+            tableView.delegate = tableDataSource
+            tableView.dataSource = tableDataSource
+        
+        let filter = GMSAutocompleteFilter()
+        filter.type = .city
+        tableDataSource.autocompleteFilter = filter
+        blurView.addSubview(tableView)
+        
+        // tableView 속성 편집
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        tableDataSource.tableCellBackgroundColor = .clear
+        tableDataSource.tableCellSeparatorColor = .clear
+        tableDataSource.primaryTextHighlightColor = .white
+        
+        // searchBar 속성 편집
+        customSearchBar.barTintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        tableView.can
+    }
+}
 
+extension SearchViewController: GMSAutocompleteTableDataSourceDelegate, UISearchBarDelegate  {
+    
+    func didUpdateAutocompletePredictions(for tableDataSource: GMSAutocompleteTableDataSource) {
+        // Turn the network activity indicator off.
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        // Reload table data.
+        tableView.reloadData()
+      }
 
+      func didRequestAutocompletePredictions(for tableDataSource: GMSAutocompleteTableDataSource) {
+        // Turn the network activity indicator on.
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        // Reload table data.
+        tableView.reloadData()
+      }
+
+      func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didAutocompleteWith place: GMSPlace) {
+        // Do something with the selected place.
+        weatherViewModel.coreDataManager.save(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+      }
+
+      func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didFailAutocompleteWithError error: Error) {
+        // Handle the error.
+        print("Error: \(error.localizedDescription)")
+      }
+
+      func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didSelect prediction: GMSAutocompletePrediction) -> Bool {
+        return true
+      }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // Update the GMSAutocompleteTableDataSource with the search text.
+        tableDataSource.sourceTextHasChanged(searchText)
+      }
+    
+    
+ 
 }
 
 
