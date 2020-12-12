@@ -13,6 +13,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var customSearchBar: UISearchBar!
     @IBOutlet weak var blurView: UIView!
     
+    let weatherViewModel = WeatherViewModel()
     
     private var tableView: UITableView!
       private var tableDataSource: GMSAutocompleteTableDataSource!
@@ -44,12 +45,15 @@ class SearchViewController: UIViewController {
         
         // searchBar 속성 편집
         customSearchBar.barTintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        tableView.can
     }
 }
 
 extension SearchViewController: GMSAutocompleteTableDataSourceDelegate, UISearchBarDelegate  {
+    
     func didUpdateAutocompletePredictions(for tableDataSource: GMSAutocompleteTableDataSource) {
         // Turn the network activity indicator off.
+        
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
         // Reload table data.
         tableView.reloadData()
@@ -64,9 +68,7 @@ extension SearchViewController: GMSAutocompleteTableDataSourceDelegate, UISearch
 
       func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didAutocompleteWith place: GMSPlace) {
         // Do something with the selected place.
-        print("Place name: \(place.name)")
-        print("Place address: \(place.formattedAddress)")
-        print("Place attributions: \(place.attributions)")
+        weatherViewModel.coreDataManager.save(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
       }
 
       func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didFailAutocompleteWithError error: Error) {

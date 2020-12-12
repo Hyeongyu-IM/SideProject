@@ -9,7 +9,29 @@ import UIKit
 
 class LocationListViewController: UIViewController {
     
+    let weatherViewModel = WeatherViewModel()
+    
+    @IBOutlet weak var weatherListView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 }
+
+extension LocationListViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
+}
+
+extension LocationListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+}
+

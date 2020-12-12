@@ -123,6 +123,9 @@
                             <constraint firstItem="u5W-zR-kNt" firstAttribute="trailing" secondItem="sFp-64-vkc" secondAttribute="trailing" id="tko-xx-iYd"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="weatherListView" destination="zYP-Oq-7w0" id="lKC-oi-0Tw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eg8-aP-LFM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

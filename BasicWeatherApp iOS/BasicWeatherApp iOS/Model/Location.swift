@@ -9,9 +9,9 @@ import Foundation
 import CoreLocation
 
 struct Location {
-  let name: String
-  let latitude: Double
-  let longitude: Double
+  var name: String
+  var latitude: Double
+  var longitude: Double
   
   var location: CLLocation {
     return CLLocation(latitude: latitude, longitude: longitude)

@@ -9,15 +9,9 @@ import UIKit
 
 struct WeatherbitData: Codable {
     
-    private static let dateFormatter: DateFormatter = {
-      var formatter = DateFormatter()
-      formatter.dateFormat = "yyyy-MM-dd"
-      return formatter
-    }()
-    
     let weatherInfo: [WeatherInfo]
     
-    struct WeatherInfo: Codable {
+    struct WeatherInfo: Codable { 
         let location: String
         let currentTime: Date
         let currentWeather: String
