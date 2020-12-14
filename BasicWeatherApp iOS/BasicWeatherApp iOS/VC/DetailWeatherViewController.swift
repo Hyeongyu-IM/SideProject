@@ -11,7 +11,7 @@ import CoreLocation
 class DetailWeatherViewController: UIViewController {
     
     var locationManager: CLLocationManager!
-    
+    let weatherViewModel = WeatherViewModel()
     var currentLocation: Location!
     
     
@@ -28,7 +28,7 @@ class DetailWeatherViewController: UIViewController {
 
 extension DetailWeatherViewController: UIScrollViewDelegate {
     
-    let weatherViewModel = WeatherViewModel()
+    
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
        
@@ -50,6 +50,7 @@ extension DetailWeatherViewController: CLLocationManagerDelegate {
         let coor = locationManager.location?.coordinate
         currentLocation.longitude = coor!.longitude
         currentLocation.latitude = coor!.latitude
+        CoreDataManager.shared.updateCurrentLocation(latitude: coor!.latitude, longitude: coor!.longitude)
     }
     
     func currentLocationName(_ longitude: CLLocationDegrees,_ latitude:CLLocationDegrees) {

@@ -5,6 +5,9 @@
       location = "group:Location+CoreDataProperties.swift">
    </FileRef>
    <FileRef
+      location = "group:File.swift">
+   </FileRef>
+   <FileRef
       location = "group:BasicWeatherApp iOS.xcodeproj">
    </FileRef>
    <FileRef

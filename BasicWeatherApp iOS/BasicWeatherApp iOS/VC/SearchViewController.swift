@@ -45,7 +45,6 @@ class SearchViewController: UIViewController {
         
         // searchBar 속성 편집
         customSearchBar.barTintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        tableView.can
     }
 }
 

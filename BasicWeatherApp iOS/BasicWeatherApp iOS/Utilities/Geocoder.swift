@@ -8,11 +8,11 @@
 import Foundation
 import CoreLocation
 
-// 주소를 위도와 경도 이름으로 변환
 class LocationGeocoder {
   private lazy var geocoder = CLGeocoder()
-  
-  func geocode(addressString: String, callback: @escaping ([Location]) -> ()) {
+ 
+    // 도시 이름을 경도와 위도로 변환
+  func cityNameToGeoCoordi(addressString: String, callback: @escaping ([Location]) -> ()) {
     geocoder.geocodeAddressString(addressString) { (placemarks, error) in
       var locations: [Location] = []
       if let error = error {
@@ -38,4 +38,23 @@ class LocationGeocoder {
       callback(locations)
     }
   }
+        
+    // 경도와 위도를 도시이름으로 변환
+    func GeoCoordiToCityName(latitude: Double, longitude: Double) -> String {
+        let findLocation = CLLocation(latitude: latitude, longitude: longitude)
+        var cityName: String = ""
+        geocoder.reverseGeocodeLocation(findLocation, preferredLocale: Locale(identifier: "Ko-kr")) {
+            (placemarks, error) -> Void in
+                if let error = error {
+                    print("Geocoding error: (\(error))")
+                } else {
+                    if let address: [CLPlacemark] = placemarks {
+                        if let name: String = address.last?.locality {
+                            cityName = name
+                        }
+                    }
+                }
+            }
+        return cityName
+    }
 }
