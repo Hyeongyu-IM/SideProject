@@ -9,16 +9,19 @@ import UIKit
 import CoreData
 
 class CoreDataManager {
+    
     static let shared: CoreDataManager = CoreDataManager()
     
     let modelName: String = "DataLocation"
     let appDelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
     lazy var context = appDelegate?.persistentContainer.viewContext
     let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "DataLocation")
-    
+
     lazy var locationList: [DataLocation] = {
         self.getLocation()
     }()
+    
+    
     
     // 저장된 데이터 받아오기
     func getLocation(ascending: Bool = false) -> [DataLocation] {
@@ -77,7 +80,7 @@ class CoreDataManager {
            }
     
     // 현재위치 업데이트 앱 시작시 메서드 호출
-    func updateCurrentLocation(latitude: Double, longitude: Double) {
+    func updateCurrentLocation(_ latitude: Double, _ longitude: Double) {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: modelName)
         do {
             let data: [DataLocation] = try (context?.fetch(fetchRequest) as? [DataLocation])!
