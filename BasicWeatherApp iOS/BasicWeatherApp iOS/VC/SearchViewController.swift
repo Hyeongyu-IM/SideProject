@@ -68,6 +68,7 @@ extension SearchViewController: GMSAutocompleteTableDataSourceDelegate, UISearch
       func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didAutocompleteWith place: GMSPlace) {
         // Do something with the selected place.
         weatherViewModel.coreDataManager.save(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+//        place.name
       }
 
       func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didFailAutocompleteWithError error: Error) {

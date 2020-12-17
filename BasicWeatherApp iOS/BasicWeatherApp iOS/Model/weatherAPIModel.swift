@@ -8,13 +8,17 @@
 import UIKit
 
 struct APIresponse: Codable {
-    let respon: [WeatherInfo]
+    let respon: WeatherInfo
 }
 
 struct WeatherInfo: Codable {
-    let current: [CurrentWeatherInfo]
+    let latitude: Double
+    let longitude: Double
+    let current: CurrentWeatherInfo
     let hourly: [HourlyWeatherInfo]
     let daily: [DailyWeatherInfo]
+
+
 }
 
 struct CurrentWeatherInfo: Codable {
@@ -28,7 +32,8 @@ struct CurrentWeatherInfo: Codable {
     let uvi: Double
     let wind_speed: Double
     let feels_like: Double
-    let rain: [HourlyRain]?
+    let rain: Double
+    let snow: Double
     let weather: [TitleWeatherInfo]
 }
 
@@ -54,13 +59,21 @@ struct DailyTemp: Codable {
     let min: Double
 }
 
-struct HourlyRain: Codable {
-    let hourlyRain: Double
-    
-    enum CodingKeys: String, CodingKey {
-    case hourlyRain = "1h"
-        }
-}
+//struct HourlyRain: Codable {
+//    let hourlyRain: Double
+//
+//    enum CodingKeys: String, CodingKey {
+//    case hourlyRain = "1h"
+//        }
+//}
+//
+//struct HourlySnow: Codable {
+//    let hourlySnow: Double
+//
+//    enum CodingKeys: String, CodingKey {
+//    case hourlySnow = "1h"
+//        }
+//}
 
 
 //struct WeatherbitData: Codable {

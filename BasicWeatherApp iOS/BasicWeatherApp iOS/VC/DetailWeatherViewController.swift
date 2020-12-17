@@ -16,8 +16,8 @@ class DetailWeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        getCurrentLocation()
-//        currentLocationName(currentLocation.longitude, currentLocation.latitude)
+        getCurrentLocation()
+        currentLocationName(currentLocation.longitude, currentLocation.latitude)
     }
 }
 
@@ -42,9 +42,9 @@ extension DetailWeatherViewController: CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
         
-//        let coor = locationManager.location?.coordinate
-//        currentLocation.longitude = coor!.longitude
-//        currentLocation.latitude = coor!.latitude
+        let coor = locationManager.location?.coordinate
+        currentLocation.longitude = coor!.longitude
+        currentLocation.latitude = coor!.latitude
     }
     
     func currentLocationName(_ longitude: CLLocationDegrees,_ latitude:CLLocationDegrees) {

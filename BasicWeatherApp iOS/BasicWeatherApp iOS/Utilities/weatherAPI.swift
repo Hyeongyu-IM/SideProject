@@ -47,7 +47,7 @@ class WeatherAPI {
                         let jsonResponse = try JSONDecoder().decode(APIresponse.self, from: jsonData)
                         
                         //dataSource에 변환한 값을 대입
-                        weatherInfo = jsonResponse.respon
+                        weatherInfo = [jsonResponse.respon]
                     } catch( let error) {
                         print(error.localizedDescription)
                     }
