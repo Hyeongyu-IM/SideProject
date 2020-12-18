@@ -11,7 +11,7 @@ public class WeatherViewModel {
     
     let locationGeocoder = LocationGeocoder()
     
-    //MARK: - Format Setting
+    //MARK: - DateFormat Setting
     
     private func dtToWeekend(_ dt: Int) -> String {
         let dt = TimeInterval(dt)
@@ -24,11 +24,20 @@ public class WeatherViewModel {
     private func dtToTime(_ dt: Int) -> String {
         let dt = TimeInterval(dt)
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "a h"
+        dateFormatter.dateFormat = "a h시"
           dateFormatter.locale = Locale(identifier: "ko-kr")
         return dateFormatter.string(for: dt) ?? ""
     }
     
+    private func curretTime(_ dt: Int) -> String {
+        let dt = TimeInterval(dt)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "a h:m"
+          dateFormatter.locale = Locale(identifier: "ko-kr")
+        return dateFormatter.string(for: dt) ?? ""
+    }
+    
+    //MARK: - TempFormat Setting
     private let tempFormatter: NumberFormatter = {
       let tempFormatter = NumberFormatter()
       tempFormatter.numberStyle = .none
@@ -60,21 +69,33 @@ public class WeatherViewModel {
         } else { print("코어데이터에 데이터가 없습니다") }
     }
 
-    //MARK: - TableViewData, CollectionView Data( 시간별, 요일별, 현재날씨 뷰에 따른 데이터 공급 )
-    func hourData(_ data: WeatherInfo ) -> [[HourCell]]{
-        let hourCells = data.hourly.map {
-                [HourCell(time: dtToTime($0.dt) ,
+    //MARK: - HourlyCollectionCell Data Config
+    func hourDataConfig(_ data: WeatherInfo ) -> [[HourCell]]{
+        let sunsetCell = [HourCell(dt: data.current.sunset ,time: dtToTime(data.current.sunset), icon: UIImage(named: "sunset.fill")!, Ctemp: "", Ftemp: "", NowOrSunSetAndRise: "일출")]
+        let sunriseCell = [HourCell(dt: data.current.sunrise, time: dtToTime(data.current.sunrise), icon: UIImage(named: "sunrise.fill")!, Ctemp: "", Ftemp: "", NowOrSunSetAndRise: "일몰")]
+        let currentCell = [HourCell(dt: data.current.dt, time: curretTime(data.current.dt), icon: UIImage(named: "\(data.daily[0].weather[0].icon)")!, Ctemp: tempFormatter.string(from: data.current.temp as NSNumber) ?? "", Ftemp: "\(celsiusToFahrenhit(tempFormatter.string(from: data.current.temp as NSNumber)!))", NowOrSunSetAndRise: "지금")]
+        
+        var hourCells: [[HourCell]] = data.hourly.map {
+            [HourCell(dt: $0.dt ,time: dtToTime($0.dt) ,
                                     icon: UIImage(named: "\($0.weather[0].icon)")!,
                                     Ctemp: tempFormatter.string(from: $0.temp as NSNumber)!,
-                                    Ftemp: "\(celsiusToFahrenhit(tempFormatter.string(from: $0.temp as NSNumber)!))" )]
+                                    Ftemp: "\(celsiusToFahrenhit(tempFormatter.string(from: $0.temp as NSNumber)!))",
+                                    NowOrSunSetAndRise: nil) ]
         }
-        let sunsetCell: SunsetCell = SunsetCell(time: dtToTime(data.current.sunset), icon: UIImage(named: "sunrise.fill")! )
-        let sunriseCell = SunriseCell(time: dtToTime(data.current.sunrise), icon: UIImage(named: "sunset.fill")!)
         hourCells.append(sunsetCell)
+        hourCells.append(sunriseCell)
+        hourCells.sort { $0[0].dt < $1[0].dt }
+        // 현재시간 5:10분 이면 5시가 들어있기때문에 5시를 삭제합니다.
+        hourCells.removeFirst()
+        // 현재시간 5:10(지금)을 넣고, 다음셀은 6시 부터 표시.
+        hourCells.insert(currentCell, at: 0)
         
         return hourCells
     }
     
+    
+    
+    //MARK: - WeekendTableData Config
     func weekendData(_ data: WeatherInfo) -> [[WeekendCell]] {
         let weekendCells = data.daily.map {
             [WeekendCell(weekend: dtToWeekend($0.dt),
@@ -87,6 +108,7 @@ public class WeatherViewModel {
         return weekendCells
     }
     
+    //MARK: - DetailData Config
     func detailData(_ data: WeatherInfo) -> [DetailCell] {
         let state = String(locationGeocoder.GeoCoordiToCityName(latitude: data.latitude, longitude: data.longitude))
         let detailCell: [DetailCell] = [ DetailCell(location: state,

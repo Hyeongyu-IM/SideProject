@@ -22,6 +22,7 @@ struct WeatherInfo: Codable {
 }
 
 struct CurrentWeatherInfo: Codable {
+    let dt: Int
     let sunrise: Int
     let sunset: Int
     let temp: Double

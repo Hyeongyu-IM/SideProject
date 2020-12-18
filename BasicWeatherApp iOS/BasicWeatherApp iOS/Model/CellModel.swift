@@ -17,10 +17,12 @@ struct WeekendCell {
 }
 
 struct HourCell {
+    let dt: Int
     let time: String
     let icon: UIImage
     let Ctemp: String
     let Ftemp: String
+    let NowOrSunSetAndRise: String?
 }
 
 struct DetailCell {
@@ -44,14 +46,14 @@ struct DetailCell {
     let humidity: Int
 }
 
-struct SunsetCell {
-    let time: String
-    let icon: UIImage
-    let sunset = "일몰"
-}
-
-struct SunriseCell {
-    let time: String
-    let icon: UIImage
-    let sunrise = "일출"
-}
+//struct SunsetCell {
+//    let time: String
+//    let icon: UIImage
+//    let sunset = "일몰"
+//}
+//
+//struct SunriseCell {
+//    let time: String
+//    let icon: UIImage
+//    let sunrise = "일출"
+//}
