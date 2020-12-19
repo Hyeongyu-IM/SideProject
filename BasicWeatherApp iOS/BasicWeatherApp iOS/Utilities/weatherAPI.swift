@@ -25,7 +25,7 @@ class WeatherAPI {
     func getWeatherInfo(_ latitude: Double,_ longitude: Double) -> [WeatherInfo] {
         let apiKey = "f8ad3cf3aa1e0f2df6433c805e65ca58"
         let url = "api.openweathermap.org/data/2.5/onecall?lat=\(latitude)&lon=\(longitude)lang=kr&exclude=minutely&appid=\(apiKey)"
-        var weatherInfo: [WeatherInfo] = []
+        var weatherInfo = [WeatherInfo]()
         
         AF.request(url,
                    method: .get,

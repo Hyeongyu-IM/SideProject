@@ -39,7 +39,7 @@ class CoreDataManager {
         }
 
     // saveLocation
-    func save(latitude: Double, longitude: Double) -> Bool {
+    func saveLocation(latitude: Double, longitude: Double) -> Bool {
         let object = NSEntityDescription.insertNewObject(forEntityName: modelName, into: context!)
         object.setValue(latitude, forKey: "latitude")
         object.setValue(longitude, forKey: "longitude")
@@ -52,11 +52,11 @@ class CoreDataManager {
             context?.rollback()
             return false
             }
-        print("코어데이터 저장 성공")
+      return false
         }
     
     // deleteLocation 셀 지울때 메서드 호출 ( latitude 매개변수 )
-    func delete(latitude: Double, onSuccess: @escaping ((Bool) -> Void)) -> Bool {
+    func deleteLocation(latitude: Double, onSuccess: @escaping ((Bool) -> Void)) -> Bool {
         let deleteRequest: NSFetchRequest<NSFetchRequestResult> = filteredRequest(latitude: latitude)
        
         do {
