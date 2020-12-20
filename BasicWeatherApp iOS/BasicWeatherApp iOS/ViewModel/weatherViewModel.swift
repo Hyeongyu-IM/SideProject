@@ -99,24 +99,25 @@ public class WeatherViewModel {
         let weekendCells = data.daily.map {
             WeekendCell(weekend: dtToWeekend($0.dt),
                              icon: UIImage(named: "\($0.weather[0].icon)")!,
-                             minCTemp: tempFormatter.string(from: $0.temp[0].min as NSNumber)!,
-                             maxCTemp: tempFormatter.string(from: $0.temp[0].max as NSNumber)!,
-                             minFTemp: "\(celsiusToFahrenhit(tempFormatter.string(from: $0.temp[0].min as NSNumber)!))" ,
-                             maxFTemp: "\(celsiusToFahrenhit(tempFormatter.string(from: $0.temp[0].min as NSNumber)!))")
+                             minCTemp: tempFormatter.string(from: $0.temp.min as NSNumber)!,
+                             maxCTemp: tempFormatter.string(from: $0.temp.max as NSNumber)!,
+                             minFTemp: "\(celsiusToFahrenhit(tempFormatter.string(from: $0.temp.min as NSNumber)!))" ,
+                             maxFTemp: "\(celsiusToFahrenhit(tempFormatter.string(from: $0.temp.min as NSNumber)!))")
         }
         return weekendCells
     }
     
     //MARK: - DetailData Config
     func detailDataConfig(_ data: WeatherInfo) -> DetailCell {
-        let state = String(locationGeocoder.GeoCoordiToCityName(latitude: data.latitude, longitude: data.longitude))
+        let state = String(locationGeocoder.GeoCoordiToCityName(latitude: data.lat, longitude: data.lon))
         let detailCell: DetailCell = DetailCell(location: state,
                                                     discription: data.current.weather.description,
                                                     currentTemp: tempFormatter.string(from: data.current.temp as NSNumber) ?? "",
-                                                    minTemp: tempFormatter.string(from: data.daily[0].temp[0].min as NSNumber) ?? "",
-                                                    maxTemp: tempFormatter.string(from: data.daily[0].temp[0].max as NSNumber) ?? "",
-                                                    minFTemp: "\(celsiusToFahrenhit(tempFormatter.string(from: data.daily[0].temp[0].min as NSNumber)!))",
-                                                    maxFTemp: "\(celsiusToFahrenhit(tempFormatter.string(from: data.daily[0].temp[0].max as NSNumber)!))",
+                                                    minTemp: tempFormatter.string(from: data.daily[0].temp.min
+                                                                                    as NSNumber) ?? "",
+                                                    maxTemp: tempFormatter.string(from: data.daily[0].temp.max as NSNumber) ?? "",
+                                                    minFTemp: "\(celsiusToFahrenhit(tempFormatter.string(from: data.daily[0].temp.min as NSNumber)!))",
+                                                    maxFTemp: "\(celsiusToFahrenhit(tempFormatter.string(from: data.daily[0].temp.max as NSNumber)!))",
                                                     detailDiscription: data.current.weather.description,
                                                     sunset: dtToTime(data.current.sunset) ,
                                                     sunrise: dtToTime(data.current.sunrise),

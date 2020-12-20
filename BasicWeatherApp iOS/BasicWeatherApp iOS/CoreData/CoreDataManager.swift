@@ -48,11 +48,14 @@ class CoreDataManager {
         do{
             try context?.save()
             return true
+            print("데이터 저장성공")
         } catch {
             context?.rollback()
             return false
+            print("데이터 저장실패")
             }
       return false
+        print("데이터 저장실패")
         }
     
     // deleteLocation 셀 지울때 메서드 호출 ( latitude 매개변수 )

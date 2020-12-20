@@ -41,7 +41,7 @@ struct DetailCell {
     let wind: Int
     let feelsLike: Int
     let pressure: Int
-    let visibility: Double
+    let visibility: Int
     let uvi: Int
     let humidity: Int
 }
