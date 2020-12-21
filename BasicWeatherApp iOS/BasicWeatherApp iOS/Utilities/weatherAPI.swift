@@ -24,12 +24,19 @@ class WeatherAPI {
     
     func getWeatherInfo(_ latitude: Double,_ longitude: Double) -> [WeatherInfo] {
         let apiKey = "f8ad3cf3aa1e0f2df6433c805e65ca58"
-        let url = "api.openweathermap.org/data/2.5/onecall?lat=\(latitude)&lon=\(longitude)lang=kr&exclude=minutely&appid=\(apiKey)"
-        var weatherInfo: [WeatherInfo] = []
+        let url = "https://api.openweathermap.org/data/2.5/onecall"
+        let parameters:[String:String] = [
+            "lang": "kr",
+            "exclude": "minutely",
+            "lon": "\(longitude)",
+            "lat": "\(latitude)",
+            "appid": apiKey
+        ]
+        var weatherInfo = [WeatherInfo]()
         
         AF.request(url,
                    method: .get,
-                   parameters: nil,
+                   parameters:  parameters,
                    encoding: URLEncoding.default,
                    headers: ["Content-Type":"application/json", "Accept":"application/json"])
             .validate(statusCode: 200..<300)
@@ -42,21 +49,22 @@ class WeatherAPI {
                     do {
                         // 반환값을 DATA로 변환
                         let jsonData = try JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)
-                        
+                        print("Data변환")
                         // DATA를 [APIresponse] 타입으로 디코딩
-                        let jsonResponse = try JSONDecoder().decode(APIresponse.self, from: jsonData)
-                        
+                        let jsonResponse = try JSONDecoder().decode(WeatherInfo.self, from: jsonData)
+                        print("jsonResponse \(jsonResponse)")
                         //dataSource에 변환한 값을 대입
-                        weatherInfo = [jsonResponse.respon]
+                       weatherInfo = [jsonResponse]
                     } catch( let error) {
-                        print(error.localizedDescription)
+                        print(" data를 담지못했습니다\(error.localizedDescription)")
                     }
                 //실패
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    print("\(error.localizedDescription) 데이터를 요청했지만 받지 못했습니다.  ")
                 }
         }
         return weatherInfo
+        print(weatherInfo)
     }
     
 }

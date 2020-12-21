@@ -7,13 +7,9 @@
 
 import UIKit
 
-struct APIresponse: Codable {
-    let respon: WeatherInfo
-}
-
 struct WeatherInfo: Codable {
-    let latitude: Double
-    let longitude: Double
+    let lat: Double
+    let lon: Double
     let current: CurrentWeatherInfo
     let hourly: [HourlyWeatherInfo]
     let daily: [DailyWeatherInfo]
@@ -22,24 +18,25 @@ struct WeatherInfo: Codable {
 }
 
 struct CurrentWeatherInfo: Codable {
+    let dt: Int
     let sunrise: Int
     let sunset: Int
     let temp: Double
     let pressure: Int
     let humidity: Int
-    let visibility: Double
+    let visibility: Int
     let wind_deg: Int
     let uvi: Double
     let wind_speed: Double
     let feels_like: Double
-    let rain: Double
-    let snow: Double
+    let rain: Double?
+    let snow: Double?
     let weather: [TitleWeatherInfo]
 }
 
 struct DailyWeatherInfo: Codable {
     let dt: Int
-    let temp: [DailyTemp]
+    let temp: DailyTemp
     let weather: [TitleWeatherInfo]
 }
 

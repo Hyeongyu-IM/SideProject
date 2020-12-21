@@ -52,23 +52,34 @@ extension SearchViewController: GMSAutocompleteTableDataSourceDelegate, UISearch
     
     func didUpdateAutocompletePredictions(for tableDataSource: GMSAutocompleteTableDataSource) {
         // Turn the network activity indicator off.
-        
+        if #available(iOS 13.0, *) {
+            
+        } else {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
         // Reload table data.
         tableView.reloadData()
       }
+    }
 
       func didRequestAutocompletePredictions(for tableDataSource: GMSAutocompleteTableDataSource) {
         // Turn the network activity indicator on.
+        if #available(iOS 13.0, *) {
+            
+        } else {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         // Reload table data.
         tableView.reloadData()
+        }
       }
 
       func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didAutocompleteWith place: GMSPlace) {
         // Do something with the selected place.
-        weatherViewModel.coreDataManager.save(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+        if #available(iOS 13.0, *) {
+        
+        } else {
+            weatherViewModel.addLocation(place.coordinate.latitude, place.coordinate.longitude)
 //        place.name
+        }
       }
 
       func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didFailAutocompleteWithError error: Error) {
