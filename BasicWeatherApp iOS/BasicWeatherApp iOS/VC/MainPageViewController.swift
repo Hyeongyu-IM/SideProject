@@ -33,7 +33,7 @@ class MainPageViewController: UIPageViewController {
         dataSource = self
 //        getCurrentLocation()
 //        currentLocationName(126.96, 37)
-        CoreDataManager.shared.saveLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+//        CoreDataManager.shared.saveLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
         weatherViewModel.convertCoreData()
         prepareViewControllers()
         setupViewControllers()

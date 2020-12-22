@@ -13,8 +13,6 @@ struct WeatherInfo: Codable {
     let current: CurrentWeatherInfo
     let hourly: [HourlyWeatherInfo]
     let daily: [DailyWeatherInfo]
-
-
 }
 
 struct CurrentWeatherInfo: Codable {

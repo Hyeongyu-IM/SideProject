@@ -58,6 +58,7 @@ public class WeatherViewModel {
     
     func convertCoreData() {
         if coreData.count != 0 {
+            
            weatherDataList = coreData.compactMap {
                 WeatherAPI.shared.getWeatherInfo($0.latitude, $0.longitude)
            }.flatMap { $0 }

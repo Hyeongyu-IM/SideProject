@@ -34,8 +34,8 @@ class CoreDataManager {
                } catch let error as NSError {
                    print("Could not fetch: \(error), \(error.userInfo)")
                }
+            print("코어데이터 로드성공")
             return models
-        print("코어데이터 로드성공")
         }
 
     // saveLocation
@@ -47,15 +47,15 @@ class CoreDataManager {
         
         do{
             try context?.save()
-            return true
             print("데이터 저장성공")
+            return true
         } catch {
             context?.rollback()
-            return false
             print("데이터 저장실패")
+            return false
             }
-      return false
         print("데이터 저장실패")
+        return false
         }
     
     // deleteLocation 셀 지울때 메서드 호출 ( latitude 매개변수 )
@@ -101,7 +101,21 @@ class CoreDataManager {
         }
         print("코어데이터 현재위치 업데이트 성공")
     }
+    
+    
+    func deleteAllData() {
+        let fetrequest = NSFetchRequest<NSFetchRequestResult>(entityName: modelName)
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetrequest)
+        
+        do {
+            try context?.execute(batchDeleteRequest)
+            print("데이터 모두 삭제")
+        } catch {
+            print(error)
+        }
+    }
 }
+   
 
 extension CoreDataManager {
     fileprivate func filteredRequest(latitude: Double) -> NSFetchRequest<NSFetchRequestResult> {
