@@ -13,7 +13,7 @@ import Alamofire
 class WeatherAPI {
     
     static let shared: WeatherAPI = WeatherAPI()
-    
+    lazy var iconsName: [String] = ["01d", "02d", "03d", "04d", "09d", "10d", "11d", "13d", "50d", "01n", "02n", "03n", "04n", "09n", "10n", "11n", "13n", "50n" ]
     // 새로운 요청이 들어오면 기존 것을 취소하고 현재의 것을 실행합니다.
     private var request: DataRequest? {
         didSet {
@@ -53,6 +53,7 @@ class WeatherAPI {
                         // DATA를 [APIresponse] 타입으로 디코딩
                         let jsonResponse = try JSONDecoder().decode(WeatherInfo.self, from: jsonData)
                         print("jsonResponse \(jsonResponse)")
+                        
                         //dataSource에 변환한 값을 대입
                        weatherInfo = [jsonResponse]
                     } catch( let error) {
@@ -63,8 +64,37 @@ class WeatherAPI {
                     print("\(error.localizedDescription) 데이터를 요청했지만 받지 못했습니다.  ")
                 }
         }
+            if ImageFileManager.shared.checkingImage(weatherInfo[0].current.weather[0].icon) {
+                print("아이콘이 이미 존재합니다")
+            } else {
+                saveAllWeatherIcon(iconsName)
+            }
         return weatherInfo
-        print(weatherInfo)
     }
     
+    func downloadWeatherIcon(_ name: String) {
+        let url = "http://openweathermap.org/img/wn/\(name)@2x.png"
+        var image: UIImage = UIImage()
+        
+        AF.request(url, method: .get).validate(statusCode: 200..<300).responseJSON {
+            (json) in
+            switch json.result {
+            case .success(let response):
+                if let response = response as? UIImage {
+                    image = response
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        print("이미지를 성공적으로 다운로드했습니다.")
+        ImageFileManager.shared.saveImage(image, name)
+        return
+    }
+    
+    func saveAllWeatherIcon(_ iconNameList: [String]) {
+        iconNameList.forEach {
+            downloadWeatherIcon($0)
+        }
+    }
 }
