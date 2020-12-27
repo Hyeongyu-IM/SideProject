@@ -26,6 +26,7 @@ struct HourCell {
 }
 
 struct DetailCell {
+    let dt: String
     let location: String
     let discription: String
     let currentTemp: String

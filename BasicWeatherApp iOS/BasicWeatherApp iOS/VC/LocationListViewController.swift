@@ -11,7 +11,7 @@ class LocationListViewController: UIViewController {
     
     let weatherViewModel = WeatherViewModel()
     
-    @IBOutlet weak var weatherListView: UITableView!
+    @IBOutlet weak var weatherListView: UITableView! 
     
     override func viewDidLoad() {
         super.viewDidLoad()

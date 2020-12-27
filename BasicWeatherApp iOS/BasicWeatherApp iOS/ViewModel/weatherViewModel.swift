@@ -12,6 +12,7 @@ public class WeatherViewModel {
     let locationGeocoder = LocationGeocoder()
     
     //MARK: - DateFormat Setting
+    // 요일표시 포맷
     private func dtToWeekend(_ dt: Int) -> String {
         let dt = TimeInterval(dt)
         let dateFormatter = DateFormatter()
@@ -20,6 +21,7 @@ public class WeatherViewModel {
         return dateFormatter.string(for: dt) ?? ""
     }
     
+    // 오전/오후 몇시 표시 포맷
     private func dtToTime(_ dt: Int) -> String {
         let dt = TimeInterval(dt)
         let dateFormatter = DateFormatter()
@@ -28,6 +30,7 @@ public class WeatherViewModel {
         return dateFormatter.string(for: dt) ?? ""
     }
     
+    // 오전/오후 몇시:몇분 포맷
     private func curretTime(_ dt: Int) -> String {
         let dt = TimeInterval(dt)
         let dateFormatter = DateFormatter()
@@ -62,7 +65,11 @@ public class WeatherViewModel {
            weatherDataList = coreData.compactMap {
                 WeatherAPI.shared.getWeatherInfo($0.latitude, $0.longitude)
            }.flatMap { $0 }
-        } else { print("코어데이터에 데이터가 없습니다") }
+            
+            print("weatherDatalist입니다. \(weatherDataList)")
+        } else {
+            print("코어데이터에 데이터가 없습니다")
+        }
     }
     
     var weatherDataList = [WeatherInfo]()
@@ -111,7 +118,8 @@ public class WeatherViewModel {
     //MARK: - DetailData Config
     func detailDataConfig(_ data: WeatherInfo) -> DetailCell {
         let state = String(locationGeocoder.GeoCoordiToCityName(latitude: data.lat, longitude: data.lon))
-        let detailCell: DetailCell = DetailCell(location: state,
+        let detailCell: DetailCell = DetailCell(dt: curretTime(data.current.dt),
+                                                    location: state,
                                                     discription: data.current.weather.description,
                                                     currentTemp: tempFormatter.string(from: data.current.temp as NSNumber) ?? "",
                                                     minTemp: tempFormatter.string(from: data.daily[0].temp.min

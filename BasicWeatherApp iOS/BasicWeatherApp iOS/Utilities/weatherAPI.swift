@@ -33,7 +33,7 @@ class WeatherAPI {
             "appid": apiKey
         ]
         var weatherInfo = [WeatherInfo]()
-        
+       
         AF.request(url,
                    method: .get,
                    parameters:  parameters,
@@ -41,36 +41,29 @@ class WeatherAPI {
                    headers: ["Content-Type":"application/json", "Accept":"application/json"])
             .validate(statusCode: 200..<300)
             .responseJSON { (json) in
-                //여기서 가져온 데이터를 자유롭게 활용하세요.
-                print("데이터가 요청되었습니다 \(json)")
                 switch json.result {
-                 //성공
                 case .success(let response):
                     do {
-                        // 반환값을 DATA로 변환
                         let jsonData = try JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)
-                        print("Data변환")
-                        // DATA를 [APIresponse] 타입으로 디코딩
                         let jsonResponse = try JSONDecoder().decode(WeatherInfo.self, from: jsonData)
-                        print("jsonResponse \(jsonResponse)")
-                        
-                        //dataSource에 변환한 값을 대입
                        weatherInfo = [jsonResponse]
                     } catch( let error) {
-                        print(" data를 담지못했습니다\(error.localizedDescription)")
                     }
-                //실패
                 case .failure(let error):
                     print("\(error.localizedDescription) 데이터를 요청했지만 받지 못했습니다.  ")
                 }
         }
-            if ImageFileManager.shared.checkingImage(weatherInfo[0].current.weather[0].icon) {
-                print("아이콘이 이미 존재합니다")
-            } else {
-                saveAllWeatherIcon(iconsName)
-            }
+        print(weatherInfo)
         return weatherInfo
     }
+    
+//    if ImageFileManager.shared.checkingImage(weatherInfo.first?.daily.first?.weather.first?.icon ?? "") {
+//            print("아이콘이 이미 존재합니다 \(weatherInfo.first?.daily.first?.weather.first?.icon)")
+//        } else {
+////                saveAllWeatherIcon(iconsName)
+//            print("이미지를 다운로드 합니다, \(ImageFileManager.shared.checkingImage(weatherInfo.first?.daily.first?.weather.first?.icon ?? "")) , \(weatherInfo.first?.daily.first?.weather.first?.icon)")
+//        }
+    
     
     func downloadWeatherIcon(_ name: String) {
         let url = "http://openweathermap.org/img/wn/\(name)@2x.png"
