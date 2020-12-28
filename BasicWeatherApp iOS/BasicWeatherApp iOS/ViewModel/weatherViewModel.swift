@@ -62,11 +62,12 @@ public class WeatherViewModel {
     func convertCoreData() {
         if coreData.count != 0 {
             
-           weatherDataList = coreData.compactMap {
-                WeatherAPI.shared.getWeatherInfo($0.latitude, $0.longitude)
-           }.flatMap { $0 }
-            
+           coreData.compactMap {
+            WeatherAPI.shared.getWeatherInfo($0.latitude, $0.longitude) { (result) in
+                self.weatherDataList.append(contentsOf: result)
+                }
             print("weatherDatalist입니다. \(weatherDataList)")
+           }
         } else {
             print("코어데이터에 데이터가 없습니다")
         }
@@ -80,16 +81,15 @@ public class WeatherViewModel {
 
     //MARK: - HourlyCollectionCell Data Config
     func hourDataConfig(_ data: WeatherInfo ) -> [HourCell]{
-        let sunsetCell = HourCell(dt: data.current.sunset ,time: dtToTime(data.current.sunset), icon: UIImage(named: "sunset.fill")!, Ctemp: "", Ftemp: "", NowOrSunSetAndRise: "일출")
-        let sunriseCell = HourCell(dt: data.current.sunrise, time: dtToTime(data.current.sunrise), icon: UIImage(named: "sunrise.fill")!, Ctemp: "", Ftemp: "", NowOrSunSetAndRise: "일몰")
-        let currentCell = HourCell(dt: data.current.dt, time: curretTime(data.current.dt), icon: UIImage(named: "\(data.daily[0].weather[0].icon)")!, Ctemp: tempFormatter.string(from: data.current.temp as NSNumber) ?? "", Ftemp: "\(celsiusToFahrenhit(tempFormatter.string(from: data.current.temp as NSNumber)!))", NowOrSunSetAndRise: "지금")
+        let sunsetCell = HourCell(dt: data.current.sunset ,time: dtToTime(data.current.sunset), icon: UIImage(named: "sunset.fill")!, Ctemp: "일몰", Ftemp: "일몰")
+        let sunriseCell = HourCell(dt: data.current.sunrise, time: dtToTime(data.current.sunrise), icon: UIImage(named: "sunrise.fill")!, Ctemp: "일출", Ftemp: "일출")
+        let currentCell = HourCell(dt: data.current.dt, time: "지금", icon: UIImage(named: "\(data.daily[0].weather[0].icon)")!, Ctemp: tempFormatter.string(from: data.current.temp as NSNumber) ?? "", Ftemp: "\(celsiusToFahrenhit(tempFormatter.string(from: data.current.temp as NSNumber)!))")
         
         var hourCells: [HourCell] = data.hourly.map {
             HourCell(dt: $0.dt ,time: dtToTime($0.dt) ,
                                     icon: UIImage(named: "\($0.weather[0].icon)")!,
                                     Ctemp: tempFormatter.string(from: $0.temp as NSNumber)!,
-                                    Ftemp: "\(celsiusToFahrenhit(tempFormatter.string(from: $0.temp as NSNumber)!))",
-                                    NowOrSunSetAndRise: nil)
+                                    Ftemp: "\(celsiusToFahrenhit(tempFormatter.string(from: $0.temp as NSNumber)!))")
         }
         hourCells.append(sunsetCell)
         hourCells.append(sunriseCell)
@@ -162,10 +162,11 @@ public class WeatherViewModel {
     
     func addLocation(_ latitude: Double,_ longitude: Double) {
         coreDataManager.saveLocation(latitude: latitude, longitude: longitude)
-        let newWeatherInfo = WeatherAPI.shared.getWeatherInfo(latitude, longitude)
-        hourCells.append(hourDataConfig(newWeatherInfo[0]))
-        detailCells.append(detailDataConfig(newWeatherInfo[0]))
-        weekendCells.append(weekendDataConfig(newWeatherInfo[0]))
+        WeatherAPI.shared.getWeatherInfo(latitude, longitude) { (result) in
+            self.hourCells.append(self.hourDataConfig(result[0]))
+            self.detailCells.append(self.detailDataConfig(result[0]))
+            self.weekendCells.append(self.weekendDataConfig(result[0]))
+        }
     }
     
     

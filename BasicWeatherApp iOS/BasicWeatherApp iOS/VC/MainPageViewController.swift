@@ -21,7 +21,10 @@ class MainPageViewController: UIPageViewController {
         super.viewDidLoad()
         delegate = self
         dataSource = self
-        print(WeatherAPI.shared.getWeatherInfo(37,126.96))
+        weatherViewModel.weatherDataList.removeAll()
+        WeatherAPI.shared.getWeatherInfo(37,126.96) { (result)  in
+            print(result)
+        }
 //        currentLocationName(126.96, 37)
 //        CoreDataManager.shared.saveLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
 //        weatherViewModel.convertCoreData()

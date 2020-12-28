@@ -22,7 +22,6 @@ struct HourCell {
     let icon: UIImage
     let Ctemp: String
     let Ftemp: String
-    let NowOrSunSetAndRise: String?
 }
 
 struct DetailCell {
