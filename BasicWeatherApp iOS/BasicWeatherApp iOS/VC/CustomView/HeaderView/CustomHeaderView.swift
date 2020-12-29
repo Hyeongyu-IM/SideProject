@@ -26,15 +26,41 @@ class CustomHeaderView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        configData()
+        binderSetting()
     }
     
-    func configData() {
-        let data = weatherViewModel.detailCells[MainTableViewController.controllerIndex]
-        stateLabel.text = data.location
-        descriptionLabel.text = data.discription
-        currentTempLabel.text = data.currentTemp
-        minTempLabel.text = data.minTemp
-        maxTempLabel.text = data.maxTemp
+    func binderSetting() {
+        stateBinder.bind { [weak self] stateName in
+            self?.stateLabel.text = stateName
+        }
+        descriptionBinder.bind { [weak self] description in
+            self?.descriptionLabel.text = description
+        }
+        currentTempBinder.bind { [weak self] currentTemp in
+            self?.currentTempLabel.text = currentTemp
+        }
+        minTempBinder.bind { [weak self] minTemp in
+            self?.minTempLabel.text = minTemp
+        }
+        maxTempBinder.bind { [weak self] maxTemp in
+            self?.maxTempLabel.text = maxTemp
+        }
     }
+    
+    let stateBinder = Binder(" ")
+    let descriptionBinder = Binder(" ")
+    let currentTempBinder = Binder(" ")
+    let minTempBinder = Binder(" ")
+    let maxTempBinder = Binder(" ")
+    
+    func configData(_ data: [DetailCell],_ index: Int) {
+        self.stateBinder.value = data[index].location
+        self.descriptionBinder.value = data[index].discription
+        self.currentTempBinder.value = data[index].currentTemp
+        self.minTempBinder.value = data[index].minTemp
+        self.maxTempBinder.value = data[index].maxTemp
+    }
+    
+    
 }
+

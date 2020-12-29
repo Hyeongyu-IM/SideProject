@@ -10,6 +10,7 @@ import UIKit
 public class WeatherViewModel {
     
     let locationGeocoder = LocationGeocoder()
+    var weatherDataList: [WeatherInfo] = []
     
     //MARK: - DateFormat Setting
     // 요일표시 포맷
@@ -59,25 +60,37 @@ public class WeatherViewModel {
         CoreDataManager.shared.locationList
     }()
     
-    func convertCoreData() {
+    func convertCoreData(completion: @escaping () -> Void) {
         if coreData.count != 0 {
-            
            coreData.compactMap {
             WeatherAPI.shared.getWeatherInfo($0.latitude, $0.longitude) { (result) in
-                self.weatherDataList.append(contentsOf: result)
+                self.weatherDataList.insert(result, at: self.weatherDataList.count)
+                print("weatherDatalist입니다. \(self.weatherDataList)")
                 }
-            print("weatherDatalist입니다. \(weatherDataList)")
+            completion()
            }
+            
+            return
         } else {
             print("코어데이터에 데이터가 없습니다")
+            completion()
         }
     }
     
-    var weatherDataList = [WeatherInfo]()
     
-    lazy var hourCells = weatherDataList.map { hourDataConfig( $0 ) }
-    lazy var detailCells = weatherDataList.map { detailDataConfig( $0 ) }
-    lazy var weekendCells = weatherDataList.map { weekendDataConfig( $0 ) }
+    
+    lazy var hourCells: [[HourCell]] = {
+       return weatherDataList.map { hourDataConfig( $0 ) }
+    }()
+    
+    lazy var detailCells: [DetailCell] = {
+        print(weatherDataList.count)
+       return weatherDataList.map { detailDataConfig($0) }
+    }()
+    
+    lazy var weekendCells: [[WeekendCell]] = {
+       return weatherDataList.map { weekendDataConfig( $0 ) }
+    }()
 
     //MARK: - HourlyCollectionCell Data Config
     func hourDataConfig(_ data: WeatherInfo ) -> [HourCell]{
@@ -119,7 +132,7 @@ public class WeatherViewModel {
     func detailDataConfig(_ data: WeatherInfo) -> DetailCell {
         let state = String(locationGeocoder.GeoCoordiToCityName(latitude: data.lat, longitude: data.lon))
         let detailCell: DetailCell = DetailCell(dt: curretTime(data.current.dt),
-                                                    location: state,
+                                                    location: "용산구",
                                                     discription: data.current.weather.description,
                                                     currentTemp: tempFormatter.string(from: data.current.temp as NSNumber) ?? "",
                                                     minTemp: tempFormatter.string(from: data.daily[0].temp.min
@@ -130,14 +143,15 @@ public class WeatherViewModel {
                                                     detailDiscription: data.current.weather.description,
                                                     sunset: dtToTime(data.current.sunset) ,
                                                     sunrise: dtToTime(data.current.sunrise),
-                                                    snow: data.current.snow ,
-                                                    rain: data.current.rain ,
+                                                    snow: data.current.snow?.lastHour ,
+                                                    rain: data.current.rain?.lastHour ,
                                                     wind: Int(data.current.wind_speed),
                                                     feelsLike: Int(data.current.feels_like),
                                                     pressure: data.current.pressure,
                                                     visibility: data.current.visibility,
                                                     uvi: Int(data.current.uvi),
                                                     humidity: data.current.humidity)
+        print("detailCell입니다 \(detailCell)")
         return detailCell
     }
     
@@ -163,9 +177,9 @@ public class WeatherViewModel {
     func addLocation(_ latitude: Double,_ longitude: Double) {
         coreDataManager.saveLocation(latitude: latitude, longitude: longitude)
         WeatherAPI.shared.getWeatherInfo(latitude, longitude) { (result) in
-            self.hourCells.append(self.hourDataConfig(result[0]))
-            self.detailCells.append(self.detailDataConfig(result[0]))
-            self.weekendCells.append(self.weekendDataConfig(result[0]))
+            self.hourCells.append(self.hourDataConfig(result))
+            self.detailCells.append(self.detailDataConfig(result))
+            self.weekendCells.append(self.weekendDataConfig(result))
         }
     }
     
@@ -174,11 +188,11 @@ public class WeatherViewModel {
     func refreshData() {
        let newCoreData = coreDataManager.getLocation()
         coreData = newCoreData
-        convertCoreData()
-        
-        hourCells = weatherDataList.map { hourDataConfig( $0 ) }
-        detailCells = weatherDataList.map { detailDataConfig( $0 ) }
-        weekendCells = weatherDataList.map { weekendDataConfig( $0 ) }
+        convertCoreData { () in
+                self.hourCells = self.weatherDataList.map { self.hourDataConfig( $0 ) }
+                self.detailCells = self.weatherDataList.map { self.detailDataConfig( $0 ) }
+                self.weekendCells = self.weatherDataList.map { self.weekendDataConfig( $0 ) }
+        }
     }
 }
     

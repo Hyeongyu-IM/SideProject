@@ -27,8 +27,8 @@ struct CurrentWeatherInfo: Codable {
     let uvi: Double
     let wind_speed: Double
     let feels_like: Double
-    let rain: Double?
-    let snow: Double?
+    let rain: Rain?
+    let snow: Snow?
     let weather: [TitleWeatherInfo]
 }
 
@@ -53,6 +53,24 @@ struct DailyTemp: Codable {
     let max: Double
     let min: Double
 }
+
+struct Rain: Codable {
+    let lastHour: Double
+    
+    private enum CodingKeys: String, CodingKey {
+        case lastHour = "1h"
+    }
+}
+
+struct Snow: Codable {
+    let lastHour: Double
+    
+    private enum CodingKeys: String, CodingKey {
+        case lastHour = "1h"
+    }
+}
+
+
 
 //struct HourlyRain: Codable {
 //    let hourlyRain: Double
