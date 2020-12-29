@@ -17,7 +17,25 @@ class HourlyTableCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+    }
+    
+    
+    let weekendBinder: Binder = Binder(" ")
+    let weatherIconBinder: Binder<UIImage?> = Binder(nil)
+    let hourlyTempBinder: Binder = Binder(" ")
+
+    
+    func binderSetting() {
+        self.weekendBinder.value { [weak self] weekendTime in
+            
+        }
+        self.weatherIconBinder.value { [weak self] weatherIcon in
+            
+        }
+        self.hourlyTempBinder.value { [weak self] hourTemp in
+            
+        }
     }
     
     func hourData(_ hourData: HourCell) {

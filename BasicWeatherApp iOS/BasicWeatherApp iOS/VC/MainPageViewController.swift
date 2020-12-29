@@ -15,24 +15,20 @@ class MainPageViewController: UIPageViewController {
     
     lazy var currentLocation = Location(name: "", latitude: 0.0, longitude: 0.0)
     
-    lazy var vcArray = [UIViewController]()
+    lazy var vcArray: [UIViewController] = { return prepareViewControllers() }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
         dataSource = self
         weatherViewModel.weatherDataList.removeAll()
-        WeatherAPI.shared.getWeatherInfo(37,126.96) { (result)  in
-            print(result)
-        }
-//        currentLocationName(126.96, 37)
+//        CoreDataManager.shared.saveLocation(latitude: 37, longitude: 126.96)
 //        CoreDataManager.shared.saveLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
-//        weatherViewModel.convertCoreData()
-        prepareViewControllers()
-//        getCurrentLocationAndName()
-        setupViewControllers()
+        weatherViewModel.convertCoreData { () in
+            print("1번 completion이 실행되었습니다. ")
+                self.setupViewControllers()
+            }
     }
-    
     
     
     func configViewControllers() {
@@ -41,14 +37,15 @@ class MainPageViewController: UIPageViewController {
     }
     
     // 저장된 weatherInfo수만큼 뷰를 생성합니다.
-    func prepareViewControllers() {
-        let viewIndex = weatherViewModel.weatherDataList.count
+    func prepareViewControllers() -> [UIViewController] {
+        let viewIndex = weatherViewModel.coreData.count
         var result = [UIViewController]()
         for i in 0..<viewIndex {
             result.append( MainTableViewController.instance() ?? UIViewController() )
             MainTableViewController.controllerIndex = i
         }
-        vcArray = result
+        print("vcArray생성된 개수 입니다. \(result.count)")
+        return result
     }
     
     // 첫화면을 설정합니다.
@@ -58,13 +55,14 @@ class MainPageViewController: UIPageViewController {
                            direction: .forward,
                            animated: true,
                            completion: nil)
+        print("setupViewControllers 실행되었습니다" )
     }
 }
 
 // 페이지 뷰의 페이지를 설정합니다.
 extension MainPageViewController: UIPageViewControllerDelegate {
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        vcArray.count
+        return vcArray.count
     }
     
     // 페이지 뷰가 전환될때
@@ -146,6 +144,7 @@ extension MainPageViewController: CLLocationManagerDelegate {
         CoreDataManager.shared.saveLocation(latitude: Double(coor?.latitude ?? 0.0), longitude: Double(coor?.longitude ?? 0.0))
         
         currentLocation = location
+        print(#function, location)
     }
     
     func currentLocationName(_ longitude: Double,_ latitude:Double) -> String {
@@ -157,10 +156,12 @@ extension MainPageViewController: CLLocationManagerDelegate {
         geocoder.reverseGeocodeLocation(findLocation, preferredLocale: locale) { (placemarks, error) in
             if let address: [CLPlacemark] = placemarks {
                 if let name: String = address.last?.locality {
+                    print(#function, cityname)
                     cityname = name
                 }
             }
         }
+        
         return cityname
     }
 }

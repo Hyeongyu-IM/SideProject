@@ -14,7 +14,6 @@ class WeatherAPI {
     
     static let shared: WeatherAPI = WeatherAPI()
     
-    
     lazy var iconsName: [String] = ["01d", "02d", "03d", "04d", "09d", "10d", "11d", "13d", "50d", "01n", "02n", "03n", "04n", "09n", "10n", "11n", "13n", "50n" ]
     // 새로운 요청이 들어오면 기존 것을 취소하고 현재의 것을 실행합니다.
     private var request: DataRequest? {
@@ -24,7 +23,7 @@ class WeatherAPI {
     }
     
     
-    func getWeatherInfo(_ latitude: Double,_ longitude: Double, completion: @escaping ([WeatherInfo]) -> Void) {
+    func getWeatherInfo(_ latitude: Double,_ longitude: Double, completion: @escaping (WeatherInfo) -> Void) {
         let apiKey = "f8ad3cf3aa1e0f2df6433c805e65ca58"
         let url = "https://api.openweathermap.org/data/2.5/onecall"
         let parameters:[String:String] = [
@@ -34,7 +33,6 @@ class WeatherAPI {
             "lat": "\(latitude)",
             "appid": apiKey
         ]
-        let weatherInfo = [WeatherInfo]()
        
         AF.request(url,
                    method: .get,
@@ -49,9 +47,9 @@ class WeatherAPI {
                         let jsonData = try JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)
                         let jsonResponse = try JSONDecoder().decode(WeatherInfo.self, from: jsonData)
                         self.imageChecking([jsonResponse])
-                       completion([jsonResponse])
+                       completion(jsonResponse)
                     } catch( let error) {
-                        completion(weatherInfo)
+                        print("decoding에러입니다 \(error)")
                     }
                 case .failure(let error):
                     print("\(error.localizedDescription) 데이터를 요청했지만 받지 못했습니다.  ")

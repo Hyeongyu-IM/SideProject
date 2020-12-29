@@ -42,7 +42,7 @@ extension DetailTableViewCell: UICollectionViewDataSource {
         case 2:
             cell.configData("일몰", dataTarget.sunset)
         case 3:
-            cell.configData("눈 올 확률", "\(dataTarget.snow ?? 0)")
+            cell.configData("눈 올 확률", "\(dataTarget.snow ?? 0.0)")
         case 4:
             cell.configData("습도", "\(dataTarget.humidity)")
         case 5:
@@ -50,7 +50,7 @@ extension DetailTableViewCell: UICollectionViewDataSource {
         case 6:
             cell.configData("체감", "\(dataTarget.feelsLike)")
         case 7:
-            cell.configData("강수량", "\(dataTarget.rain ?? 0)")
+            cell.configData("강수량", "\(dataTarget.rain ?? 0.0)")
         case 8:
             cell.configData("기압", "\(dataTarget.pressure)")
         case 9:
