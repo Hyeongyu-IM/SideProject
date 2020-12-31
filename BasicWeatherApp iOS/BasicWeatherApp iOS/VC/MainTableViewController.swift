@@ -9,7 +9,7 @@ import UIKit
 
 class MainTableViewController: UIViewController {
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var mainTableView: UITableView!
     
     static var controllerIndex = 0
     let weatherViewModel = WeatherViewModel()
@@ -27,11 +27,13 @@ class MainTableViewController: UIViewController {
     }
     
     func configView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UINib(nibName: "HourlyTableViewCell", bundle: nil), forCellReuseIdentifier: HourlyTableViewCell.registerID)
-        tableView.register(UINib(nibName: "WeekendTableViewCell", bundle: nil), forCellReuseIdentifier: WeekendTableViewCell.registerID)
-        tableView.register(UINib(nibName: "DetailTableViewCell", bundle: nil), forCellReuseIdentifier: DetailTableViewCell.registerID)
+        mainTableView.delegate = self
+        mainTableView.dataSource = self
+        mainTableView.register(UINib(nibName: "HourlyTableViewCell", bundle: nil), forCellReuseIdentifier: HourlyTableViewCell.registerID)
+        mainTableView.register(UINib(nibName: "WeekendTableViewCell", bundle: nil), forCellReuseIdentifier: WeekendTableViewCell.registerID)
+        mainTableView.register(UINib(nibName: "DetailTableViewCell", bundle: nil), forCellReuseIdentifier: DetailTableViewCell.registerID)
+        
+        
     }
 }
 
@@ -45,12 +47,12 @@ extension MainTableViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("section \(section)")
+//        print("section \(section)")
         switch section {
         case 0:
             return 1
         case 1:
-            return 7
+            return weatherViewModel.weekendCells.count
         case 2:
             return 1
         case 3:
@@ -66,23 +68,24 @@ extension MainTableViewController: UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        print("IndexPath.section \(indexPath.section)")
         switch indexPath.section {
-        case 1:
+        case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: HourlyTableViewCell.registerID, for: indexPath) as? HourlyTableViewCell else { return UITableViewCell() }
             return cell
-        case 2:
+        case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: WeekendTableViewCell.registerID, for: indexPath) as? WeekendTableViewCell else { return UITableViewCell() }
             let target = weatherViewModel.weekendCells[MainTableViewController.controllerIndex]
-            cell.configData(target[indexPath.row])
+            cell.updateUIData(weekendData: target, indexPath.row)
             return cell
-        case 3:
+        case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "longdescriptioncell", for: indexPath)
             cell.textLabel?.text = "오늘: 날씨가 화창하고 오후에 비가올수 있습니다. 모두 장난이니까 믿지 마세요"
             return cell
-        case 4:
+        case 3:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailTableViewCell.registerID, for: indexPath) as? DetailTableViewCell else { break }
             return cell
-        case 5:
+        case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: "linkcell", for: indexPath)
             cell.textLabel?.text = "자료가 없습니다"
             return cell
@@ -94,11 +97,15 @@ extension MainTableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = CustomHeaderView.instance()
+        headerView.updateUIData(headerData: weatherViewModel.headerDatas, MainTableViewController.controllerIndex)
+        print(weatherViewModel.headerDatas[MainTableViewController.controllerIndex])
+        print(weatherViewModel.headerDatas)
+        print("uiUpdate 메서드가 호출되었습니다")
         return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 458
+        return 200
     }
 }
 

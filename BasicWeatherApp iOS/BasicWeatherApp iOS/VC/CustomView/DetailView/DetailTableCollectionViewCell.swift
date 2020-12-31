@@ -16,11 +16,24 @@ class DetailTableCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.binderSetting()
     }
     
-    func configData(_ name: String,_ value: String) {
-        nameLabel.text = name
-        valueLabel.text = value
+    let nameLabelBinder = Binder(" ")
+    let valueLabelBinder = Binder(" ")
+    
+    func binderSetting() {
+        nameLabelBinder.bind { [weak self] text in
+            self?.nameLabel.text = text
+        }
+        valueLabelBinder.bind { [weak self] text in
+            self?.valueLabel.text = text
+        }
+    }
+    
+    func detailData(_ name: String,_ value: String) {
+        nameLabelBinder.value = name
+        valueLabelBinder.value = value
     }
 }
 

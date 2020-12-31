@@ -53,12 +53,12 @@ class CustomHeaderView: UIView {
     let minTempBinder = Binder(" ")
     let maxTempBinder = Binder(" ")
     
-    func configData(_ data: [DetailCell],_ index: Int) {
-        self.stateBinder.value = data[index].location
-        self.descriptionBinder.value = data[index].discription
-        self.currentTempBinder.value = data[index].currentTemp
-        self.minTempBinder.value = data[index].minTemp
-        self.maxTempBinder.value = data[index].maxTemp
+    func updateUIData(headerData: [HeaderCell],_ index: Int) {
+        self.stateBinder.value = headerData[index].state
+        self.descriptionBinder.value = headerData[index].description
+        self.currentTempBinder.value = headerData[index].currentTemp
+        self.minTempBinder.value = headerData[index].minTemp
+        self.maxTempBinder.value = headerData[index].maxTemp
     }
     
     

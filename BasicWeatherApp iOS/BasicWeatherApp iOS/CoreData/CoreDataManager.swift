@@ -10,19 +10,11 @@ import CoreData
 
 class CoreDataManager {
     
-    static let shared: CoreDataManager = CoreDataManager()
-    
-    let modelName: String = "DataLocation"
-    let appDelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
+    private let modelName: String = "DataLocation"
+    private let appDelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
     lazy var context = appDelegate?.persistentContainer.viewContext
-    let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "DataLocation")
+    private let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "DataLocation")
 
-    lazy var locationList: [DataLocation] = {
-        self.getLocation()
-    }()
-    
-    
-    
     // 저장된 데이터 받아오기
     func getLocation(ascending: Bool = false) -> [DataLocation] {
            var models: [DataLocation] = [DataLocation]()

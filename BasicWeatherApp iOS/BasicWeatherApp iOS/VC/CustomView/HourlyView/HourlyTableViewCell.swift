@@ -10,8 +10,8 @@ import UIKit
 class HourlyTableViewCell: UITableViewCell {
     
     static let registerID: String = "\(HourlyTableViewCell.self)"
+    
     let weatherViewModel = WeatherViewModel()
-    var cellCount: Int!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -19,18 +19,18 @@ class HourlyTableViewCell: UITableViewCell {
         super.awakeFromNib()
         collectionView.delegate = self
         collectionView.dataSource = self
-        self.collectionViewCellCount.bind { [weak self] count in
-            self?.cellCount = count
+        dataConfig()
+    }
+    
+    func dataConfig() {
+
+        weatherViewModel.hourlyTableViewCellBinder.bind { [weak self] data in
+            self?.weatherViewModel.hourCells = data
         }
+        
         collectionView.register(UINib(nibName: "HourlyTableCollectionViewCell",
                                       bundle: nil),
                                 forCellWithReuseIdentifier: HourlyTableCollectionViewCell.registerID)
-    }
-    
-    let collectionViewCellCount: Binder = Binder(10)
-    
-    func reloadCellCount(_ data: [[HourCell]],_ index: Int) {
-        self.collectionViewCellCount.value = data[index].count
     }
 }
 
@@ -40,7 +40,8 @@ extension HourlyTableViewCell: UICollectionViewDelegate {
 
 extension HourlyTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cellCount
+//        print("MainTableViewController.controllerIndex \(MainTableViewController.controllerIndex) 콜렉션뷰에서 테스트")
+        return weatherViewModel.hourCells[MainTableViewController.controllerIndex].count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

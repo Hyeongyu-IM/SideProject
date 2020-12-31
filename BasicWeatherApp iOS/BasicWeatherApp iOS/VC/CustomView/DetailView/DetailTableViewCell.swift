@@ -18,7 +18,10 @@ class DetailTableViewCell: UITableViewCell {
         super.awakeFromNib()
         collectionView.delegate = self
         collectionView.dataSource = self
-        
+        configData()
+    }
+    
+    func configData() {
         collectionView.register(UINib(nibName: "DetailTableCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: DetailTableCollectionViewCell.registerID)
     }
 }
@@ -38,25 +41,25 @@ extension DetailTableViewCell: UICollectionViewDataSource {
         
         switch indexPath.row {
         case 1:
-            cell.configData("일출", dataTarget.sunrise)
+            cell.detailData("일출", dataTarget.sunrise)
         case 2:
-            cell.configData("일몰", dataTarget.sunset)
+            cell.detailData("일몰", dataTarget.sunset)
         case 3:
-            cell.configData("눈 올 확률", "\(dataTarget.snow ?? 0.0)")
+            cell.detailData("눈 올 확률", "\(dataTarget.snow ?? "")")
         case 4:
-            cell.configData("습도", "\(dataTarget.humidity)")
+            cell.detailData("습도", "\(dataTarget.humidity)")
         case 5:
-            cell.configData("바람", "\(dataTarget.wind)")
+            cell.detailData("바람", "\(dataTarget.wind)")
         case 6:
-            cell.configData("체감", "\(dataTarget.feelsLike)")
+            cell.detailData("체감", "\(dataTarget.feelsLike)")
         case 7:
-            cell.configData("강수량", "\(dataTarget.rain ?? 0.0)")
+            cell.detailData("강수량", "\(dataTarget.rain ?? "")")
         case 8:
-            cell.configData("기압", "\(dataTarget.pressure)")
+            cell.detailData("기압", "\(dataTarget.pressure)")
         case 9:
-            cell.configData("가시거리", "\(dataTarget.visibility)")
+            cell.detailData("가시거리", "\(dataTarget.visibility)")
         case 10:
-            cell.configData("자외선지수", "\(dataTarget.uvi)")
+            cell.detailData("자외선지수", "\(dataTarget.uvi)")
         default: break
             }
         return cell

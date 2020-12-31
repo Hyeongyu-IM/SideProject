@@ -19,6 +19,7 @@ class WeekendTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        binderSetting()
     }
     
     func binderSetting() {
@@ -45,11 +46,11 @@ class WeekendTableViewCell: UITableViewCell {
     let weekendMaxTempBinder = Binder(" ")
     let weekendMinTempBinder = Binder(" ")
     
-    func fetchData(_ data: [WeekendCell],_ index: Int ) {
-        self.weekendBinder.value = data[index].weekend
-        self.weekendImageBinder.value = data[index].icon
-        self.weekendpercentBinder.value = data[index].minFTemp
-        self.weekendMaxTempBinder.value = data[index].maxCTemp
-        self.weekendMinTempBinder.value = data[index].minCTemp
+    func updateUIData(weekendData: [WeekendCell],_ index: Int ) {
+        self.weekendBinder.value = weekendData[index].weekend
+        self.weekendImageBinder.value = weekendData[index].icon
+        self.weekendpercentBinder.value = weekendData[index].minFTemp
+        self.weekendMaxTempBinder.value = weekendData[index].maxCTemp
+        self.weekendMinTempBinder.value = weekendData[index].minCTemp
     }
 }

@@ -14,26 +14,41 @@ class MainPageViewController: UIPageViewController {
     var locationManager: CLLocationManager!
     
     lazy var currentLocation = Location(name: "", latitude: 0.0, longitude: 0.0)
-    
     lazy var vcArray: [UIViewController] = { return prepareViewControllers() }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
         dataSource = self
+        binderSetting()
         weatherViewModel.weatherDataList.removeAll()
+//        CoreDataManager.shared.deleteAllData()
 //        CoreDataManager.shared.saveLocation(latitude: 37, longitude: 126.96)
 //        CoreDataManager.shared.saveLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
         weatherViewModel.convertCoreData { () in
-            print("1번 completion이 실행되었습니다. ")
-                self.setupViewControllers()
+            print("1번 completion이 실행되었습니다.")
+            self.weatherViewModel.cellDataUpdate()
+            self.setupViewControllers()
             }
     }
     
     
-    func configViewControllers() {
-       
-        
+    func binderSetting() {
+        weatherViewModel.weekendTableViewCellBinder.bind { [weak self] cell in
+            self?.weatherViewModel.weekendCells = cell
+        }
+        weatherViewModel.detailTableViewCellBinder.bind { [weak self] cell in
+            self?.weatherViewModel.detailCells = cell
+        }
+        weatherViewModel.customHeaderViewDataBinder.bind { [weak self] cell in
+            self?.weatherViewModel.headerDatas = cell
+        }
+        weatherViewModel.hourlyTableViewCellBinder.bind { [weak self] cell in
+            self?.weatherViewModel.hourCells = cell
+        }
+        weatherViewModel.weatherListTableCellBinder.bind { [weak self] cell in
+            self?.weatherViewModel.weatherLists = cell
+        }
     }
     
     // 저장된 weatherInfo수만큼 뷰를 생성합니다.
@@ -43,8 +58,10 @@ class MainPageViewController: UIPageViewController {
         for i in 0..<viewIndex {
             result.append( MainTableViewController.instance() ?? UIViewController() )
             MainTableViewController.controllerIndex = i
+            print("MainTableViewController.controllerIndex   \(MainTableViewController.controllerIndex)")
         }
         print("vcArray생성된 개수 입니다. \(result.count)")
+        
         return result
     }
     
@@ -101,7 +118,7 @@ extension MainPageViewController: UIPageViewControllerDataSource {
             return nil
         }
 
-        guard vcArray.count > prevViewControllerIndex else { 
+        guard vcArray.count > prevViewControllerIndex else {
             return nil
         }
 

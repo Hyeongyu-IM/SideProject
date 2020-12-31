@@ -8,13 +8,17 @@
 import UIKit
 import Alamofire
 
+typealias WeatherCompletionHandler = (WeatherInfo?, ServiceError?) -> Void
+
 // Corelocation에 저장된 데이터를 map으로 당겨와서 하나씩 API실행후에 받아온 정보로 테이블뷰에 실행.
-// 가져올 요소 - { list:[{ main:{ temp, tempmin, tempmax, humidity,
+
 class WeatherAPI {
     
     static let shared: WeatherAPI = WeatherAPI()
+    let locationGeocoder = LocationGeocoder()
     
     lazy var iconsName: [String] = ["01d", "02d", "03d", "04d", "09d", "10d", "11d", "13d", "50d", "01n", "02n", "03n", "04n", "09n", "10n", "11n", "13n", "50n" ]
+    
     // 새로운 요청이 들어오면 기존 것을 취소하고 현재의 것을 실행합니다.
     private var request: DataRequest? {
         didSet {
@@ -22,19 +26,17 @@ class WeatherAPI {
         }
     }
     
-    
-    func getWeatherInfo(_ latitude: Double,_ longitude: Double, completion: @escaping (WeatherInfo) -> Void) {
-        let apiKey = "f8ad3cf3aa1e0f2df6433c805e65ca58"
-        let url = "https://api.openweathermap.org/data/2.5/onecall"
-        let parameters:[String:String] = [
+    func getWeatherInfo(_ latitude: Double,_ longitude: Double, completion: @escaping (WeatherCompletionHandler) -> Void) {
+        let state = String(locationGeocoder.GeoCoordiToCityName(latitude: latitude, longitude: longitude))
+        let parameters: [String:String] = [
             "lang": "kr",
             "exclude": "minutely",
             "lon": "\(longitude)",
             "lat": "\(latitude)",
-            "appid": apiKey
+            "appid": "\(WeatherAPIInfo.apiID)"
         ]
        
-        AF.request(url,
+        AF.request(WeatherAPIInfo.currentWeatherURL,
                    method: .get,
                    parameters:  parameters,
                    encoding: URLEncoding.default,
@@ -45,8 +47,9 @@ class WeatherAPI {
                 case .success(let response):
                     do {
                         let jsonData = try JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)
-                        let jsonResponse = try JSONDecoder().decode(WeatherInfo.self, from: jsonData)
+                        var jsonResponse = try JSONDecoder().decode(WeatherInfo.self, from: jsonData)
                         self.imageChecking([jsonResponse])
+                        jsonResponse.timezone = state
                        completion(jsonResponse)
                     } catch( let error) {
                         print("decoding에러입니다 \(error)")
