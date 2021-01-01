@@ -23,19 +23,6 @@ class HourlyTableCollectionViewCell: UICollectionViewCell {
     let weekendBinder = Binder(" ")
     let weatherIconBinder: Binder<UIImage?> = Binder(nil)
     let hourlyTempBinder = Binder(" ")
-
-    
-    func binderSetting() {
-        weekendBinder.bind { [weak self] weekendTime in
-            self?.weekendLabel.text = weekendTime
-        }
-        weatherIconBinder.bind { [weak self] weatherIcon in
-            self?.weatherIcon.image = weatherIcon
-        }
-        hourlyTempBinder.bind { [weak self] hourTemp in
-            self?.hourlyTemp.text = hourTemp
-        }
-    }
     
     func hourData(_ hourData: HourCell) {
         self.weekendBinder.value = hourData.time

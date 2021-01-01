@@ -8,16 +8,11 @@
 import UIKit
 import Alamofire
 
-typealias WeatherCompletionHandler = (WeatherInfo?, ServiceError?) -> Void
-
-// Corelocation에 저장된 데이터를 map으로 당겨와서 하나씩 API실행후에 받아온 정보로 테이블뷰에 실행.
+typealias WeatherCompletionHandler = (WeatherInfo?, Error?) -> Void
 
 class WeatherAPI {
-    
-    static let shared: WeatherAPI = WeatherAPI()
     let locationGeocoder = LocationGeocoder()
-    
-    lazy var iconsName: [String] = ["01d", "02d", "03d", "04d", "09d", "10d", "11d", "13d", "50d", "01n", "02n", "03n", "04n", "09n", "10n", "11n", "13n", "50n" ]
+    let imageFileManager = ImageFileManager()
     
     // 새로운 요청이 들어오면 기존 것을 취소하고 현재의 것을 실행합니다.
     private var request: DataRequest? {
@@ -26,13 +21,13 @@ class WeatherAPI {
         }
     }
     
-    func getWeatherInfo(_ latitude: Double,_ longitude: Double, completion: @escaping (WeatherCompletionHandler) -> Void) {
-        let state = String(locationGeocoder.GeoCoordiToCityName(latitude: latitude, longitude: longitude))
+    func getWeatherInfo(_ location: Location, completion: @escaping WeatherCompletionHandler) {
+        let state = String(locationGeocoder.GeoCoordiToCityName(latitude: location.latitude, longitude: location.longitude))
         let parameters: [String:String] = [
             "lang": "kr",
             "exclude": "minutely",
-            "lon": "\(longitude)",
-            "lat": "\(latitude)",
+            "lon": "\(location.longitude)",
+            "lat": "\(location.latitude)",
             "appid": "\(WeatherAPIInfo.apiID)"
         ]
        
@@ -48,51 +43,17 @@ class WeatherAPI {
                     do {
                         let jsonData = try JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)
                         var jsonResponse = try JSONDecoder().decode(WeatherInfo.self, from: jsonData)
-                        self.imageChecking([jsonResponse])
+                        self.imageFileManager.storageImageChecking(jsonResponse)
                         jsonResponse.timezone = state
-                       completion(jsonResponse)
+                       completion(jsonResponse, nil)
                     } catch( let error) {
-                        print("decoding에러입니다 \(error)")
+                        print("\(ServiceError.impossibleToParseJSON)")
+                        completion(nil, error)
                     }
                 case .failure(let error):
-                    print("\(error.localizedDescription) 데이터를 요청했지만 받지 못했습니다.  ")
+                    print("\(ServiceError.impossibleToGetJSONData)")
+                    completion(nil, error)
                 }
-        }
-    }
-    
-    func imageChecking(_ weatherInfo: [WeatherInfo]) {
-    if ImageFileManager.shared.checkingImage(weatherInfo.first?.daily.first?.weather.first?.icon ?? "") {
-            print("아이콘이 이미 존재합니다 \(weatherInfo.first?.daily.first?.weather.first?.icon)")
-        } else {
-//                saveAllWeatherIcon(iconsName)
-            print("이미지를 다운로드 합니다, \(ImageFileManager.shared.checkingImage(weatherInfo.first?.daily.first?.weather.first?.icon ?? "")) , \(weatherInfo.first?.daily.first?.weather.first?.icon)")
-        }
-    
-    
-    func downloadWeatherIcon(_ name: String) {
-        let url = "http://openweathermap.org/img/wn/\(name)@2x.png"
-        var image: UIImage = UIImage()
-        
-        AF.request(url, method: .get).validate(statusCode: 200..<300).responseJSON {
-            (json) in
-            switch json.result {
-            case .success(let response):
-                if let response = response as? UIImage {
-                    image = response
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-        print("이미지를 성공적으로 다운로드했습니다.")
-        ImageFileManager.shared.saveImage(image, name)
-        return
-    }
-    
-    func saveAllWeatherIcon(_ iconNameList: [String]) {
-        iconNameList.forEach {
-            downloadWeatherIcon($0)
-            }
         }
     }
 }

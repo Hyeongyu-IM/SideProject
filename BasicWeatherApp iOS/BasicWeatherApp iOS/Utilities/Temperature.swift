@@ -17,23 +17,11 @@ class Temperature {
     }
     
     var text: String {
-        
+        return TemperatureUnit.shared.boolValue ? "\(celciusTempValue)" : "\(toFahrenhit)"
     }
     
     var toFahrenhit: Int {
         let convertedValue = (celciusTempValue * 9/5) + 32
         return convertedValue
     }
-    
-//    private func tempFormatter: NumberFormatter = {
-//      let tempFormatter = NumberFormatter()
-//      tempFormatter.numberStyle = .none
-//      return tempFormatter
-//    }()
-//
-//    private func celsiusToFahrenhit(_ temp: String) -> NSNumber {
-//        let celsius = Int(temp)!
-//        let F = (celsius * 9/5) + 32
-//        return NSNumber(value: F)
-//    }
 }

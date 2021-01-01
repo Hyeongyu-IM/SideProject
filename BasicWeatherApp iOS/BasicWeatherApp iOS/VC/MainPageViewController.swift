@@ -10,7 +10,6 @@ import CoreLocation
 
 class MainPageViewController: UIPageViewController {
     
-    let weatherViewModel = WeatherViewModel()
     var locationManager: CLLocationManager!
     
     lazy var currentLocation = Location(name: "", latitude: 0.0, longitude: 0.0)
@@ -21,7 +20,6 @@ class MainPageViewController: UIPageViewController {
         delegate = self
         dataSource = self
         binderSetting()
-        weatherViewModel.weatherDataList.removeAll()
 //        CoreDataManager.shared.deleteAllData()
 //        CoreDataManager.shared.saveLocation(latitude: 37, longitude: 126.96)
 //        CoreDataManager.shared.saveLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)

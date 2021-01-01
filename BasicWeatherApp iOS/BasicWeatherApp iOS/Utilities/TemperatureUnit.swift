@@ -19,9 +19,24 @@ static let shared = TemperatureUnit()
     
     var unit: Unit
     
+    init() {
+        let bool = true
+        self.unit = Unit(bool: bool)
+    }
+    
     init(bool: Bool) {
         self.unit = Unit(bool: bool)
     }
+    
+    func setUnit(with newValue: Bool) {
+        self.unit = Unit(bool: newValue)
+    }
+    
+    var boolValue: Bool {
+        return self.unit == .celcius ? true : false
+    }
+
+}
 
 
 

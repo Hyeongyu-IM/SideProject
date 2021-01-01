@@ -11,23 +11,12 @@ class HourlyTableViewCell: UITableViewCell {
     
     static let registerID: String = "\(HourlyTableViewCell.self)"
     
-    let weatherViewModel = WeatherViewModel()
-    
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         collectionView.delegate = self
         collectionView.dataSource = self
-        dataConfig()
-    }
-    
-    func dataConfig() {
-
-        weatherViewModel.hourlyTableViewCellBinder.bind { [weak self] data in
-            self?.weatherViewModel.hourCells = data
-        }
-        
         collectionView.register(UINib(nibName: "HourlyTableCollectionViewCell",
                                       bundle: nil),
                                 forCellWithReuseIdentifier: HourlyTableCollectionViewCell.registerID)

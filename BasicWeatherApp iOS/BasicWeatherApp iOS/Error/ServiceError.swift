@@ -12,4 +12,5 @@ enum ServiceError: Error {
     case networkRequestError
     case impossibleToGetJSONData
     case impossibleToParseJSON
+    case impossibleToGetImageData
 }

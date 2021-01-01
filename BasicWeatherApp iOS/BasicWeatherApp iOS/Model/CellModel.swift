@@ -12,8 +12,6 @@ struct WeekendCell {
     let icon: UIImage?
     let minCTemp: String
     let maxCTemp: String
-    let minFTemp: String
-    let maxFTemp: String
 }
 
 struct HourCell {
@@ -21,7 +19,6 @@ struct HourCell {
     let time: String
     let icon: UIImage?
     let Ctemp: String
-    let Ftemp: String
 }
 
 struct DetailCell {
@@ -53,6 +50,5 @@ struct WeatherListViewCell {
     let dt: String
     let state: String
     let currentTempC: String
-    let currentTempF: String
 }
 
