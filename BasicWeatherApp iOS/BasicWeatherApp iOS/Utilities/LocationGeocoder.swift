@@ -8,9 +8,25 @@
 import Foundation
 import CoreLocation
 
-class LocationGeocoder {
-  var geocoder = CLGeocoder()
+class LocationGeocoder: NSObject {
+    weak var delegate: LocationManagerDelegate?
+    private let manager = CLLocationManager()
+    private var geocoder = CLGeocoder()
+    var didUpdateCurrentLocation = false
  
+    override init() {
+        super.init()
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        manager.requestWhenInUseAuthorization()
+    }
+    
+    func requestCurrentLocation() {
+        if(manager.authorizationStatus == .authorizedWhenInUse || manager.authorizationStatus == .authorizedAlways) {
+            manager.requestLocation()
+        }
+    }
+    
     // 도시 이름을 경도와 위도로 변환
   func cityNameToGeoCoordi(_ addressString: String, callback: @escaping ([Location]) -> ()) {
     geocoder.geocodeAddressString(addressString) { (placemarks, error) in
@@ -56,5 +72,32 @@ class LocationGeocoder {
                 }
             }
         return cityName
+    }
+}
+
+extension LocationGeocoder: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if(status == .authorizedWhenInUse || status == .authorizedAlways) {
+            manager.requestLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            let currentLocation = Location(name: self.GeoCoordiToCityName(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude),
+                                           latitude: location.coordinate.latitude,
+                                           longitude: location.coordinate.longitude)
+            print("currentLocation 입니다 \(currentLocation)")
+            if didUpdateCurrentLocation {
+                return
+            }
+            didUpdateCurrentLocation.toggle()
+            // delegate method for deiliver to copied viewController
+            self.delegate?.locationManagerDidUpdate(currentLocation: currentLocation)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("error: did fail to get current location")
     }
 }

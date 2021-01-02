@@ -11,7 +11,7 @@
 		2C156935258F447E00C77AAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C156934258F447E00C77AAC /* Main.storyboard */; };
 		2C156938258F450400C77AAC /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C156937258F450400C77AAC /* MainPageViewController.swift */; };
 		2C1569482593285A00C77AAC /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1569472593285A00C77AAC /* ImageFileManager.swift */; };
-		2C390C382584940200B4812F /* Geocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C390C372584940200B4812F /* Geocoder.swift */; };
+		2C390C382584940200B4812F /* LocationGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C390C372584940200B4812F /* LocationGeocoder.swift */; };
 		2C390C3F2584AF4B00B4812F /* savedLocation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C390C3D2584AF4B00B4812F /* savedLocation.xcdatamodeld */; };
 		2C390C6D2584B59700B4812F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C390C6C2584B59700B4812F /* CoreDataManager.swift */; };
 		2C94BA1F258338B4008F260C /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C94BA1E258338B4008F260C /* Location.swift */; };
@@ -62,7 +62,7 @@
 		2C156934258F447E00C77AAC /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2C156937258F450400C77AAC /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		2C1569472593285A00C77AAC /* ImageFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileManager.swift; sourceTree = "<group>"; };
-		2C390C372584940200B4812F /* Geocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoder.swift; sourceTree = "<group>"; };
+		2C390C372584940200B4812F /* LocationGeocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationGeocoder.swift; sourceTree = "<group>"; };
 		2C390C3E2584AF4B00B4812F /* savedLocation.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = savedLocation.xcdatamodel; sourceTree = "<group>"; };
 		2C390C6C2584B59700B4812F /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		2C94BA1E258338B4008F260C /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -287,7 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				2CF75A12257E031600BA6044 /* binder.swift */,
-				2C390C372584940200B4812F /* Geocoder.swift */,
+				2C390C372584940200B4812F /* LocationGeocoder.swift */,
 				2C1569472593285A00C77AAC /* ImageFileManager.swift */,
 				2C10E0212585DDFB00AD227D /* weatherAPI.swift */,
 				2CE0E656259DFE5400E030F5 /* Temperature.swift */,
@@ -450,7 +450,7 @@
 			files = (
 				2CF759F8257E023000BA6044 /* SearchViewController.swift in Sources */,
 				2CE0E64E259DFDCD00E030F5 /* LocationListDelegate.swift in Sources */,
-				2C390C382584940200B4812F /* Geocoder.swift in Sources */,
+				2C390C382584940200B4812F /* LocationGeocoder.swift in Sources */,
 				2CE0E657259DFE5400E030F5 /* Temperature.swift in Sources */,
 				2CE192892597674A00C809F7 /* MainTableViewController.swift in Sources */,
 				2CE0E5E02599CFD100E030F5 /* HourlyTableViewCell.swift in Sources */,

@@ -8,8 +8,8 @@
 import Foundation
 import CoreLocation
 
-struct Location {
-  var name: String
+struct Location: Equatable {
+    var name: String?
     var latitude: Double
     var longitude: Double
   
@@ -18,7 +18,7 @@ struct Location {
   }
 }
 
-extension Location: Equatable {
+extension Location {
   static func ==(lhs: Location, rhs: Location) -> Bool {
     return lhs.name == rhs.name &&
       lhs.latitude == rhs.latitude &&

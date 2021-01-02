@@ -14,20 +14,21 @@ class CoreDataManager {
     private let appDelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
     lazy var context = appDelegate?.persistentContainer.viewContext
     private let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "DataLocation")
-
+    
+    
     // 저장된 데이터 받아오기
-    func getLocation(ascending: Bool = false) -> [DataLocation] {
-           var models: [DataLocation] = [DataLocation]()
-           
+    func getLocationList() -> [Location] {
+           var models = [Location]()
+
             do {
                 if let result: [DataLocation] = try context?.fetch(fetchRequest) as? [DataLocation] {
-                       models = result
+                  models = result.map { Location(name: $0.stateName ?? "" , latitude: $0.latitude, longitude: $0.longitude) }
                    }
                } catch let error as NSError {
                    print("Could not fetch: \(error), \(error.userInfo)")
                }
-            print("코어데이터 로드성공")
-            return models
+            print("models 입니다 \(models)")
+        return models
         }
 
     // saveLocation

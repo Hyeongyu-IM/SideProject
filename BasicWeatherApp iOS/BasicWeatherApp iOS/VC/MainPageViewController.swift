@@ -10,44 +10,41 @@ import CoreLocation
 
 class MainPageViewController: UIPageViewController {
     
-    var locationManager: CLLocationManager!
-    
-    lazy var currentLocation = Location(name: "", latitude: 0.0, longitude: 0.0)
-    lazy var vcArray: [UIViewController] = { return prepareViewControllers() }()
+    private var locationManager = LocationGeocoder()
+    private var coreDatas = CoreDataManager()
+    private var cachedWeatherViewControllers = NSCache<NSNumber, MainTableViewController>()
+    private let currentLocation = Location(name: "", latitude: 0.0, longitude: 0.0)
+    private let pageControl = UIPageControl()
+    private var locationList = [Location]() {
+        didSet {
+            self.pageControl.numberOfPages = locationList.count
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
         dataSource = self
-        binderSetting()
+        setLocationList()
+        configSubViews()
 //        CoreDataManager.shared.deleteAllData()
 //        CoreDataManager.shared.saveLocation(latitude: 37, longitude: 126.96)
 //        CoreDataManager.shared.saveLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
-        weatherViewModel.convertCoreData { () in
-            print("1번 completion이 실행되었습니다.")
-            self.weatherViewModel.cellDataUpdate()
-            self.setupViewControllers()
-            }
+        
+    }
+    
+    private func setLocationList() {
+        self.locationList = coreDatas.getLocationList()
+    }
+    
+    private func configSubViews() {
+        let pageViewFrame = self.view.frame
+        
     }
     
     
-    func binderSetting() {
-        weatherViewModel.weekendTableViewCellBinder.bind { [weak self] cell in
-            self?.weatherViewModel.weekendCells = cell
-        }
-        weatherViewModel.detailTableViewCellBinder.bind { [weak self] cell in
-            self?.weatherViewModel.detailCells = cell
-        }
-        weatherViewModel.customHeaderViewDataBinder.bind { [weak self] cell in
-            self?.weatherViewModel.headerDatas = cell
-        }
-        weatherViewModel.hourlyTableViewCellBinder.bind { [weak self] cell in
-            self?.weatherViewModel.hourCells = cell
-        }
-        weatherViewModel.weatherListTableCellBinder.bind { [weak self] cell in
-            self?.weatherViewModel.weatherLists = cell
-        }
-    }
+    
+ 
     
     // 저장된 weatherInfo수만큼 뷰를 생성합니다.
     func prepareViewControllers() -> [UIViewController] {

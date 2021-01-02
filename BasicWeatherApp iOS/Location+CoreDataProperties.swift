@@ -18,6 +18,6 @@ extension DataLocation {
 
     @NSManaged public var longitude: Double
     @NSManaged public var latitude: Double
-    @NSManaged public var location: [Double]?
+    @NSManaged public var stateName: String?
 
 }

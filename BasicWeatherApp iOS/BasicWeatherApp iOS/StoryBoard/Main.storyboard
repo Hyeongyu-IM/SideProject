@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,7 +11,7 @@
         <!--Main Page View Controller-->
         <scene sceneID="9Ji-OL-dhd">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="m5Y-EE-xRz" customClass="MainPageViewController" customModule="BasicWeatherApp_iOS" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="m5Y-EE-xRz" customClass="MainPageViewController" customModule="BasicWeatherApp_iOS" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ase-d9-pTW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-710" y="180"/>
@@ -67,54 +66,12 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t2K-G1-5qd">
-                                <rect key="frame" x="0.0" y="793" width="414" height="103"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qpb-hY-X6Z">
-                                        <rect key="frame" x="8" y="8" width="35" height="53"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                        <state key="normal">
-                                            <imageReference key="image" image="weatherChannelLogo" symbolScale="default"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hn8-x7-HbG">
-                                        <rect key="frame" x="380" y="17" width="26" height="35"/>
-                                        <color key="tintColor" systemColor="opaqueSeparatorColor"/>
-                                        <state key="normal">
-                                            <imageReference key="image" image="line.horizontal.3" catalog="system" symbolScale="large"/>
-                                        </state>
-                                    </button>
-                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="rz2-fw-6Ag">
-                                        <rect key="frame" x="146" y="21" width="122.5" height="27.5"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" systemColor="opaqueSeparatorColor"/>
-                                        <color key="pageIndicatorTintColor" systemColor="opaqueSeparatorColor"/>
-                                    </pageControl>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="hn8-x7-HbG" firstAttribute="top" secondItem="t2K-G1-5qd" secondAttribute="top" constant="17" id="0Hm-Rc-umQ"/>
-                                    <constraint firstItem="qpb-hY-X6Z" firstAttribute="leading" secondItem="t2K-G1-5qd" secondAttribute="leading" constant="8" id="C8j-wj-5Ae"/>
-                                    <constraint firstAttribute="trailing" secondItem="hn8-x7-HbG" secondAttribute="trailing" constant="8" id="GZR-Qf-dhT"/>
-                                    <constraint firstItem="rz2-fw-6Ag" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qpb-hY-X6Z" secondAttribute="trailing" constant="39" id="Rrz-N8-Peo"/>
-                                    <constraint firstItem="rz2-fw-6Ag" firstAttribute="centerY" secondItem="qpb-hY-X6Z" secondAttribute="centerY" id="UNJ-2d-Izd"/>
-                                    <constraint firstItem="qpb-hY-X6Z" firstAttribute="top" secondItem="t2K-G1-5qd" secondAttribute="top" constant="8" id="V2K-yb-CFt"/>
-                                    <constraint firstItem="rz2-fw-6Ag" firstAttribute="centerX" secondItem="t2K-G1-5qd" secondAttribute="centerX" id="g8g-08-LfI"/>
-                                    <constraint firstAttribute="bottom" secondItem="hn8-x7-HbG" secondAttribute="bottom" constant="51" id="hGx-Ig-Rb9"/>
-                                    <constraint firstItem="hn8-x7-HbG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rz2-fw-6Ag" secondAttribute="trailing" constant="35" id="sRg-vL-YR8"/>
-                                    <constraint firstAttribute="bottom" secondItem="qpb-hY-X6Z" secondAttribute="bottom" constant="42" id="uyx-Ft-R85"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2tt-QA-Fje"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="2tt-QA-Fje" firstAttribute="trailing" secondItem="t2K-G1-5qd" secondAttribute="trailing" id="3tx-Ok-xix"/>
-                            <constraint firstItem="t2K-G1-5qd" firstAttribute="bottom" secondItem="Tuf-76-NRa" secondAttribute="bottom" id="9wb-mk-hmo"/>
-                            <constraint firstItem="t2K-G1-5qd" firstAttribute="leading" secondItem="2tt-QA-Fje" secondAttribute="leading" id="Ghz-bF-fiF"/>
                             <constraint firstAttribute="bottom" secondItem="pD7-oA-cQI" secondAttribute="bottom" constant="100" id="KlN-lE-jtd"/>
                             <constraint firstItem="pD7-oA-cQI" firstAttribute="leading" secondItem="2tt-QA-Fje" secondAttribute="leading" id="QaQ-sV-kys"/>
-                            <constraint firstItem="t2K-G1-5qd" firstAttribute="top" secondItem="pD7-oA-cQI" secondAttribute="bottom" constant="-3" id="WG8-TS-Flw"/>
                             <constraint firstItem="pD7-oA-cQI" firstAttribute="trailing" secondItem="2tt-QA-Fje" secondAttribute="trailing" id="abH-En-csJ"/>
                             <constraint firstItem="pD7-oA-cQI" firstAttribute="top" secondItem="Tuf-76-NRa" secondAttribute="top" id="wme-rJ-Xtg"/>
                         </constraints>
@@ -129,11 +86,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="line.horizontal.3" catalog="system" width="128" height="64"/>
-        <image name="weatherChannelLogo" width="35" height="35"/>
-        <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
