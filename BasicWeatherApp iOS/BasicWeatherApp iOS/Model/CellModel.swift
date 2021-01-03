@@ -12,6 +12,7 @@ struct WeekendCell {
     let icon: UIImage?
     let minCTemp: String
     let maxCTemp: String
+    let percent: String?
 }
 
 struct HourCell {
@@ -34,7 +35,7 @@ struct DetailCell {
     let uvi: String
 }
 
-struct HeaderCell {
+struct HeaderCell  {
     let state: String
     let description: String
     let currentTemp: String

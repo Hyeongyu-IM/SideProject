@@ -12,20 +12,23 @@ import UIKit
     let maxItemCount = 20
     let emptyString = ""
     var location: Binder<Location>
-    let hourlyTableViewCellBinder : Binder<[HourCell]>
-    let detailTableViewCellBinder : Binder<DetailCell>
-    let customHeaderViewDataBinder : Binder<HeaderCell>
-    let weekendTableViewCellBinder : Binder<[WeekendCell]>
-    let weatherListTableCellBinder : Binder<WeatherListViewCell>
     let temperatureUnit: Binder<TemperatureUnit.Unit>
+    var hourlyTableViewCell : [HourCell]
+    var detailTableViewCell : DetailCell?
+    var customHeaderViewData : HeaderCell?
+    var weekendTableViewCell : [WeekendCell]
+    var weatherListTableCell : WeatherListViewCell?
+    var weatherDescription: String?
     
     init(location: Location) {
         self.location = Binder(location)
-        self.hourlyTableViewCellBinder = Binder([])
-        self.detailTableViewCellBinder = Binder(nil)
-        self.weekendTableViewCellBinder = Binder([])
-        self.customHeaderViewDataBinder = Binder(nil)
-        self.weatherListTableCellBinder = Binder(nil)
+        self.hourlyTableViewCell = []
+        self.detailTableViewCell = nil
+        self.weekendTableViewCell = []
+        self.customHeaderViewData = nil
+        self.weatherListTableCell = nil
+        self.weatherDescription = nil
+        self.temperatureUnit = Binder(TemperatureUnit.shared.unit)
     }
     
     func retrieveWeatherInfo() {
@@ -46,11 +49,12 @@ import UIKit
             self.location.value?.name = weatherInfo.timezone
         }
         let weatherCellDataMaker = WeatherCellDataMaker(data: weatherInfo)
-        hourlyTableViewCellBinder.value = weatherCellDataMaker.getHourDataCell()
-        detailTableViewCellBinder.value = weatherCellDataMaker.getdetailDataCell()
-        weekendTableViewCellBinder.value = weatherCellDataMaker.getWeekendDataCell()
-        customHeaderViewDataBinder.value = weatherCellDataMaker.getheaderDataCell()
-        weatherListTableCellBinder.value = weatherCellDataMaker.getWeatherListDataCell()
+        self.hourlyTableViewCell = weatherCellDataMaker.getHourDataCell()
+        self.detailTableViewCell = weatherCellDataMaker.getdetailDataCell()
+        self.weekendTableViewCell = weatherCellDataMaker.getWeekendDataCell()
+        self.customHeaderViewData = weatherCellDataMaker.getheaderDataCell()
+        self.weatherListTableCell = weatherCellDataMaker.getWeatherListDataCell()
+        self.weatherDescription = "오늘: 현재 날씨 청명함, 기온은 5º이며 오늘 예상 최고 기온은 10º입니다"
     }
     
     

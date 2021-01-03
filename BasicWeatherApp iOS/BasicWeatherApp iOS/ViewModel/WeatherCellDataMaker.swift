@@ -54,7 +54,8 @@ class WeatherCellDataMaker {
             WeekendCell(weekend: utcTimeConvertor.dtToWeekend($0.dt),
                              icon: ImageFileManager.loadImage("\($0.weather[0].icon)"),
                              minCTemp: "\(temperature: Temperature(celcius: $0.temp.min))",
-                             maxCTemp: "\(Temperature(celcius: $0.temp.max))")
+                             maxCTemp: "\(Temperature(celcius: $0.temp.max))",
+                             percent: "")
         }
         return weekendCells
     }

@@ -10,16 +10,16 @@ import UIKit
 class DetailTableCollectionViewCell: UICollectionViewCell {
     
     static let registerID: String = "\(DetailTableCollectionViewCell.self)"
-    static let height: CGFloat = 90
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.backgroundColor = .clear
     }
     
-    func detailData(_ name: String,_ value: String) {
+    func setDetailData(_ name: String,_ value: String) {
         self.nameLabel.text = name
         self.valueLabel.text = value
     }

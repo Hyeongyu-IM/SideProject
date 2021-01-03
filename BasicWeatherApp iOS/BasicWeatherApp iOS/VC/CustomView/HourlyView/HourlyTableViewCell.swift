@@ -13,13 +13,24 @@ class HourlyTableViewCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    private var hourDatas = [HourCell]()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.backgroundColor = .clear
+        registerCell()
+    }
+    
+    func registerCell() {
         collectionView.register(UINib(nibName: "HourlyTableCollectionViewCell",
                                       bundle: nil),
                                 forCellWithReuseIdentifier: HourlyTableCollectionViewCell.registerID)
+    }
+    
+    func passHourDatas(hourData: [HourCell]) {
+        hourDatas = hourData
     }
 }
 
@@ -30,12 +41,12 @@ extension HourlyTableViewCell: UICollectionViewDelegate {
 extension HourlyTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        print("MainTableViewController.controllerIndex \(MainTableViewController.controllerIndex) 콜렉션뷰에서 테스트")
-        return weatherViewModel.hourCells[MainTableViewController.controllerIndex].count
+        return hourDatas.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyTableCollectionViewCell.registerID, for: indexPath) as? HourlyTableCollectionViewCell else { return UICollectionViewCell()}
-        cell.hourData(weatherViewModel.hourCells[MainTableViewController.controllerIndex][indexPath.row])
+        cell.setHourData(hourDatas[indexPath.row])
         return cell
     }
     

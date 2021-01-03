@@ -9,21 +9,21 @@ import UIKit
 import GooglePlaces
 
 class SearchViewController: UIViewController {
-    
     @IBOutlet weak var customSearchBar: UISearchBar!
     @IBOutlet weak var blurView: UIView!
     
-    let weatherViewModel = WeatherViewModel()
-    
+    static let identifier: String = "\(SearchViewController.self)"
     private var tableView: UITableView!
-      private var tableDataSource: GMSAutocompleteTableDataSource!
+    private var tableDataSource: GMSAutocompleteTableDataSource!
     
-      override func viewDidLoad() {
+    weak var delegate: SearchViewDelegate?
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
         configAutoComplete()
-      }
+    }
     
-    func configAutoComplete() {
+    private func configAutoComplete() {
         customSearchBar.delegate = self
         tableDataSource = GMSAutocompleteTableDataSource()
         tableDataSource.delegate = self
@@ -49,7 +49,6 @@ class SearchViewController: UIViewController {
 }
 
 extension SearchViewController: GMSAutocompleteTableDataSourceDelegate, UISearchBarDelegate  {
-    
     func didUpdateAutocompletePredictions(for tableDataSource: GMSAutocompleteTableDataSource) {
         // Turn the network activity indicator off.
         if #available(iOS 13.0, *) {
@@ -77,7 +76,10 @@ extension SearchViewController: GMSAutocompleteTableDataSourceDelegate, UISearch
         if #available(iOS 13.0, *) {
         
         } else {
-            weatherViewModel.addLocation(place.coordinate.latitude, place.coordinate.longitude)
+            
+            self.delegate?.userSelected(newLocation: Location(name: place.name, latitude: place.coordinate.latitude, longitude: place.coordinate.longitude))
+            self.dismiss(animated: true, completion: nil)
+//            weatherViewModel.addLocation(place.coordinate.latitude, place.coordinate.longitude)
 //        place.name
         }
       }
@@ -95,6 +97,8 @@ extension SearchViewController: GMSAutocompleteTableDataSourceDelegate, UISearch
         // Update the GMSAutocompleteTableDataSource with the search text.
         tableDataSource.sourceTextHasChanged(searchText)
       }
+    
+    
     
     
  

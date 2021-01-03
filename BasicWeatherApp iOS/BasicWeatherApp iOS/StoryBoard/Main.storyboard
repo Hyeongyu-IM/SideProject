@@ -77,7 +77,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="pD7-oA-cQI" id="75e-Hm-l5P"/>
+                        <outlet property="mainTableView" destination="pD7-oA-cQI" id="zhj-JU-1aw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F4i-NK-RkX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
