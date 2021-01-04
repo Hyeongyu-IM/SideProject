@@ -31,6 +31,7 @@ class HourlyTableViewCell: UITableViewCell {
     
     func passHourDatas(hourData: [HourCell]) {
         hourDatas = hourData
+        collectionView.reloadData()
     }
 }
 
@@ -49,6 +50,10 @@ extension HourlyTableViewCell: UICollectionViewDataSource {
         cell.setHourData(hourDatas[indexPath.row])
         return cell
     }
-    
-    
+}
+
+extension HourlyTableViewCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 80, height: 140)
+    }
 }

@@ -28,9 +28,8 @@ class ImageFileManager {
         }
     }
     
-    static func loadImage(_ name: String) -> UIImage {
+    func loadImage(_ name: String) -> UIImage {
         let url = "http://openweathermap.org/img/wn/\(name)@2x.png"
-        let fileManager = FileManager.default
         guard let path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first else { return UIImage() }
         
         var filePath = URL(fileURLWithPath: path)
@@ -56,33 +55,35 @@ class ImageFileManager {
         var filePath = URL(fileURLWithPath: path)
         
         filePath.appendPathComponent((url as NSString).lastPathComponent)
+        print(fileManager.fileExists(atPath: filePath.path))
+        print(filePath.path)
         return fileManager.fileExists(atPath: filePath.path)
     }
     
     func storageImageChecking(_ weatherInfo: WeatherInfo) {
-        if checkingImagefile(weatherInfo.daily.first?.weather.first?.icon ?? "") {
-            print("아이콘이 이미 존재합니다 \(String(describing: weatherInfo.daily.first?.weather.first?.icon))")
+        guard let image = weatherInfo.daily.first?.weather.first?.icon else{ return }
+        if checkingImagefile(image) {
+            print("아이콘이 이미 존재합니다 \(image)")
         } else {
 //                saveAllWeatherIcon(iconsName)
-            print("이미지를 다운로드 합니다, \(checkingImagefile(weatherInfo.daily.first?.weather.first?.icon ?? "")) ,\(String(describing: weatherInfo.daily.first?.weather.first?.icon))")
+            print("이미지를 다운로드 합니다, \(image) ,\(image)")
         }
+    }
     
     
         func downloadWeatherIcon(_ name: String, completion: @escaping (UIImage?, String, Error?) -> Void) {
             let url = "http://openweathermap.org/img/wn/\(name)@2x.png"
-            var image: UIImage = UIImage()
-        
-            AF.request(url, method: .get).validate(statusCode: 200..<300).responseJSON {
-                (json) in
-                switch json.result {
-                case .success(let response):
-                    if let response = response as? UIImage {
-                        image = response
+            AF.download(url)
+                .downloadProgress { progress in
+                    print("Download Progress: \(progress.fractionCompleted)")
+                }.response { response in
+                    debugPrint(response)
+                    if response.error == nil, let imagePath = response.fileURL?.path {
+                        let image = UIImage(contentsOfFile: imagePath)
                         completion(image, name, nil)
-                    }
-                case .failure(let error):
+                    } else {
                     print(ServiceError.impossibleToGetImageData)
-                    completion(nil, name, error)
+                    completion(nil, name, nil)
                 }
             }
         }
@@ -96,4 +97,3 @@ class ImageFileManager {
             }
         }
     }
-}

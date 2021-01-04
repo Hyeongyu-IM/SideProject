@@ -16,8 +16,8 @@ class DetailTableViewCell: UITableViewCell {
         super.awakeFromNib()
         collectionView.delegate = self
         collectionView.dataSource = self
-        self.backgroundColor = .clear
         registerCell()
+        self.backgroundColor = .clear
     }
     
     private var detailData: DetailCell?
@@ -28,6 +28,7 @@ class DetailTableViewCell: UITableViewCell {
     
     func passDetailDatas( detailData: DetailCell) {
         self.detailData = detailData
+        collectionView.reloadData()
     }
 }
 
@@ -43,45 +44,44 @@ extension DetailTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailTableCollectionViewCell.registerID, for: indexPath) as? DetailTableCollectionViewCell,
               let detailData = detailData else { return UICollectionViewCell() }
-        
         switch indexPath.row {
-        case 1:
+        case 0:
             cell.setDetailData("일출", detailData.sunrise)
             return cell
             
-        case 2:
+        case 1:
             cell.setDetailData("일몰", detailData.sunset)
             return cell
             
-        case 3:
+        case 2:
             cell.setDetailData("눈 올 확률", detailData.snow ?? "")
             return cell
             
-        case 4:
+        case 3:
             cell.setDetailData("습도", detailData.humidity)
             return cell
             
-        case 5:
+        case 4:
             cell.setDetailData("바람", detailData.wind)
             return cell
             
-        case 6:
+        case 5:
             cell.setDetailData("체감", detailData.feelsLike)
             return cell
             
-        case 7:
+        case 6:
             cell.setDetailData("강수량", detailData.rain ?? "")
             return cell
             
-        case 8:
+        case 7:
             cell.setDetailData("기압", detailData.pressure)
             return cell
             
-        case 9:
+        case 8:
             cell.setDetailData("가시거리", detailData.visibility)
             return cell
             
-        case 10:
+        case 9:
             cell.setDetailData("자외선지수", detailData.uvi)
             return cell
             
@@ -90,5 +90,11 @@ extension DetailTableViewCell: UICollectionViewDataSource {
             break
             }
         return cell
+    }
+}
+
+extension DetailTableViewCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (UIScreen.main.bounds.maxX - 10) / 2, height: 60)
     }
 }

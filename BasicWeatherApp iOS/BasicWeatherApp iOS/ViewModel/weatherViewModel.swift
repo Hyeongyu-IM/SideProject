@@ -8,10 +8,12 @@
 import UIKit
 
  class WeatherViewModel {
+    private var utcTimeConvertor = DateConverter()
     let weatherAPI = WeatherAPI()
+    let locationGeocoder = LocationGeocoder()
     let maxItemCount = 20
-    let emptyString = ""
     var location: Binder<Location>
+    var currentLocationName: Binder<String>
     let temperatureUnit: Binder<TemperatureUnit.Unit>
     var hourlyTableViewCell : [HourCell]
     var detailTableViewCell : DetailCell?
@@ -19,6 +21,7 @@ import UIKit
     var weekendTableViewCell : [WeekendCell]
     var weatherListTableCell : WeatherListViewCell?
     var weatherDescription: String?
+    var backgroundImageColor: UIColor
     
     init(location: Location) {
         self.location = Binder(location)
@@ -28,7 +31,9 @@ import UIKit
         self.customHeaderViewData = nil
         self.weatherListTableCell = nil
         self.weatherDescription = nil
+        self.backgroundImageColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         self.temperatureUnit = Binder(TemperatureUnit.shared.unit)
+        self.currentLocationName = Binder("")
     }
     
     func retrieveWeatherInfo() {
@@ -45,16 +50,43 @@ import UIKit
     }
     
     func update(_ weatherInfo: WeatherInfo) {
-        if self.location.value?.name == nil {
-            self.location.value?.name = weatherInfo.timezone
+        if self.location.value?.name == "" {
+            self.location.value?.name = self.currentLocationName.value
+            print("self.location.value?.name \(self.location.value?.name)")
         }
         let weatherCellDataMaker = WeatherCellDataMaker(data: weatherInfo)
+        self.getBackgroundImage(weatherInfo)
         self.hourlyTableViewCell = weatherCellDataMaker.getHourDataCell()
         self.detailTableViewCell = weatherCellDataMaker.getdetailDataCell()
         self.weekendTableViewCell = weatherCellDataMaker.getWeekendDataCell()
         self.customHeaderViewData = weatherCellDataMaker.getheaderDataCell()
         self.weatherListTableCell = weatherCellDataMaker.getWeatherListDataCell()
         self.weatherDescription = "오늘: 현재 날씨 청명함, 기온은 5º이며 오늘 예상 최고 기온은 10º입니다"
+    }
+    
+    func getBackgroundImage(_ weatherInfo: WeatherInfo) {
+        if weatherInfo.current.rain != nil {
+            print("비가오네요~~~ 배경을 비로 바꾸겠습니다!")
+            self.backgroundImageColor = UIColor(patternImage: UIImage(named: "rainy")!)
+            return
+            }
+    let currentTime = utcTimeConvertor.timeForBackground(weatherInfo.current.dt)
+    switch currentTime {
+    case 0..<8:
+        self.backgroundImageColor = UIColor(patternImage: UIImage(named: "night")!)
+        return
+    case 8..<17:
+        self.backgroundImageColor = UIColor(patternImage: UIImage(named: "sunny")!)
+        return
+    case 17..<19:
+        self.backgroundImageColor = UIColor(patternImage: UIImage(named: "sunset")!)
+        return
+    case 19...24:
+        self.backgroundImageColor = UIColor(patternImage: UIImage(named: "night")!)
+        return
+    default:
+        return
+        }
     }
     
     

@@ -9,19 +9,23 @@ import Foundation
 
 class Temperature {
     
-    let celciusTempValue: Int
+    static let celciusGap = 273.15
+    let kelvinValue: Double
     
-    init(celcius: Double) {
-        let toInt = Int(celcius)
-        self.celciusTempValue = toInt
+    init(kelvin: Double) {
+        self.kelvinValue = kelvin
     }
     
     var text: String {
-        return TemperatureUnit.shared.boolValue ? "\(celciusTempValue)" : "\(toFahrenhit)"
+        return TemperatureUnit.shared.boolValue ? "\(toCelcius)" : "\(toFahrenheit)"
     }
     
-    var toFahrenhit: Int {
-        let convertedValue = (celciusTempValue * 9/5) + 32
-        return convertedValue
+    var toCelcius: Int {
+        return Int(kelvinValue - Temperature.celciusGap)
+    }
+    
+    var toFahrenheit: Int {
+        let convertedValue = (kelvinValue - 273.15) * 9/5 + 32
+        return Int(convertedValue)
     }
 }

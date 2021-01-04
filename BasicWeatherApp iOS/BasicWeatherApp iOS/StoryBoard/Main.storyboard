@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,7 +10,7 @@
         <!--Main Page View Controller-->
         <scene sceneID="9Ji-OL-dhd">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="m5Y-EE-xRz" customClass="MainPageViewController" customModule="BasicWeatherApp_iOS" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="none" id="m5Y-EE-xRz" customClass="MainPageViewController" customModule="BasicWeatherApp_iOS" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ase-d9-pTW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-710" y="180"/>
@@ -20,12 +19,12 @@
         <scene sceneID="PJV-pV-t0S">
             <objects>
                 <viewController storyboardIdentifier="MainTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ScL-iz-RP7" customClass="MainTableViewController" customModule="BasicWeatherApp_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Tuf-76-NRa">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Tuf-76-NRa">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="846"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pD7-oA-cQI">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="796"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="746"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="longdescriptioncell" textLabel="yDN-5u-O3g" style="IBUITableViewCellStyleDefault" id="dAO-oB-IVf">
@@ -67,17 +66,18 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="2tt-QA-Fje"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="pD7-oA-cQI" secondAttribute="bottom" constant="100" id="KlN-lE-jtd"/>
-                            <constraint firstItem="pD7-oA-cQI" firstAttribute="leading" secondItem="2tt-QA-Fje" secondAttribute="leading" id="QaQ-sV-kys"/>
-                            <constraint firstItem="pD7-oA-cQI" firstAttribute="trailing" secondItem="2tt-QA-Fje" secondAttribute="trailing" id="abH-En-csJ"/>
+                            <constraint firstItem="pD7-oA-cQI" firstAttribute="width" secondItem="Tuf-76-NRa" secondAttribute="width" id="4Fr-1j-Nxg"/>
+                            <constraint firstItem="pD7-oA-cQI" firstAttribute="height" secondItem="Tuf-76-NRa" secondAttribute="height" multiplier="0.881797" id="6EX-UG-nXj"/>
+                            <constraint firstItem="pD7-oA-cQI" firstAttribute="leading" secondItem="Tuf-76-NRa" secondAttribute="leading" id="QaQ-sV-kys"/>
+                            <constraint firstItem="pD7-oA-cQI" firstAttribute="trailing" secondItem="Tuf-76-NRa" secondAttribute="trailing" id="abH-En-csJ"/>
                             <constraint firstItem="pD7-oA-cQI" firstAttribute="top" secondItem="Tuf-76-NRa" secondAttribute="top" id="wme-rJ-Xtg"/>
                         </constraints>
                     </view>
+                    <size key="freeformSize" width="414" height="846"/>
                     <connections>
-                        <outlet property="mainTableView" destination="pD7-oA-cQI" id="zhj-JU-1aw"/>
+                        <outlet property="mainTableView" destination="pD7-oA-cQI" id="cyl-Ub-vme"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F4i-NK-RkX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

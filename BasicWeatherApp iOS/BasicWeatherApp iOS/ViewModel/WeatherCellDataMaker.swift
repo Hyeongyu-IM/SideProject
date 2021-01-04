@@ -11,6 +11,7 @@ class WeatherCellDataMaker {
     private let data: WeatherInfo
     private let maxItemCount = 20
     private var utcTimeConvertor = DateConverter()
+    private let fileManager = ImageFileManager()
     
     init(data: WeatherInfo) {
         self.data = data
@@ -28,14 +29,14 @@ class WeatherCellDataMaker {
                                    Ctemp: "일출")
         let currentCell = HourCell(dt: data.current.dt,
                                    time: "지금",
-                                   icon: ImageFileManager.loadImage("\(data.daily[0].weather[0].icon)"),
-                                   Ctemp: "\(Temperature(celcius: data.current.temp))")
+                                   icon: fileManager.loadImage(data.daily[0].weather[0].icon),
+                                   Ctemp: "\(temperature: Temperature(kelvin: data.current.temp).text)")
         
         var hourCells: [HourCell] = data.hourly.map {
             HourCell(dt: $0.dt ,
                      time: utcTimeConvertor.dtToTime($0.dt),
-                     icon: ImageFileManager.loadImage("\($0.weather[0].icon)"),
-                                    Ctemp: "\(Temperature(celcius: $0.temp))")
+                     icon: fileManager.loadImage($0.weather[0].icon),
+                     Ctemp: "\(temperature: Temperature(kelvin: $0.temp).text)")
         }
         hourCells.append(sunsetCell)
         hourCells.append(sunriseCell)
@@ -52,11 +53,12 @@ class WeatherCellDataMaker {
     func getWeekendDataCell() -> [WeekendCell] {
         let weekendCells = data.daily.map {
             WeekendCell(weekend: utcTimeConvertor.dtToWeekend($0.dt),
-                             icon: ImageFileManager.loadImage("\($0.weather[0].icon)"),
-                             minCTemp: "\(temperature: Temperature(celcius: $0.temp.min))",
-                             maxCTemp: "\(Temperature(celcius: $0.temp.max))",
+                             icon: fileManager.loadImage($0.weather.first!.icon),
+                             minCTemp: "\(temperature: Temperature(kelvin: $0.temp.min).text)",
+                             maxCTemp: "\(temperature: Temperature(kelvin: $0.temp.max).text)",
                              percent: "")
         }
+       
         return weekendCells
     }
     
@@ -78,10 +80,10 @@ class WeatherCellDataMaker {
     //MARK: - HeaderCell DataConfig
     func getheaderDataCell() -> HeaderCell {
         let headerCell: HeaderCell = HeaderCell(state: data.timezone,
-                                                description: String(data.daily.description),
-                                                currentTemp: "\(temperature: Temperature(celcius: data.current.temp))",
-                                                minTemp: "\(temperature: Temperature(celcius: data.daily[0].temp.min))" ,
-                                                maxTemp: "\(temperature: Temperature(celcius: data.daily[0].temp.max))")
+                                                description: data.current.weather.first!.description,
+                                                currentTemp: "\(temperature: Temperature(kelvin: data.current.temp).text)",
+                                                minTemp: "\(temperature: Temperature(kelvin: data.daily[0].temp.min).text)" ,
+                                                maxTemp: "\(temperature: Temperature(kelvin: data.daily[0].temp.max).text)")
         return headerCell
     }
     
@@ -89,7 +91,7 @@ class WeatherCellDataMaker {
     func getWeatherListDataCell() -> WeatherListViewCell {
         let weatherListCell = WeatherListViewCell(dt: utcTimeConvertor.curretTime(data.current.dt),
                                                   state: data.timezone,
-                                                  currentTempC: "\(temperature: Temperature(celcius: data.current.temp))")
+                                                  currentTempC: "\(temperature: Temperature(kelvin: data.current.temp).text)")
         return weatherListCell
     }
 }
