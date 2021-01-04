@@ -26,13 +26,16 @@
                                         <state key="normal" title="℃ / ℉">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="tempChangeBtnTouched:" destination="6a5-wS-6rD" eventType="touchUpInside" id="gZ9-EB-1i1"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1g-HO-Ree">
                                         <rect key="frame" x="373" y="12" width="20" height="22"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="magnifyingglass" catalog="system"/>
                                         <connections>
-                                            <segue destination="VHn-KG-Qu1" kind="presentation" id="jXT-zd-ibF"/>
+                                            <action selector="addLocationBtnTouched:" destination="6a5-wS-6rD" eventType="touchUpInside" id="WxH-ZD-pba"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pX5-I8-Ov7">
@@ -61,7 +64,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="100" id="ssY-Ws-ir5">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListViewTableViewCell" rowHeight="100" id="ssY-Ws-ir5" customClass="ListViewTableViewCell" customModule="BasicWeatherApp_iOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ssY-Ws-ir5" id="YoC-fA-m20">
@@ -124,6 +127,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addLocationBtn" destination="w1g-HO-Ree" id="ECa-yG-5BM"/>
+                        <outlet property="tempToggleBtn" destination="dJc-gC-VJJ" id="a5s-iT-Yoa"/>
                         <outlet property="weatherListView" destination="zYP-Oq-7w0" id="lKC-oi-0Tw"/>
                     </connections>
                 </viewController>
@@ -136,13 +141,13 @@
             <objects>
                 <viewController id="VHn-KG-Qu1" customClass="SearchViewController" customModule="BasicWeatherApp_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SWp-nC-kqw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7WU-xI-gmO">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="q9h-Pj-xwj">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="852"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7SG-lm-a7k">

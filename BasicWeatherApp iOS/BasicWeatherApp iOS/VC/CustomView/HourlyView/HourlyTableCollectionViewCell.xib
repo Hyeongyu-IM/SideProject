@@ -56,7 +56,7 @@
                 <outlet property="weatherIcon" destination="CKV-ii-eRv" id="RuA-TQ-mNm"/>
                 <outlet property="weekendLabel" destination="CnN-Gt-qeL" id="tdX-NQ-Vpt"/>
             </connections>
-            <point key="canvasLocation" x="221" y="7"/>
+            <point key="canvasLocation" x="219.56521739130437" y="6.3616071428571423"/>
         </collectionViewCell>
     </objects>
 </document>

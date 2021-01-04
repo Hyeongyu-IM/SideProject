@@ -13,18 +13,24 @@ final class Binder<T> {
     
   var listener: Listener?
   
-  var value: T {
+  var value: T? {
     didSet {
-      listener?(value)
+        guard let value = value else {
+            return
+        }
+        listener?(value)
     }
   }
   
-  init(_ value: T) {
+  init(_ value: T?) {
     self.value = value
   }
 
   func bind(listener: Listener?) {
     self.listener = listener
+    guard let value = value else {
+        return
+    }
     listener?(value)
   }
 }

@@ -10,6 +10,7 @@ import UIKit
 struct WeatherInfo: Codable {
     let lat: Double
     let lon: Double
+    var timezone: String
     let current: CurrentWeatherInfo
     let hourly: [HourlyWeatherInfo]
     let daily: [DailyWeatherInfo]

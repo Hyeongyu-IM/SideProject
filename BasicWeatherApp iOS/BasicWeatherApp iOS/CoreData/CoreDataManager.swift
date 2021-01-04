@@ -10,57 +10,49 @@ import CoreData
 
 class CoreDataManager {
     
-    static let shared: CoreDataManager = CoreDataManager()
-    
-    let modelName: String = "DataLocation"
-    let appDelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
+    private let modelName: String = "DataLocation"
+    private let appDelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
     lazy var context = appDelegate?.persistentContainer.viewContext
-    let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "DataLocation")
-
-    lazy var locationList: [DataLocation] = {
-        self.getLocation()
-    }()
-    
+    private let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "DataLocation")
     
     
     // 저장된 데이터 받아오기
-    func getLocation(ascending: Bool = false) -> [DataLocation] {
-           var models: [DataLocation] = [DataLocation]()
-           
+    func getLocationList() -> [Location] {
+           var models = [Location]()
+
             do {
                 if let result: [DataLocation] = try context?.fetch(fetchRequest) as? [DataLocation] {
-                       models = result
+                  models = result.map { Location(name: $0.stateName ?? "" , latitude: $0.latitude, longitude: $0.longitude) }
                    }
                } catch let error as NSError {
                    print("Could not fetch: \(error), \(error.userInfo)")
                }
-            print("코어데이터 로드성공")
-            return models
+            print("models 입니다 \(models)")
+        return models
         }
 
     // saveLocation
-    func saveLocation(latitude: Double, longitude: Double) -> Bool {
+    func saveLocation(_ location: Location ) {
         let object = NSEntityDescription.insertNewObject(forEntityName: modelName, into: context!)
-        object.setValue(latitude, forKey: "latitude")
-        object.setValue(longitude, forKey: "longitude")
-        object.setValue([latitude, longitude], forKey: "location")
+        object.setValue(location.latitude, forKey: "latitude")
+        object.setValue(location.longitude, forKey: "longitude")
+        object.setValue(location.name, forKey: "stateName")
         
         do{
             try context?.save()
             print("데이터 저장성공")
-            return true
+            return
         } catch {
             context?.rollback()
             print("데이터 저장실패")
-            return false
             }
         print("데이터 저장실패")
-        return false
+        return
         }
     
     // deleteLocation 셀 지울때 메서드 호출 ( latitude 매개변수 )
-    func deleteLocation(latitude: Double, onSuccess: @escaping ((Bool) -> Void)) -> Bool {
-        let deleteRequest: NSFetchRequest<NSFetchRequestResult> = filteredRequest(latitude: latitude)
+    func deleteLocation(stateName: String) {
+        let deleteRequest: NSFetchRequest<NSFetchRequestResult> = filteredRequest(stateName: stateName)
        
         do {
             if let results: [DataLocation] = try context?.fetch(deleteRequest) as? [DataLocation] {
@@ -70,14 +62,14 @@ class CoreDataManager {
                    }
                } catch let error as NSError {
                    print("Could not fatch: \(error), \(error.userInfo)")
-                   onSuccess(false)
                }
         do {
                 try context?.save()
-                return true
+                return
             } catch {
                 context?.rollback()
-                return false
+                print("실행 불가능 합니다")
+                return
                 }
             print("코어데이터 삭제 성공")
            }
@@ -118,9 +110,9 @@ class CoreDataManager {
    
 
 extension CoreDataManager {
-    fileprivate func filteredRequest(latitude: Double) -> NSFetchRequest<NSFetchRequestResult> {
+    fileprivate func filteredRequest(stateName: String) -> NSFetchRequest<NSFetchRequestResult> {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest<NSFetchRequestResult>(entityName: modelName)
-        fetchRequest.predicate = NSPredicate(format: "latitude = %@", NSNumber(value: latitude))
+        fetchRequest.predicate = NSPredicate(format: "latitude = %@", NSString(string: stateName))
         return fetchRequest
     }
 }

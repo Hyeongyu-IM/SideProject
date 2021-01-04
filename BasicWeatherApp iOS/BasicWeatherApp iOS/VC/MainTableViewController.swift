@@ -8,11 +8,11 @@
 import UIKit
 
 class MainTableViewController: UIViewController {
+    static let identifier: String = "\(MainTableViewController.self)"
+    var location: Location!
+    var index = 0
     
-    @IBOutlet weak var tableView: UITableView!
-    
-    static var controllerIndex = 0
-    let weatherViewModel = WeatherViewModel()
+    @IBOutlet weak var mainTableView: UITableView!
     
     static func instance() -> MainTableViewController? {
         return UIStoryboard(
@@ -21,17 +21,48 @@ class MainTableViewController: UIViewController {
             identifier: "MainTableViewController") as? MainTableViewController
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configView()
+    var viewModel: WeatherViewModel? {
+        didSet {
+            guard let viewModel = viewModel else {
+                return
+            }
+            viewModel.location.bind { [weak self] _ in
+                self!.mainTableView.reloadData()
+            }
+        }
     }
     
-    func configView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UINib(nibName: "HourlyTableViewCell", bundle: nil), forCellReuseIdentifier: HourlyTableViewCell.registerID)
-        tableView.register(UINib(nibName: "WeekendTableViewCell", bundle: nil), forCellReuseIdentifier: WeekendTableViewCell.registerID)
-        tableView.register(UINib(nibName: "DetailTableViewCell", bundle: nil), forCellReuseIdentifier: DetailTableViewCell.registerID)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        print("view did load at index \(self.index)")
+        mainTableView.delegate = self
+        mainTableView.dataSource = self
+        registerCells()
+        getWeatherData()
+    }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        let temperatureUnit = TemperatureUnit.shared.unit
+//        if viewModel?.temperatureUnit.value != temperatureUnit {
+//            viewModel?.temperatureUnit.value = temperatureUnit
+//        }
+//    }
+    
+    func registerCells() {
+        mainTableView.register(UINib(nibName: "HourlyTableViewCell", bundle: nil), forCellReuseIdentifier: HourlyTableViewCell.registerID)
+        mainTableView.register(UINib(nibName: "WeekendTableViewCell", bundle: nil), forCellReuseIdentifier: WeekendTableViewCell.registerID)
+        mainTableView.register(UINib(nibName: "DetailTableViewCell", bundle: nil), forCellReuseIdentifier: DetailTableViewCell.registerID)
+    }
+    
+    func getWeatherData() {
+        print("get weather")
+        guard let location = self.location else {
+            print(LocationError.noLocationConfigured.localizedDescription)
+            return
+        }
+        self.viewModel = WeatherViewModel(location: location)
+        self.viewModel?.retrieveWeatherInfo()
     }
 }
 
@@ -41,23 +72,23 @@ extension MainTableViewController: UITableViewDelegate {
 
 extension MainTableViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return WeatherTableViewSection.numberOfSection
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("section \(section)")
+//        print("section \(section)")
+        guard let section = WeatherTableViewSection(sectionIndex: section) else { return 0 }
         switch section {
-        case 0:
+        case .hour:
             return 1
-        case 1:
-            return 7
-        case 2:
+        case .weekend:
+            return viewModel?.weekendTableViewCell.count ?? 0
+        case .description:
+            return viewModel?.weatherDescription?.count ?? 0
+        case .detail:
             return 1
-        case 3:
+        case .link:
             return 1
-        case 4:
-            return 1
-        default: break
         }
         print(#function, "섹션결과값이 없습니다")
         return 5
@@ -66,23 +97,33 @@ extension MainTableViewController: UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 1:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: HourlyTableViewCell.registerID, for: indexPath) as? HourlyTableViewCell else { return UITableViewCell() }
+        guard let section = WeatherTableViewSection(sectionIndex: indexPath.section) else { return UITableViewCell() }
+//        print("IndexPath.section \(indexPath.section)")
+        switch section {
+        case  .hour:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: HourlyTableViewCell.registerID, for: indexPath) as? HourlyTableViewCell,
+                  let hourdatas = viewModel?.hourlyTableViewCell else { return UITableViewCell() }
+            cell.passHourDatas(hourData: hourdatas)
             return cell
-        case 2:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: WeekendTableViewCell.registerID, for: indexPath) as? WeekendTableViewCell else { return UITableViewCell() }
-            let target = weatherViewModel.weekendCells[MainTableViewController.controllerIndex]
-            cell.configData(target[indexPath.row])
+            
+        case .weekend:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: WeekendTableViewCell.registerID, for: indexPath) as? WeekendTableViewCell,
+                let weekendDatas = viewModel?.weekendTableViewCell else { return UITableViewCell() }
+            cell.setWeekendData(weekendData: weekendDatas[indexPath.row])
             return cell
-        case 3:
+            
+        case .description:
             let cell = tableView.dequeueReusableCell(withIdentifier: "longdescriptioncell", for: indexPath)
-            cell.textLabel?.text = "오늘: 날씨가 화창하고 오후에 비가올수 있습니다. 모두 장난이니까 믿지 마세요"
+            cell.textLabel?.text = viewModel?.weatherDescription ?? ""
             return cell
-        case 4:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailTableViewCell.registerID, for: indexPath) as? DetailTableViewCell else { break }
+            
+        case .detail:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailTableViewCell.registerID, for: indexPath) as? DetailTableViewCell,
+                let detailDatas = viewModel?.detailTableViewCell  else { break }
+            cell.passDetailDatas(detailData: detailDatas)
             return cell
-        case 5:
+            
+        case .link:
             let cell = tableView.dequeueReusableCell(withIdentifier: "linkcell", for: indexPath)
             cell.textLabel?.text = "자료가 없습니다"
             return cell
@@ -93,12 +134,14 @@ extension MainTableViewController: UITableViewDataSource {
 }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let headerData = viewModel?.customHeaderViewData else { return UIView() }
         let headerView = CustomHeaderView.instance()
+        headerView.setHeaderData(headerData)
         return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 458
+        return CGFloat(400)
     }
 }
 

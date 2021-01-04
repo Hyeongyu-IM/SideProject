@@ -9,51 +9,47 @@ import UIKit
 
 struct WeekendCell {
     let weekend: String
-    let icon: UIImage
+    let icon: UIImage?
     let minCTemp: String
     let maxCTemp: String
-    let minFTemp: String
-    let maxFTemp: String
+    let percent: String?
 }
 
 struct HourCell {
     let dt: Int
     let time: String
-    let icon: UIImage
+    let icon: UIImage?
     let Ctemp: String
-    let Ftemp: String
 }
 
 struct DetailCell {
-    let dt: String
-    let location: String
-    let discription: String
+    let sunrise: String
+    let sunset: String
+    let snow: String?
+    let humidity: String
+    let wind: String
+    let feelsLike: String
+    let rain: String?
+    let pressure: String
+    let visibility: String
+    let uvi: String
+}
+
+struct HeaderCell  {
+    let state: String
+    let description: String
     let currentTemp: String
     let minTemp: String
     let maxTemp: String
-    let minFTemp: String
-    let maxFTemp: String
-    let detailDiscription: String
-    let sunset: String
-    let sunrise: String
-    let snow: Double?
-    let rain: Double?
-    let wind: Int
-    let feelsLike: Int
-    let pressure: Int
-    let visibility: Int
-    let uvi: Int
-    let humidity: Int
 }
 
-//struct SunsetCell {
-//    let time: String
-//    let icon: UIImage
-//    let sunset = "일몰"
-//}
-//
-//struct SunriseCell {
-//    let time: String
-//    let icon: UIImage
-//    let sunrise = "일출"
-//}
+struct DetailDescription  {
+    let detailDiscription: String
+}
+
+struct WeatherListViewCell {
+    let dt: String
+    let state: String
+    let currentTempC: String
+}
+

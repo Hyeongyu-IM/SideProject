@@ -16,11 +16,12 @@ class DetailTableCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.backgroundColor = .clear
     }
     
-    func configData(_ name: String,_ value: String) {
-        nameLabel.text = name
-        valueLabel.text = value
+    func setDetailData(_ name: String,_ value: String) {
+        self.nameLabel.text = name
+        self.valueLabel.text = value
     }
 }
 
