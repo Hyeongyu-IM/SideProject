@@ -14,7 +14,6 @@ class MainPageViewController: UIPageViewController {
     private var cachedWeatherViewControllers = NSCache<NSNumber, MainTableViewController>()
     private let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
     private let subStoryBoard = UIStoryboard(name: "Mainsub", bundle: nil)
-    private let currentLocation = Location(name: "", latitude: 0.0, longitude: 0.0)
     private var pageControl = UIPageControl()
     private var locationList = [Location]() {
         didSet {
@@ -24,15 +23,15 @@ class MainPageViewController: UIPageViewController {
     
     var lastViewedPageIndex: Int = 0
     
-    lazy var bottomView: UIView = {
-        let view = UIView(frame: .init(
-                            x: 0,
-                            y: UIScreen.main.bounds.height - 50,
-                            width: UIScreen.main.bounds.width,
-                            height: 50))
-        view.backgroundColor = .clear
-        return view
-    }()
+//    lazy var bottomView: UIView = {
+//        let view = UIView(frame: .init(
+//                            x: 0,
+//                            y: UIScreen.main.bounds.height - 50,
+//                            width: UIScreen.main.bounds.width,
+//                            height: 50))
+//        view.backgroundColor = .clear
+//        return view
+//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,10 +40,6 @@ class MainPageViewController: UIPageViewController {
         self.locationManager.delegate = self
         self.locationManager.requestCurrentLocation()
         configSubViews()
-//        CoreDataManager.shared.deleteAllData()
-//        CoreDataManager.shared.saveLocation(latitude: 37, longitude: 126.96)
-//        CoreDataManager.shared.saveLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
-        
     }
     
     private func configPageViewController() {
@@ -95,11 +90,12 @@ class MainPageViewController: UIPageViewController {
         guard let locationListViewController = subStoryBoard.instantiateViewController(identifier: LocationListViewController.identifier) as? LocationListViewController else { return }
         locationListViewController.locations = self.locationList
         locationListViewController.delegate = self
+        locationListViewController.modalPresentationStyle = .fullScreen
         self.present(locationListViewController, animated: true, completion: nil)
     }
     
     private func configureLinkIconButton(inside frame: CGRect) {
-        let buttonRect = CGRect(x: frame.maxX - 10, y: frame.maxY - 40, width: 20, height: 20)
+        let buttonRect = CGRect(x: 10, y: frame.maxY - 40, width: 20, height: 20)
         let linkIconButton = UIButton(frame: buttonRect)
         linkIconButton.setImage(UIImage(named: "weatherChannelLogo"), for: .normal)
         linkIconButton.addTarget(self, action: #selector(self.presentWebpage), for: .touchUpInside)
@@ -118,6 +114,7 @@ extension MainPageViewController: UIPageViewControllerDelegate {
             return
         }
         self.pageControl.currentPage = displayedContentViewController.index
+        
         self.lastViewedPageIndex = displayedContentViewController.index
     }
     
@@ -126,7 +123,11 @@ extension MainPageViewController: UIPageViewControllerDelegate {
 //    }
     
     // 페이지 뷰가 전환될때
-//    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        guard let currentView = pendingViewControllers[lastViewedPageIndex] as? MainTableViewController else { return }
+        DispatchQueue.main.async {
+            self.view.backgroundColor = currentView.viewModel!.backgroundImageColor
+        }
 //        print(pendingViewControllers)
 //        if pendingViewControllers[0] == vcArray[0] {
 //            bottomView.alpha = 0.0
@@ -142,7 +143,7 @@ extension MainPageViewController: UIPageViewControllerDelegate {
 //                        self?.bottomView.isHidden = true
 //                    }
 //        }
-//    }
+    }
 }
 
 

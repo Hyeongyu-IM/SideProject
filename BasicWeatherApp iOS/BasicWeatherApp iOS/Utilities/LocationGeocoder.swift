@@ -67,11 +67,13 @@ class LocationGeocoder: NSObject {
                     if let address: [CLPlacemark] = placemarks {
                         if let name: String = address.last?.locality {
                             cityName = name
+                         
                         }
                     }
                 }
             }
         return cityName
+        
     }
 }
 

@@ -14,12 +14,13 @@ class MainTableViewController: UIViewController {
     
     @IBOutlet weak var mainTableView: UITableView!
     
-    static func instance() -> MainTableViewController? {
-        return UIStoryboard(
-            name: "Main",
-            bundle: nil).instantiateViewController(
-            identifier: "MainTableViewController") as? MainTableViewController
-    }
+    
+//    static func instance() -> MainTableViewController? {
+//        return UIStoryboard(
+//            name: "Main",
+//            bundle: nil).instantiateViewController(
+//            identifier: "MainTableViewController") as? MainTableViewController
+//    }
     
     var viewModel: WeatherViewModel? {
         didSet {
@@ -29,11 +30,16 @@ class MainTableViewController: UIViewController {
             viewModel.location.bind { [weak self] _ in
                 self!.mainTableView.reloadData()
             }
+            viewModel.currentLocationName.bind { [weak self] _ in
+                self?.location.name = viewModel.currentLocationName.value
+                self!.mainTableView.reloadData()
+            }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         print("view did load at index \(self.index)")
         mainTableView.delegate = self
         mainTableView.dataSource = self
@@ -72,12 +78,12 @@ extension MainTableViewController: UITableViewDelegate {
 
 extension MainTableViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return WeatherTableViewSection.numberOfSection
+        return 5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        print("section \(section)")
-        guard let section = WeatherTableViewSection(sectionIndex: section) else { return 0 }
+        print("section이 불렸습니다 --> \(section)")
+        guard let section = WeatherTableViewSection(sectionIndex: section) else { return 9 }
         switch section {
         case .hour:
             return 1
@@ -90,45 +96,49 @@ extension MainTableViewController: UITableViewDataSource {
         case .link:
             return 1
         }
-        print(#function, "섹션결과값이 없습니다")
-        return 5
     }
     
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("section -->>>>>> \(indexPath.section)")
         guard let section = WeatherTableViewSection(sectionIndex: indexPath.section) else { return UITableViewCell() }
-//        print("IndexPath.section \(indexPath.section)")
+        
         switch section {
         case  .hour:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: HourlyTableViewCell.registerID, for: indexPath) as? HourlyTableViewCell,
                   let hourdatas = viewModel?.hourlyTableViewCell else { return UITableViewCell() }
             cell.passHourDatas(hourData: hourdatas)
+            print("Hour셀이 생성됩니다")
             return cell
             
         case .weekend:
+            
             guard let cell = tableView.dequeueReusableCell(withIdentifier: WeekendTableViewCell.registerID, for: indexPath) as? WeekendTableViewCell,
                 let weekendDatas = viewModel?.weekendTableViewCell else { return UITableViewCell() }
             cell.setWeekendData(weekendData: weekendDatas[indexPath.row])
+            print("weekendDatas[indexPath.row] -->>>> \(weekendDatas[indexPath.row])")
+            print("weekend cell생성됩니다 ")
             return cell
             
         case .description:
             let cell = tableView.dequeueReusableCell(withIdentifier: "longdescriptioncell", for: indexPath)
             cell.textLabel?.text = viewModel?.weatherDescription ?? ""
+            print("description cell생성됩니다 ")
             return cell
             
         case .detail:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailTableViewCell.registerID, for: indexPath) as? DetailTableViewCell,
                 let detailDatas = viewModel?.detailTableViewCell  else { break }
             cell.passDetailDatas(detailData: detailDatas)
+            print("detail cell생성됩니다 ")
             return cell
             
         case .link:
             let cell = tableView.dequeueReusableCell(withIdentifier: "linkcell", for: indexPath)
             cell.textLabel?.text = "자료가 없습니다"
+            print("link cell생성됩니다 ")
             return cell
-        default:
-            return UITableViewCell()
         }
         return UITableViewCell()
 }
@@ -141,18 +151,35 @@ extension MainTableViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat(400)
+        return CGFloat(200)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let section = WeatherTableViewSection(sectionIndex: indexPath.section) else { return CGFloat() }
+        switch section {
+        case .description :
+            return section.cellHeight
+        case .detail:
+            return section.cellHeight
+        case .hour:
+            return section.cellHeight
+        case .link:
+            return section.cellHeight
+        case .weekend:
+            return section.cellHeight
+        }
+        
     }
 }
 
 extension MainTableViewController: UIScrollViewDelegate {
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard let headerView = Bundle.main.loadNibNamed("CustomHeaderView", owner: nil, options: nil)?.first as? CustomHeaderView else { return }
-        let offset = scrollView.contentOffset.y
-        
-        let changeStartOffset: CGFloat = -180
-        let changeSpeed: CGFloat = 100
-        headerView.tempStackView.alpha = min(1.0, (offset - changeStartOffset) / changeSpeed)
-    }
+//
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        guard let headerView = Bundle.main.loadNibNamed("CustomHeaderView", owner: nil, options: nil)?.first as? CustomHeaderView else { return }
+//        let offset = scrollView.contentOffset.y
+//
+//        let changeStartOffset: CGFloat = -180
+//        let changeSpeed: CGFloat = 100
+//        headerView.tempStackView.alpha = min(1.0, (offset - changeStartOffset) / changeSpeed)
+//    }
 }

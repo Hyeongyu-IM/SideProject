@@ -12,7 +12,7 @@
         <!--Location List View Controller-->
         <scene sceneID="80F-B7-8vQ">
             <objects>
-                <viewController id="6a5-wS-6rD" customClass="LocationListViewController" customModule="BasicWeatherApp_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6a5-wS-6rD" customClass="LocationListViewController" customModule="BasicWeatherApp_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qk8-VK-E6R">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -127,7 +127,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addLocationBtn" destination="w1g-HO-Ree" id="ECa-yG-5BM"/>
                         <outlet property="tempToggleBtn" destination="dJc-gC-VJJ" id="a5s-iT-Yoa"/>
                         <outlet property="weatherListView" destination="zYP-Oq-7w0" id="lKC-oi-0Tw"/>
                     </connections>
@@ -139,7 +138,7 @@
         <!--Search View Controller-->
         <scene sceneID="z1a-k6-ps5">
             <objects>
-                <viewController id="VHn-KG-Qu1" customClass="SearchViewController" customModule="BasicWeatherApp_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VHn-KG-Qu1" customClass="SearchViewController" customModule="BasicWeatherApp_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SWp-nC-kqw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

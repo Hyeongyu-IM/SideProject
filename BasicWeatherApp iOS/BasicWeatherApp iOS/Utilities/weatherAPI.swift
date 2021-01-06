@@ -22,7 +22,7 @@ class WeatherAPI {
     }
     
     func getWeatherInfo(_ location: Location, completion: @escaping WeatherCompletionHandler) {
-        let state = String(locationGeocoder.GeoCoordiToCityName(latitude: location.latitude, longitude: location.longitude))
+        
         let parameters: [String:String] = [
             "lang": "kr",
             "exclude": "minutely",
@@ -33,18 +33,17 @@ class WeatherAPI {
        
         AF.request(WeatherAPIInfo.currentWeatherURL,
                    method: .get,
-                   parameters:  parameters,
-                   encoding: URLEncoding.default,
-                   headers: ["Content-Type":"application/json", "Accept":"application/json"])
+                   parameters: parameters,
+                   encoding: URLEncoding.queryString,
+                   headers: nil) //["Content-Type":"application/json"]) // "Accept":"application/json"
             .validate(statusCode: 200..<300)
             .responseJSON { (json) in
                 switch json.result {
                 case .success(let response):
                     do {
                         let jsonData = try JSONSerialization.data(withJSONObject: response, options: .prettyPrinted)
-                        var jsonResponse = try JSONDecoder().decode(WeatherInfo.self, from: jsonData)
+                        let jsonResponse = try JSONDecoder().decode(WeatherInfo.self, from: jsonData)
                         self.imageFileManager.storageImageChecking(jsonResponse)
-                        jsonResponse.timezone = state
                        completion(jsonResponse, nil)
                     } catch( let error) {
                         print("\(ServiceError.impossibleToParseJSON)")

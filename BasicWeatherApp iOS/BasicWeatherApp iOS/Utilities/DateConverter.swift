@@ -36,4 +36,13 @@ class DateConverter {
       dateFormatter.locale = Locale(identifier: "ko-kr")
     return dateFormatter.string(for: dt) ?? ""
     }
+    
+    // 오전/오후 몇시:몇분 포맷
+        func timeForBackground(_ dt: Int) -> Int {
+        let dt = NSDate(timeIntervalSince1970: Double(dt))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "h"
+          dateFormatter.locale = Locale(identifier: "ko-kr")
+        return Int(dateFormatter.string(for: dt) ?? "") ?? 0
+        }
 }

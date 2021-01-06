@@ -46,6 +46,7 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="currentTempLabel" destination="PIf-h6-EkN" id="zx9-eB-VvS"/>
                 <outlet property="stateNameLabel" destination="3cF-oP-8HC" id="kQP-yd-CSh"/>

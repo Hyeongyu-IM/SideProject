@@ -13,6 +13,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var blurView: UIView!
     
     static let identifier: String = "\(SearchViewController.self)"
+    
     private var tableView: UITableView!
     private var tableDataSource: GMSAutocompleteTableDataSource!
     
@@ -42,6 +43,7 @@ class SearchViewController: UIViewController {
         tableDataSource.tableCellBackgroundColor = .clear
         tableDataSource.tableCellSeparatorColor = .clear
         tableDataSource.primaryTextHighlightColor = .white
+//        tableDataSource.primaryTextColor = .blue
         
         // searchBar 속성 편집
         customSearchBar.barTintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
@@ -49,39 +51,34 @@ class SearchViewController: UIViewController {
 }
 
 extension SearchViewController: GMSAutocompleteTableDataSourceDelegate, UISearchBarDelegate  {
+    
     func didUpdateAutocompletePredictions(for tableDataSource: GMSAutocompleteTableDataSource) {
         // Turn the network activity indicator off.
-        if #available(iOS 13.0, *) {
-            
-        } else {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
         // Reload table data.
         tableView.reloadData()
-      }
+      
     }
 
       func didRequestAutocompletePredictions(for tableDataSource: GMSAutocompleteTableDataSource) {
         // Turn the network activity indicator on.
-        if #available(iOS 13.0, *) {
-            
-        } else {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         // Reload table data.
         tableView.reloadData()
-        }
+        
       }
 
       func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didAutocompleteWith place: GMSPlace) {
         // Do something with the selected place.
-        if #available(iOS 13.0, *) {
+        print("Place name: \(place.name)")
+            print("Place address: \(place.formattedAddress)")
+            print("Place attributions: \(place.attributions)")
         
-        } else {
             
             self.delegate?.userSelected(newLocation: Location(name: place.name, latitude: place.coordinate.latitude, longitude: place.coordinate.longitude))
             self.dismiss(animated: true, completion: nil)
-//            weatherViewModel.addLocation(place.coordinate.latitude, place.coordinate.longitude)
-//        place.name
-        }
+        print(place.name)
+        
       }
 
       func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didFailAutocompleteWithError error: Error) {
@@ -96,12 +93,8 @@ extension SearchViewController: GMSAutocompleteTableDataSourceDelegate, UISearch
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         // Update the GMSAutocompleteTableDataSource with the search text.
         tableDataSource.sourceTextHasChanged(searchText)
+        print(#function)
       }
-    
-    
-    
-    
- 
 }
 
 

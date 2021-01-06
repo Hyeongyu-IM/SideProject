@@ -26,15 +26,15 @@ enum WeatherTableViewSection: Int {
     var cellHeight: CGFloat {
         switch self {
         case .hour:
-            return CGFloat(133)
+            return CGFloat(140)
         case .weekend:
-            return CGFloat(44)
+            return CGFloat(70)
         case .description:
-            return CGFloat(43.5)
+            return CGFloat(70)
         case .link:
-            return CGFloat(43.5)
+            return CGFloat(70)
         case .detail:
-            return CGFloat(310)
+            return CGFloat(350)
         }
     }
 }
